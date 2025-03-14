@@ -1,0 +1,63 @@
+. background {
+    -fx-background-image: url("Pictures/background2.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+. forgot {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-focus-traversable: false;
+    -fx-text-fill: "#0D4E60";
+    -fx-font-family: "Comic Sans MS";
+}
+
+. backgroundAdmin {
+    -fx-background-image: url("Pictures/background.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+. backgroundCoordinator{
+    -fx-background-image: url("Pictures/background.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+. flowPaneC {
+    -fx-border-color: "#C4D4D6";
+
+}
+
+. usersC{
+    -fx-font-family: "Comic Sans MS";
+    -fx-background-color: "#C4D4D6";
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+
+. eventsC {
+    -fx-font-family: "Comic Sans MS";
+    -fx-background-color: "#C4D4D6";
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+
+. addC{
+    -fx-font-family: "Comic Sans MS";
+    -fx-background-color: "#C4D4D6";
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+. editC{
+    -fx-font-family: "Comic Sans MS";
+    -fx-background-color: "#C4D4D6";
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+
+. labelEC {
+    -fx-font-family: "Comic Sans MS";
+
+}
