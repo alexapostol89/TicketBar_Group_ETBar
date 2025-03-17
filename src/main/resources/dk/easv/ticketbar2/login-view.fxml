@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="688.0" styleClass="background" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="688.0" styleClass="background" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.LoginController">
    <children>
       <TextField fx:id="usernameTextfield" layoutX="207.0" layoutY="180.0" prefHeight="25.0" prefWidth="274.0" />
       <Button layoutX="290.0" layoutY="327.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="109.0" text="Sign in" />

@@ -1,4 +1,4 @@
-package dk.easv.ticketbar2;
+package dk.easv.ticketbar2.gui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,19 +21,18 @@ public class AdminController {
     }
 
     public void showEventsA() throws IOException {
-        loadFXML("eventList.fxml");
+        loadFXML("/dk/easv/ticketbar2/event-list.fxml");
     }
 
     public void showUsersA() throws IOException {
-        loadFXML("usersList.fxml");
+        loadFXML("/dk/easv/ticketbar2/user-list.fxml");
     }
 
     private void loadFXML(String fxmlFile) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
         Parent newContent = loader.load();
 
-
-        if (fxmlFile.equals("usersList.fxml")) {
+        if (fxmlFile.equals("user-list.fxml")) {
             UsersAdminController controller = loader.getController();
             controller.populateUsersA();
         }

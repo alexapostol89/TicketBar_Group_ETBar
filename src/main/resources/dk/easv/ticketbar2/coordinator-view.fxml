@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<BorderPane styleClass="backgroundCoordinator" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.CoordinatorController">
+<BorderPane styleClass="backgroundCoordinator" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.CoordinatorController">
 
          <center>
       <FlowPane fx:id="contentPane" prefHeight="411.0" prefWidth="371.0" styleClass="flowPaneC" BorderPane.alignment="CENTER">

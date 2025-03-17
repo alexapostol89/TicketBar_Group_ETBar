@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="351.0" prefWidth="551.0" styleClass="backgroundEditE" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.EditEvents">
+<AnchorPane prefHeight="351.0" prefWidth="551.0" styleClass="backgroundEditE" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.EditEvents">
    <children>
       <Label layoutX="140.0" layoutY="80.0" prefHeight="28.0" prefWidth="119.0" styleClass="eventInfo" stylesheets="@Main.css" text="Event Information" textFill="#3b4343">
          <font>

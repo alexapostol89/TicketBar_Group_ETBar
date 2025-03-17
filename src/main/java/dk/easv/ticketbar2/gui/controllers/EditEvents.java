@@ -1,4 +1,4 @@
-package dk.easv.ticketbar2;
+package dk.easv.ticketbar2.gui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

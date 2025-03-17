@@ -1,4 +1,4 @@
-package dk.easv.ticketbar2;
+package dk.easv.ticketbar2.gui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -16,7 +16,6 @@ public class EventsControllerAdmin {
         // Load the image from resources
         Image image = new Image(getClass().getResourceAsStream("/dk/easv/ticketbar2/pictures/background4.jpg"));
 
-
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(150);
         imageView.setFitHeight(150);
@@ -24,13 +23,11 @@ public class EventsControllerAdmin {
 
         Label label = new Label("Event Details");
 
-
         VBox vBox = new VBox();
         vBox.setSpacing(15);
         vBox.getChildren().addAll(imageView, label);
 
         flowPaneAdmin.getChildren().add(vBox);
-
         flowPaneAdmin.setHgap(10);
         flowPaneAdmin.setVgap(10);
     }

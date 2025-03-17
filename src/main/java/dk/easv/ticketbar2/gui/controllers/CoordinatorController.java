@@ -1,4 +1,4 @@
-package dk.easv.ticketbar2;
+package dk.easv.ticketbar2.gui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +33,7 @@ public class CoordinatorController {
     // Method to open EditEvents window
     private void openEditEventWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/editEvents.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/add-edit-event.fxml"));
             Parent root = loader.load();
 
             // Get the controller for EditEvents
