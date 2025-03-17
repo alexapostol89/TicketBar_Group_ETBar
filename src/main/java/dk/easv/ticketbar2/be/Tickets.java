@@ -1,64 +1,74 @@
 package dk.easv.ticketbar2.be;
 
 public class Tickets {
-    private int Ticket_id;
-    private int Event_id;
-    private int Customer_id;
-    private String Ticket_type;
-    private String Purchase_date;
+    private int TicketID;
+    private int EventID;
+    private String CustomerName;
+    private String CustomerEmail;
+    private String TicketType;
+    private String PurchaseDate;
     private String Barcode;
     private String QRCode;
     private boolean IsScanned;
 
-    public Tickets(int ticket_id, int event_id, int customer_id, String ticket_type, String purchase_date, String barcode, String QRCode, boolean isScanned) {
-        Ticket_id = ticket_id;
-        Event_id = event_id;
-        Customer_id = customer_id;
-        Ticket_type = ticket_type;
-        Purchase_date = purchase_date;
+    public Tickets(int ticketID, int eventID, String customerName, String customerEmail, String ticketType, String purchaseDate, String barcode, String QRCode, boolean isScanned) {
+        TicketID = ticketID;
+        EventID = eventID;
+        CustomerName = customerName;
+        CustomerEmail = customerEmail;
+        TicketType = ticketType;
+        PurchaseDate = purchaseDate;
         Barcode = barcode;
         this.QRCode = QRCode;
         IsScanned = isScanned;
     }
 
-    public int getTicket_id() {
-        return Ticket_id;
+    public int getTicketID() {
+        return TicketID;
     }
 
-    public void setTicket_id(int ticket_id) {
-        Ticket_id = ticket_id;
+    public void setTicketID(int ticketID) {
+        TicketID = ticketID;
     }
 
-    public int getEvent_id() {
-        return Event_id;
+    public int getEventID() {
+        return EventID;
     }
 
-    public void setEvent_id(int event_id) {
-        Event_id = event_id;
+    public void setEventID(int eventID) {
+        EventID = eventID;
     }
 
-    public int getCustomer_id() {
-        return Customer_id;
+    public String getCustomerName() {
+        return CustomerName;
     }
 
-    public void setCustomer_id(int customer_id) {
-        Customer_id = customer_id;
+    public void setCustomerName(String customerName) {
+        CustomerName = customerName;
     }
 
-    public String getTicket_type() {
-        return Ticket_type;
+    public String getCustomerEmail() {
+        return CustomerEmail;
     }
 
-    public void setTicket_type(String ticket_type) {
-        Ticket_type = ticket_type;
+    public void setCustomerEmail(String customerEmail) {
+        CustomerEmail = customerEmail;
     }
 
-    public String getPurchase_date() {
-        return Purchase_date;
+    public String getTicketType() {
+        return TicketType;
     }
 
-    public void setPurchase_date(String purchase_date) {
-        Purchase_date = purchase_date;
+    public void setTicketType(String ticketType) {
+        TicketType = ticketType;
+    }
+
+    public String getPurchaseDate() {
+        return PurchaseDate;
+    }
+
+    public void setPurchaseDate(String purchaseDate) {
+        PurchaseDate = purchaseDate;
     }
 
     public String getBarcode() {

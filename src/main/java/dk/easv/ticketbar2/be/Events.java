@@ -1,42 +1,58 @@
 package dk.easv.ticketbar2.be;
 
 public class Events {
-    private int Event_id;
-    private String Event_name;
-    private String Event_date;
+    private int EventID;
+    private String EventName;
+    private String StartDateTime;
+    private String EndDateTime;
     private String Location;
-    private int Created_by;
+    private String Description;
+    private String Notes;
+    private String LocationGuide;
+    private int CoordinatorID;
 
-    public Events(int event_id, String event_name, String event_date, String location, int created_by) {
-        Event_id = event_id;
-        Event_name = event_name;
-        Event_date = event_date;
+    public Events(int eventID, String eventName, String startDateTime, String endDateTime, String location, String description, String notes, String locationGuide, int coordinatorID) {
+        EventID = eventID;
+        EventName = eventName;
+        StartDateTime = startDateTime;
+        EndDateTime = endDateTime;
         Location = location;
-        Created_by = created_by;
+        Description = description;
+        Notes = notes;
+        LocationGuide = locationGuide;
+        CoordinatorID = coordinatorID;
     }
 
-    public int getEvent_id() {
-        return Event_id;
+    public int getEventID() {
+        return EventID;
     }
 
-    public void setEvent_id(int event_id) {
-        Event_id = event_id;
+    public void setEventID(int eventID) {
+        EventID = eventID;
     }
 
-    public String getEvent_name() {
-        return Event_name;
+    public String getEventName() {
+        return EventName;
     }
 
-    public void setEvent_name(String event_name) {
-        Event_name = event_name;
+    public void setEventName(String eventName) {
+        EventName = eventName;
     }
 
-    public String getEvent_date() {
-        return Event_date;
+    public String getStartDateTime() {
+        return StartDateTime;
     }
 
-    public void setEvent_date(String event_date) {
-        Event_date = event_date;
+    public void setStartDateTime(String startDateTime) {
+        StartDateTime = startDateTime;
+    }
+
+    public String getEndDateTime() {
+        return EndDateTime;
+    }
+
+    public void setEndDateTime(String endDateTime) {
+        EndDateTime = endDateTime;
     }
 
     public String getLocation() {
@@ -47,11 +63,35 @@ public class Events {
         Location = location;
     }
 
-    public int getCreated_by() {
-        return Created_by;
+    public String getDescription() {
+        return Description;
     }
 
-    public void setCreated_by(int created_by) {
-        Created_by = created_by;
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public String getNotes() {
+        return Notes;
+    }
+
+    public void setNotes(String notes) {
+        Notes = notes;
+    }
+
+    public String getLocationGuide() {
+        return LocationGuide;
+    }
+
+    public void setLocationGuide(String locationGuide) {
+        LocationGuide = locationGuide;
+    }
+
+    public int getCoordinatorID() {
+        return CoordinatorID;
+    }
+
+    public void setCoordinatorID(int coordinatorID) {
+        CoordinatorID = coordinatorID;
     }
 }

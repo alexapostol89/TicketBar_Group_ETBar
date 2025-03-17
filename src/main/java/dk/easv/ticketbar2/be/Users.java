@@ -1,32 +1,28 @@
 package dk.easv.ticketbar2.be;
 
 public class Users {
-    private int Userid;
+    private int UserID;
     private String Username;
-    private String Password;
+    private String PasswordHash;
     private int Rank;
-    private String Firstname;
-    private String Lastname;
+    private String FirstName;
+    private String LastName;
     private String Email;
     private String Phone;
+    private String CreatedDate;
+    private String LastLogin;
+    private String RankName; // This will hold the Rank's name ("Admin", "Coordinator")
 
-    public Users(int userid, String username, String password, int rank, String firstname, String lastname, String email, String phone) {
-        Userid = userid;
-        Username = username;
-        Password = password;
-        Rank = rank;
-        Firstname = firstname;
-        Lastname = lastname;
-        Email = email;
-        Phone = phone;
+    public Users(){
+
     }
 
-    public int getUserid() {
-        return Userid;
+    public int getUserID() {
+        return UserID;
     }
 
-    public void setUserid(int userid) {
-        Userid = userid;
+    public void setUserID(int userID) {
+        UserID = userID;
     }
 
     public String getUsername() {
@@ -37,12 +33,12 @@ public class Users {
         Username = username;
     }
 
-    public String getPassword() {
-        return Password;
+    public String getPasswordHash() {
+        return PasswordHash;
     }
 
-    public void setPassword(String password) {
-        Password = password;
+    public void setPasswordHash(String passwordHash) {
+        PasswordHash = passwordHash;
     }
 
     public int getRank() {
@@ -53,20 +49,20 @@ public class Users {
         Rank = rank;
     }
 
-    public String getFirstname() {
-        return Firstname;
+    public String getFirstName() {
+        return FirstName;
     }
 
-    public void setFirstname(String firstname) {
-        Firstname = firstname;
+    public void setFirstName(String firstName) {
+        FirstName = firstName;
     }
 
-    public String getLastname() {
-        return Lastname;
+    public String getLastName() {
+        return LastName;
     }
 
-    public void setLastname(String lastname) {
-        Lastname = lastname;
+    public void setLastName(String lastName) {
+        LastName = lastName;
     }
 
     public String getEmail() {
@@ -83,5 +79,29 @@ public class Users {
 
     public void setPhone(String phone) {
         Phone = phone;
+    }
+
+    public String getCreatedDate() {
+        return CreatedDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        CreatedDate = createdDate;
+    }
+
+    public String getLastLogin() {
+        return LastLogin;
+    }
+
+    public void setLastLogin(String lastLogin) {
+        LastLogin = lastLogin;
+    }
+
+    public String getRankName() {
+        return RankName;
+    }
+
+    public void setRankName(String rankName) {
+        RankName = rankName;
     }
 }
