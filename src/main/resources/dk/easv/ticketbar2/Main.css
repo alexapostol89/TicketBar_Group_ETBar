@@ -91,3 +91,10 @@
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
+
+. searchL {
+    -fx-background-image: url("Pictures/download.jpeg");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+
+}

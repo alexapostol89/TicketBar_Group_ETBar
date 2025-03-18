@@ -12,7 +12,7 @@ import java.io.File;
 public class EditEvents {
 
     @FXML
-    private ChoiceBox<String> searchBtn;  // A ChoiceBox to choose the image (can be used to trigger file chooser)
+    private Button searchBtn;
 
     @FXML
     private TextField nameId;  // TextField to enter the name
