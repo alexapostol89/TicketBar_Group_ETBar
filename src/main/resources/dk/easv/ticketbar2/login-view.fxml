@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -9,16 +10,16 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="688.0" styleClass="background" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.LoginController">
    <children>
-      <TextField fx:id="usernameTextfield" layoutX="207.0" layoutY="180.0" prefHeight="25.0" prefWidth="274.0" />
-      <Button layoutX="290.0" layoutY="327.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="109.0" text="Sign in" />
-      <Label layoutX="221.0" layoutY="151.0" text="Username" />
-      <Label layoutX="221.0" layoutY="227.0" text="Password" />
-      <Label layoutX="287.0" layoutY="61.0" prefHeight="32.0" prefWidth="115.0" text="EASV Ticket App">
+      <TextField fx:id="usernameTextfield" layoutX="207.0" layoutY="180.0" prefHeight="25.0" prefWidth="274.0" style="-fx-background-radius: 20px; -fx-border-radius: 20px;;" />
+      <Button layoutX="290.0" layoutY="327.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="109.0" styleClass="loginBtn" stylesheets="@Main.css" text="Sign in" />
+      <Label layoutX="221.0" layoutY="151.0" styleClass="labels" stylesheets="@Main.css" text="Username" />
+      <Label layoutX="221.0" layoutY="227.0" styleClass="labels" stylesheets="@Main.css" text="Password" />
+      <Label layoutX="287.0" layoutY="61.0" prefHeight="32.0" prefWidth="147.0" styleClass="labels" stylesheets="@Main.css" text="EASV Ticket App">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Button layoutX="534.0" layoutY="417.0" mnemonicParsing="false" styleClass="forgot" text="Forgot my password" />
-      <PasswordField fx:id="passwordTextfield" layoutX="207.0" layoutY="253.0" prefHeight="25.0" prefWidth="274.0" />
+      <PasswordField fx:id="passwordTextfield" layoutX="207.0" layoutY="253.0" prefHeight="25.0" prefWidth="274.0" style="-fx-background-radius: 20px;; -fx-border-radiu: 20px;;" />
+      <Hyperlink layoutX="557.0" layoutY="433.0" text="Forgot my password" />
    </children>
 </AnchorPane>

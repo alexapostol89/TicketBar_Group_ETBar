@@ -6,17 +6,17 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.0" prefWidth="636.0" styleClass="backgroundCoordinator" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.AdminController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.0" prefWidth="636.0" styleClass="background" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.AdminController">
 
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#showEventsA" styleClass="eventsA" stylesheets="@Main.css" text="Events">
+            <Button mnemonicParsing="false" onAction="#showEventsA" styleClass="buttons" stylesheets="@Main.css" text="Events">
                <VBox.margin>
                   <Insets bottom="20.0" top="50.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#showUsersA" styleClass="usersA" stylesheets="@Main.css" text="Users">
+            <Button mnemonicParsing="false" onAction="#showUsersA" styleClass="buttons" stylesheets="@Main.css" text="Users">
                <VBox.margin>
                   <Insets />
                </VBox.margin>

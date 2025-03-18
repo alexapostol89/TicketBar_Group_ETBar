@@ -1,100 +1,38 @@
 . background {
-    -fx-background-image: url("Pictures/1.jpg");
-    -fx-background-size: cover;
-    -fx-background-position: center center;
-}
-
-. forgot {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-padding: 0;
-    -fx-focus-traversable: false;
-    -fx-text-fill: "#0D4E60";
-    -fx-font-family: "Comic Sans MS";
-}
-
-. backgroundAdmin {
-    -fx-background-image: url("Pictures/background.png");
-    -fx-background-size: cover;
-    -fx-background-position: center center;
-}
-
-. backgroundCoordinator{
-    -fx-background-image: url("Pictures/1.jpg");
-    -fx-background-size: cover;
-    -fx-background-position: center center;
-}
-
-
-. usersC{
-    -fx-font-family: "Comic Sans MS";
-    -fx-background-color: "#C4D4D6";
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
+    -fx-background-color: "#FFE3B3";
 }
 
 . eventsC {
-    -fx-opacity: 0.5;
     -fx-font-family: "Comic Sans MS";
-    -fx-background-color: "#F4F9F9";
+    -fx-background-color: "#F3DB53";
     -fx-background-radius: 20;
     -fx-border-radius: 20;
     -fx-content-display: top;
     -fx-text-alignment: center;
 }
 
-. addE{
+. buttons {
     -fx-font-family: "Comic Sans MS";
-    -fx-background-color: "#C4D4D6";
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-}
-. editC{
-    -fx-font-family: "Comic Sans MS";
-    -fx-background-color: "#26648E";
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-
-}
-
-. labelEC {
-    -fx-font-family: "Comic Sans MS";
-}
-
-. backgroundEditE {
-    -fx-background-color: "#F4F9F9";
-    -fx-background-size: cover;
-    -fx-background-position: center center;
-}
-
-. eventInfo {
-    -fx-font-family: "Comic Sans MS";
-}
-
-. searchImage {
-    -fx-font-family: "Comic Sans MS";
-}
-
-. saveEdit {
-    -fx-font-family: "Comic Sans MS";
-    -fx-background-color: "#C4D4D6";
+    -fx-background-color: "#7C9DFF";
     -fx-background-radius: 20;
     -fx-border-radius: 20;
 }
 
-. titleEASV {
+
+. labels {
     -fx-font-family: "Comic Sans MS";
 }
 
-. backgroundE {
-    -fx-background-color: "#4F8FC0";
-    -fx-background-size: cover;
-    -fx-background-position: center center;
+. eventABC {
+    -fx-background-color: "#FFE3B3";
 }
 
-. searchL {
-    -fx-background-image: url("Pictures/download.jpeg");
-    -fx-background-size: cover;
-    -fx-background-position: center center;
+. loginBtn {
+    -fx-font-family: "Comic Sans MS";
+    -fx-background-color: "#5691FF";
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
 
 }
+
+

@@ -3,13 +3,12 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane styleClass="backgroundCoordinator" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.CoordinatorController">
+<BorderPane styleClass="background" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.CoordinatorController">
 
          <center>
       <FlowPane fx:id="contentPane" prefHeight="411.0" prefWidth="371.0" styleClass="flowPaneC" BorderPane.alignment="CENTER" />
@@ -18,7 +17,7 @@
          <bottom>
       <HBox alignment="CENTER" prefHeight="53.0" prefWidth="636.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="addEvents" mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" styleClass="addE" stylesheets="@Main.css" text="Add">
+            <Button fx:id="addEvents" mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" styleClass="buttons" stylesheets="@Main.css" text="Add">
                <HBox.margin>
                   <Insets right="15.0" />
                </HBox.margin>
@@ -26,9 +25,6 @@
          </children>
       </HBox>
    </bottom>
-   <right>
-      <ListView opacity="0.15" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </right>
    <left>
       <VBox alignment="CENTER" prefHeight="397.0" prefWidth="68.0" styleClass="eventsC" stylesheets="@Main.css" BorderPane.alignment="CENTER">
          <children>

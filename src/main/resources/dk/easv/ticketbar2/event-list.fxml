@@ -10,8 +10,8 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="41.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="addAdmin" mnemonicParsing="false" onAction="#addAdmin" text="Add" />
-            <Button mnemonicParsing="false" text="Edit">
+            <Button fx:id="addAdmin" mnemonicParsing="false" onAction="#addAdmin" styleClass="buttons" stylesheets="@Main.css" text="Add" />
+            <Button mnemonicParsing="false" styleClass="buttons" stylesheets="@Main.css" text="Edit">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin></Button>
