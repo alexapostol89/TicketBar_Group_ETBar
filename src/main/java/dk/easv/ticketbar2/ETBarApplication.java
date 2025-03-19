@@ -1,5 +1,7 @@
 package dk.easv.ticketbar2;
 
+import dk.easv.ticketbar2.dal.web.EventsDAO;
+import dk.easv.ticketbar2.dal.web.UsersDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,6 +21,10 @@ public class ETBarApplication extends Application {
 
     public static void main(String[] args) {
         launch();
+EventsDAO eventsDAO = new EventsDAO();
+eventsDAO.getEvents();
+UsersDAO usersDAO = new UsersDAO();
+usersDAO.getUsers();
     }
 
 }

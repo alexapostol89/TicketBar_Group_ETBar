@@ -10,7 +10,7 @@ public class Users {
     private String Email;
     private String Phone;
 
-    public Users(int userid, String username, String password, int rank, String firstname, String lastname, String email, String phone) {
+    public Users(int userid, String username, String password, int rank, String firstname, String lastname, String email, String phone, String lastLogin, String createdDate) {
         Userid = userid;
         Username = username;
         Password = password;
