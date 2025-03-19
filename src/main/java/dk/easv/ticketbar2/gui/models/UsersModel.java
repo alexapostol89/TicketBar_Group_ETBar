@@ -1,4 +1,4 @@
 package dk.easv.ticketbar2.gui.models;
 
-public class UsersMoldel {
+public class UsersModel {
 }

@@ -4,14 +4,21 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.LoginController">
    <children>
-      <Label layoutX="100.0" layoutY="75.0" text="Username" />
-      <TextField fx:id="usernameTextfield" layoutX="100.0" layoutY="100.0" prefHeight="25.0" prefWidth="200.0" />
-      <Label layoutX="100.0" layoutY="140.0" text="Password" />
-      <PasswordField fx:id="passwordTextfield" layoutX="100.0" layoutY="165.0" prefHeight="25.0" prefWidth="200.0" />
-      <Button layoutX="150.0" layoutY="210.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="100.0" text="Sign in" />
+      <ImageView fitHeight="54.0" fitWidth="200.0" layoutX="100.0" layoutY="14.0" AnchorPane.topAnchor="25.0">
+         <image>
+            <Image url="@pictures/easv-logo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="100.0" layoutY="110.0" text="Username" />
+      <TextField fx:id="usernameTextfield" layoutX="100.0" layoutY="130.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="100.0" />
+      <Label layoutX="100.0" layoutY="165.0" text="Password" />
+      <PasswordField fx:id="passwordTextfield" layoutX="100.0" layoutY="185.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="100.0" />
+      <Button layoutX="150.0" layoutY="225.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="100.0" text="Sign in" />
    </children>
 </AnchorPane>
