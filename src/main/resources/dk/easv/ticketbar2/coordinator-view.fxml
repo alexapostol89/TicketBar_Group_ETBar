@@ -22,6 +22,7 @@
                   <Insets right="15.0" />
                </HBox.margin>
             </Button>
+            <Button layoutX="289.0" layoutY="24.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="64.0" styleClass="buttons" stylesheets="@Main.css" text="Log out" />
          </children>
       </HBox>
    </bottom>
