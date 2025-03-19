@@ -25,7 +25,6 @@
     -fx-background-position: center center;
 }
 
-
 . usersC{
     -fx-font-family: "Comic Sans MS";
     -fx-background-color: "#C4D4D6";
@@ -49,12 +48,12 @@
     -fx-background-radius: 20;
     -fx-border-radius: 20;
 }
+
 . editC{
     -fx-font-family: "Comic Sans MS";
     -fx-background-color: "#26648E";
     -fx-background-radius: 20;
     -fx-border-radius: 20;
-
 }
 
 . labelEC {
