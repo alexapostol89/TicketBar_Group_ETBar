@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="300.0" prefWidth="500.0" styleClass="background" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.EditEvents">
+<AnchorPane prefHeight="300.0" prefWidth="500.0" styleClass="backgroundC" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.EditEvents">
    <children>
       <Label layoutX="86.0" layoutY="45.0" prefHeight="28.0" prefWidth="119.0" styleClass="labels" stylesheets="@Main.css" text="Start Date" textFill="#3b4343">
          <font>

@@ -2,9 +2,24 @@
     -fx-background-color: "#FFE3B3";
 }
 
+. backgroundLogin {
+    -fx-background-image: url("pictures/1.jpg");
+    -fx-background-size: cover; /* Ensures the image covers the entire element */
+    -fx-background-position: center; /* Centers the image */
+    -fx-background-repeat: no-repeat;
+}
+
+. backgroundC {
+    -fx-background-image: url("pictures/11.jpg");
+    -fx-background-size: cover; /* Ensures the image covers the entire element */
+    -fx-background-position: center; /* Centers the image */
+    -fx-background-repeat: no-repeat;
+}
+
 . eventsC {
     -fx-font-family: "Comic Sans MS";
-    -fx-background-color: "#F3DB53";
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 0); /* Blur effect */
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Light opacity for transparency */
     -fx-background-radius: 20;
     -fx-border-radius: 20;
     -fx-content-display: top;
@@ -13,7 +28,9 @@
 
 . buttons {
     -fx-font-family: "Comic Sans MS";
-    -fx-background-color: "#7C9DFF";
+    /*-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 0); /* Blur effect */
+    -fx-background-color: rgba(255, 255, 255, 0.15); /* Light opacity for transparency */
+    /*-fx-background-color: "#DEF2F0";*/
     -fx-background-radius: 20;
     -fx-border-radius: 20;
 }
@@ -29,10 +46,39 @@
 
 . loginBtn {
     -fx-font-family: "Comic Sans MS";
-    -fx-background-color: "#5691FF";
+    -fx-background-color: "#DEF2F0";
     -fx-background-radius: 20;
     -fx-border-radius: 20;
 
 }
 
+. labelEvent {
+    -fx-background-color: rgba(255, 255, 255, 0.15); /* Light opacity for transparency */
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+
+. labelLogin {
+    -fx-background-color: rgba(255, 255, 255, 0.15); /* Light opacity for transparency */
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+
+}
+
+. backButton {
+    -fx-background-color: black;
+}
+
+
+. eventsHeader {
+
+    -fx-font-family: "Comic Sans MS";
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 0); /* Blur effect */
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Light opacity for transparency */
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-content-display: top;
+    -fx-text-alignment: center;
+
+}
 

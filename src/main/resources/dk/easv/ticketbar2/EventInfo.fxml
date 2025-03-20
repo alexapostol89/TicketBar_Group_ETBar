@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
@@ -11,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="349.0" prefWidth="179.0" styleClass="eventABC" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="349.0" prefWidth="179.0" styleClass="backgroundC" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.EventInfo">
    <center>
       <FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="264.0" prefWidth="600.0">
          <children>
@@ -79,44 +81,28 @@
       </FlowPane>
    </center>
    <left>
-      <HBox BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="397.0" prefWidth="68.0" styleClass="eventsC" stylesheets="@Main.css" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" prefHeight="288.0" prefWidth="49.0" styleClass="eventsC" stylesheets="@Main.css">
-               <children>
-                  <Label text="E">
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label text="V">
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label text="E">
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label text="N">
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label text="T">
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label text="S">
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
-                     </VBox.margin>
-                  </Label>
-               </children>
-            </VBox>
+            <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="33.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@pictures/icons8-back-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets bottom="50.0" />
+               </VBox.margin></Button>
+
+            <Label text="E"><VBox.margin><Insets bottom="10.0" /></VBox.margin></Label>
+            <Label text="V"><VBox.margin><Insets bottom="10.0" /></VBox.margin></Label>
+            <Label text="E"><VBox.margin><Insets bottom="10.0" /></VBox.margin></Label>
+            <Label text="N"><VBox.margin><Insets bottom="10.0" /></VBox.margin></Label>
+            <Label text="T"><VBox.margin><Insets bottom="10.0" /></VBox.margin></Label>
+            <Label text="S"><VBox.margin><Insets bottom="10.0" /></VBox.margin></Label>
          </children>
-      </HBox>
+      </VBox>
    </left>
    <bottom>
       <VBox BorderPane.alignment="CENTER">

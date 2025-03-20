@@ -29,15 +29,25 @@ public class CoordinatorController {
     private FlowPane contentPane;  // FlowPane to dynamically add new images and labels
 
     @FXML
+    private VBox eventBox;  // Event template VBox (defined in SceneBuilder)
+
+    //@FXML
+    //private ImageView eventImage;  // ImageView inside the template VBox
+
+    //@FXML
+    //private Label eventLabel;  // Label inside the template VBox
+
+    @FXML
     public void initialize() {
+        contentPane.setHgap(10);  // Horizontal gap between event boxes
+        contentPane.setVgap(10);
         addEvents.setOnAction(event -> openEditEventWindow());
         loadExistingEvents();
-
     }
 
     private void loadExistingEvents() {
         EventsDAO eventsDAO = new EventsDAO();
-        List<Events> events = eventsDAO.getEvents();
+        List<Events> events = eventsDAO.getEvents();  // Fetch events from REST API
 
         for (Events event : events) {
             updateCoordinatorView(event.getEvent_name(), event.getEvent_image_path());
@@ -63,39 +73,42 @@ public class CoordinatorController {
     }
 
     public void updateCoordinatorView(String eventName, String imagePath) {
-        VBox vbox = new VBox();
-        vbox.setSpacing(10);
-        vbox.setPadding(new javafx.geometry.Insets(10));
+        // Create a new VBox dynamically (instead of using eventBox)
+        VBox newEventBox = new VBox();
+        newEventBox.setSpacing(10);
+        newEventBox.setAlignment(javafx.geometry.Pos.CENTER);
 
-        ImageView imageView = new ImageView();
+        // Create ImageView dynamically
+        ImageView newImageView = new ImageView();
+        newImageView.setFitWidth(200);
+        newImageView.setFitHeight(150);
+
         if (imagePath != null && !imagePath.isEmpty()) {
             File file = new File(imagePath);
             if (file.exists()) {
                 Image image = new Image(file.toURI().toString());
-                imageView.setImage(image);
-                imageView.setFitHeight(150);
-                imageView.setFitWidth(200);
+                newImageView.setImage(image);
             }
         }
 
-        Label label = new Label(eventName);
-        label.setWrapText(true);
-        label.setMaxWidth(200);
+        // Create Label dynamically
+        Label newLabel = new Label(eventName);
+        newLabel.setStyle("-fx-background-color: rgba(255, 255, 255, 0.15);" + "-fx-background-radius: 20;\n" + "-fx-border-radius: 20;");
+        newLabel.setWrapText(true);
+        newLabel.setMaxWidth(200);
 
-        VBox.setMargin(imageView, new javafx.geometry.Insets(0, 0, 5, 0));
-        VBox.setMargin(label, new javafx.geometry.Insets(5, 0, 0, 0));
+        newEventBox.getChildren().addAll(newImageView, newLabel);
 
-        vbox.getChildren().addAll(imageView, label);
-
-        // ADD DOUBLE-CLICK EVENT TO OPEN 1234test.fxml
-        imageView.setOnMouseClicked(event -> {
+        // Add event double-click to open event details
+        newImageView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 openDetailsWindow();
             }
         });
 
-        contentPane.getChildren().add(vbox);
+        contentPane.getChildren().add(newEventBox);
     }
+
 
     private void openDetailsWindow() {
         try {
@@ -113,12 +126,11 @@ public class CoordinatorController {
 
     @FXML
     private void logout(ActionEvent event) {
-        try{
-            //Load Login screen
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/login-view.fxml"));
             Parent root = loader.load();
 
-            //Closes actual stage
+            // Close current stage
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.close();
 

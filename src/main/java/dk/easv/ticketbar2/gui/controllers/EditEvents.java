@@ -33,7 +33,7 @@ public class EditEvents {
 
         // Handle save button click
         btnSave.setOnAction(event -> saveEvent());
-        //nameId.setStyle("-fx-background-color: lightblue; -fx-text-fill: black;");
+
     }
 
     // Set reference to CoordinatorController so that we can pass data back
