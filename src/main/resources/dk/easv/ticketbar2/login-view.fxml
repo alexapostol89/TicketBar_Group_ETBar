@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -21,5 +23,10 @@
       </Label>
       <PasswordField fx:id="passwordTextfield" layoutX="207.0" layoutY="253.0" prefHeight="25.0" prefWidth="274.0" style="-fx-background-radius: 20px;; -fx-border-radiu: 20px;;" />
       <Hyperlink layoutX="557.0" layoutY="433.0" text="Forgot my password" />
+      <ImageView fitHeight="55.0" fitWidth="82.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@pictures/logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

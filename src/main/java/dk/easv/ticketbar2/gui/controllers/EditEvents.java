@@ -16,7 +16,7 @@ public class EditEvents {
     private Button searchBtn;
 
     @FXML
-    private TextField nameId;  // TextField to enter the name
+        private TextField nameId;  // TextField to enter the name
 
     @FXML
     private Button btnSave;  // Save button to save the entered name and image
@@ -33,6 +33,7 @@ public class EditEvents {
 
         // Handle save button click
         btnSave.setOnAction(event -> saveEvent());
+        //nameId.setStyle("-fx-background-color: lightblue; -fx-text-fill: black;");
     }
 
     // Set reference to CoordinatorController so that we can pass data back
