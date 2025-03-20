@@ -1,0 +1,10 @@
+.tab:selected {
+    -fx-background-color: #4da9ff; /* Green color when selected */
+    -fx-text-fill: white; /* White text */
+    -fx-font-weight: bold;
+}
+
+.tab {
+    -fx-background-color: #f1f1f1; /* Default background color */
+    -fx-text-fill: black; /* Default text color */
+}

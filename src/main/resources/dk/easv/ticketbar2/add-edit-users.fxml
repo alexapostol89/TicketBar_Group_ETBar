@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="140.0" layoutY="74.0" text="Username:" />
+      <Label layoutX="140.0" layoutY="114.0" text="Password:" />
+      <Label layoutX="140.0" layoutY="154.0" text="Rank:" />
+      <Label layoutX="140.0" layoutY="194.0" text="First Name:" />
+      <Label layoutX="140.0" layoutY="234.0" text="Last Name:" />
+      <Label layoutX="140.0" layoutY="274.0" text="Email:" />
+      <Label layoutX="140.0" layoutY="314.0" text="Phone:" />
+      <TextField fx:id="usernameTxtField" layoutX="215.0" layoutY="70.0" prefWidth="200.0" promptText="Username" />
+      <TextField fx:id="passwordTxtField" layoutX="215.0" layoutY="110.0" prefWidth="200.0" promptText="Password" />
+      <ComboBox fx:id="rankComboBox" layoutX="215.0" layoutY="150.0" prefWidth="150.0" promptText="Select Rank" />
+      <TextField fx:id="firstNameTxtField" layoutX="215.0" layoutY="190.0" prefWidth="200.0" promptText="First name" />
+      <TextField fx:id="lastNameTxtField" layoutX="215.0" layoutY="230.0" prefWidth="200.0" promptText="Last name" />
+      <TextField fx:id="emailTxtField" layoutX="215.0" layoutY="270.0" prefWidth="200.0" promptText="Email" />
+      <TextField fx:id="phoneTxtField" layoutX="215.0" layoutY="310.0" prefWidth="200.0" promptText="Phone" />
+      <Button fx:id="saveButton" layoutX="458.0" layoutY="348.0" mnemonicParsing="false" text="Save" />
+   </children>
+</AnchorPane>
