@@ -1,5 +1,6 @@
 package dk.easv.ticketbar2.gui.controllers;
 
+import dk.easv.ticketbar2.dal.web.EventsDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -46,9 +47,29 @@ public class EditEvents {
 
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
-            selectedImagePath = selectedFile.getAbsolutePath();
+            try {
+                // Define the target directory
+                File mediaFolder = new File("media");
+                if (!mediaFolder.exists()) {
+                    mediaFolder.mkdirs(); // Create "media" folder if it doesn't exist
+                }
+
+                // Create destination file
+                File destinationFile = new File(mediaFolder, selectedFile.getName());
+
+                // Copy file to media folder
+                java.nio.file.Files.copy(selectedFile.toPath(), destinationFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+
+                // Store relative path
+                selectedImagePath = "media/" + selectedFile.getName();
+                System.out.println("Image saved to: " + selectedImagePath);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
+
 
     // Method to save the event data
     private void saveEvent() {
@@ -58,7 +79,11 @@ public class EditEvents {
             return;
         }
 
-        // Update the CoordinatorController with the entered name and selected image
+        // Save event to database
+        EventsDAO eventsDAO = new EventsDAO();
+        eventsDAO.saveEvent(eventName, selectedImagePath);
+
+        // Update UI
         if (coordinatorController != null) {
             coordinatorController.updateCoordinatorView(eventName, selectedImagePath);
         }
@@ -67,4 +92,5 @@ public class EditEvents {
         Stage stage = (Stage) btnSave.getScene().getWindow();
         stage.close();
     }
+
 }

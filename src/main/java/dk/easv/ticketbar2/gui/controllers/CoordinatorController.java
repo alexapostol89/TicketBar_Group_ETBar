@@ -1,5 +1,7 @@
 package dk.easv.ticketbar2.gui.controllers;
 
+import dk.easv.ticketbar2.be.Events;
+import dk.easv.ticketbar2.dal.web.EventsDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,10 +16,9 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import javax.imageio.plugins.tiff.GeoTIFFTagSet;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class CoordinatorController {
 
@@ -30,6 +31,17 @@ public class CoordinatorController {
     @FXML
     public void initialize() {
         addEvents.setOnAction(event -> openEditEventWindow());
+        loadExistingEvents();
+
+    }
+
+    private void loadExistingEvents() {
+        EventsDAO eventsDAO = new EventsDAO();
+        List<Events> events = eventsDAO.getEvents();
+
+        for (Events event : events) {
+            updateCoordinatorView(event.getEvent_name(), event.getEvent_image_path());
+        }
     }
 
     private void openEditEventWindow() {

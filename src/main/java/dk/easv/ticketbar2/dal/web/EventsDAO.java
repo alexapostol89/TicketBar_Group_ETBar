@@ -24,13 +24,21 @@ public class EventsDAO {
             while (rs.next()) {
 
                 int eventId = rs.getInt("EventID");
+                int createdBy = rs.getInt("CoordinatorID");
                 String eventName = rs.getString("EventName");
                 String eventDate = rs.getString("StartDateTime");
+                String endDate = rs.getString("EndDateTime");
                 String location = rs.getString("Location");
-                int createdBy = rs.getInt("CoordinatorID");
+                String eventDescription = rs.getString("Description");
+                String notes = rs.getString("Notes");
+                String locationGuide = rs.getString("LocationGuide");
+                String eventImagePath = rs.getString("EventImagePath");
 
-                Events eventTable = new Events(eventId, eventName, eventDate, location, createdBy);
-                events.add(eventTable);
+
+                Events eventsTable = new Events (eventId, createdBy,eventName, eventDate, endDate, location, eventDescription, notes, locationGuide, eventImagePath);
+                events.add(eventsTable);
+
+
 
             }
         } catch (SQLServerException e) {
@@ -40,4 +48,19 @@ public class EventsDAO {
         }
         return events;
 }
+
+    public void saveEvent(String eventName, String imagePath) {
+        try {
+            Connection c = conn.getConnection();
+            String sql = "INSERT INTO Events (EventName, EventImagePath) VALUES (?, ?)";
+            PreparedStatement statement = c.prepareStatement(sql);
+            statement.setString(1, eventName);
+            statement.setString(2, imagePath);
+            statement.executeUpdate();
+            System.out.println("Event saved successfully!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
