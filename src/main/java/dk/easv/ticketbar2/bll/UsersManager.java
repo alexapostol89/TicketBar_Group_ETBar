@@ -67,4 +67,14 @@ public class UsersManager {
         // Use PasswordUtils to check the password
         return PasswordUtils.checkPassword(password, user.getPasswordHash());
     }
+
+    // Get filtered users (delegate to UsersDAO)
+    public ObservableList<Users> getFilteredUsers(boolean showAdmin, boolean showCoordinator, String usernameFilter) {
+        return usersDAO.getFilteredUsers(showAdmin, showCoordinator, usernameFilter);
+    }
+
+    // Method to delete a user
+    public void deleteUser(Users user) {
+        usersDAO.deleteUser(user);
+    }
 }

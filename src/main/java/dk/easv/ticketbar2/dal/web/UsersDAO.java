@@ -80,6 +80,59 @@ public class UsersDAO {
         return usersList;
     }
 
+    // Get filtered users from the database based on selected filters
+    public ObservableList<Users> getFilteredUsers(boolean showAdmin, boolean showCoordinator, String usernameFilter) {
+        ObservableList<Users> filteredUsers = FXCollections.observableArrayList();
+
+        // Base query for fetching users
+        String sql = "SELECT u.UserID, u.Username, u.PasswordHash, u.Rank, ur.rank AS RankName, u.FirstName, u.LastName, u.Email, u.Phone, u.CreatedDate, u.LastLogin " +
+                "FROM Users u " +
+                "JOIN User_rank ur ON u.Rank = ur.id " +
+                "WHERE 1=1";
+
+        // Add conditions for filtering by role
+        if (showAdmin) {
+            sql += " AND ur.rank = 'Admin'";
+        }
+        if (showCoordinator) {
+            sql += " AND ur.rank = 'Coordinator'";
+        }
+        // Add condition for username search
+        if (!usernameFilter.isEmpty()) {
+            sql += " AND u.Username LIKE ?";
+        }
+
+        try (Connection c = connection.getConnection();
+             PreparedStatement stmt = c.prepareStatement(sql)) {
+
+            // Set username filter parameter if provided
+            if (!usernameFilter.isEmpty()) {
+                stmt.setString(1, "%" + usernameFilter + "%");
+            }
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Users user = new Users();
+                user.setUserID(rs.getInt("UserID"));
+                user.setUsername(rs.getString("Username"));
+                user.setPasswordHash(rs.getString("PasswordHash"));
+                user.setRank(rs.getInt("Rank"));
+                user.setRankName(rs.getString("RankName"));
+                user.setFirstName(rs.getString("FirstName"));
+                user.setLastName(rs.getString("LastName"));
+                user.setEmail(rs.getString("Email"));
+                user.setPhone(rs.getString("Phone"));
+                user.setCreatedDate(rs.getString("CreatedDate"));
+                user.setLastLogin(rs.getString("LastLogin"));
+                filteredUsers.add(user);
+            }
+        } catch (SQLException e) {
+            throw new UsersException(e.getMessage());
+        }
+        return filteredUsers;
+    }
+
     // Add User
     public boolean addUser(Users user) {
         String sql = "INSERT INTO Users (Username, PasswordHash, Rank, FirstName, LastName, Email, Phone) " +
@@ -144,6 +197,21 @@ public class UsersDAO {
             e.printStackTrace(); // Print the stack trace for debugging
         }
         return false;
+    }
+
+    // Method to delete a user from the database
+    public void deleteUser(Users user) {
+        String sql = "DELETE FROM Users WHERE UserID = ?";
+
+        try (Connection c = connection.getConnection();
+             PreparedStatement stmt = c.prepareStatement(sql)) {
+
+            // Set the UserID for the user to delete
+            stmt.setInt(1, user.getUserID());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new UsersException(e.getMessage());
+        }
     }
 
     // Get a user by ID

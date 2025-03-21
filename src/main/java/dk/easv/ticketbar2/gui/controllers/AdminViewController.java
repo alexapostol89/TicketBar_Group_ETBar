@@ -6,6 +6,7 @@ import dk.easv.ticketbar2.bll.EventsManager;
 import dk.easv.ticketbar2.bll.UsersManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 public class AdminViewController {
 
@@ -50,6 +53,12 @@ public class AdminViewController {
     @FXML
     private Button signOutButton1, signOutButton2, addUserButton, editUserButton, deleteUserButton;
 
+    @FXML
+    private CheckBox adminCheckBox, coordinatorCheckBox;
+
+    @FXML
+    private TextField usernameTextField;
+
     private UsersManager usersManager = new UsersManager();
     private EventsManager eventsManager = new EventsManager();
 
@@ -79,6 +88,11 @@ public class AdminViewController {
             }
         });
 
+        // Add listeners to checkboxes and text field for filtering
+        adminCheckBox.setOnAction(e -> filterUsers());
+        coordinatorCheckBox.setOnAction(e -> filterUsers());
+        usernameTextField.textProperty().addListener((observable, oldValue, newValue) -> filterUsers());
+
         // Sign out button action
         signOutButton1.setOnAction(this::signOut);
         signOutButton2.setOnAction(this::signOut);
@@ -88,6 +102,8 @@ public class AdminViewController {
 
         // Edit User button action
         editUserButton.setOnAction(this::handleEditUser);
+
+        deleteUserButton.setOnAction(this::handleDeleteUser);
     }
 
     private void populateUserDetails(Users user) {
@@ -160,11 +176,78 @@ public class AdminViewController {
                 usersTableView.setItems(FXCollections.observableArrayList(usersManager.getAllUsers()));
 
             } catch (Exception e) {
-                showErrorDialog("Error", "Failed to open the Edit User dialog.");
+                showErrorDialog("Error", "Failed to open the Edit User dialog");
             }
         } else {
-            showErrorDialog("Error", "Please select a user to edit.");
+            showErrorDialog("Error", "Please select a user to edit");
         }
+    }
+
+    // Method to handle Delete User button
+    private void handleDeleteUser(ActionEvent event) {
+        // Get the selected user from the table
+        Users selectedUser = usersTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedUser != null) {
+            // Show a confirmation dialog
+            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmationAlert.setTitle("Confirm Deletion");
+            confirmationAlert.setHeaderText("Are you sure you want to delete the selected user?");
+            confirmationAlert.setContentText("This action cannot be undone");
+
+            // Wait for the user's response (Yes/No)
+            ButtonType yesButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+            ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.NO);
+            confirmationAlert.getButtonTypes().setAll(yesButton, noButton);
+
+            // Show the alert and capture the user's choice
+            Optional<ButtonType> result = confirmationAlert.showAndWait();
+
+            if (result.isPresent() && result.get() == yesButton) {
+                // If the user clicks "Yes", delete the user
+                usersManager.deleteUser(selectedUser);
+                // Remove the user from the TableView
+                usersTableView.getItems().remove(selectedUser);
+            }
+        } else {
+            // Show an error if no user is selected
+            showErrorDialog("Error", "Please select a user to delete");
+        }
+    }
+
+    private void filterUsers() {
+        // Get the selected role filters
+        boolean showAdmin = adminCheckBox.isSelected();
+        boolean showCoordinator = coordinatorCheckBox.isSelected();
+
+        // Get the username filter (if any)
+        String usernameFilter = usernameTextField.getText().trim().toLowerCase();
+
+        // Get all users, filtered by role and username
+        ObservableList<Users> filteredUsers = FXCollections.observableArrayList();
+
+        for (Users user : usersManager.getAllUsers()) {
+            boolean matchesRole = false;
+            if (showAdmin && user.getRankName().equals("Admin")) {
+                matchesRole = true;
+            }
+            if (showCoordinator && user.getRankName().equals("Coordinator")) {
+                matchesRole = true;
+            }
+
+            boolean matchesUsername = user.getUsername().toLowerCase().contains(usernameFilter);
+
+            if ((showAdmin || showCoordinator) && matchesRole && matchesUsername) {
+                filteredUsers.add(user);
+            } else if (usernameFilter.isEmpty() && (showAdmin || showCoordinator) && matchesRole) {
+                filteredUsers.add(user);
+            } else if (usernameFilter.isEmpty() && !showAdmin && !showCoordinator) {
+                filteredUsers.add(user); // Show all users if no filters are selected
+            }
+        }
+
+        // Update the table view with the filtered users
+        usersTableView.setItems(filteredUsers);
     }
 
     private void signOut(ActionEvent event) {
@@ -179,14 +262,12 @@ public class AdminViewController {
         }
     }
 
-    // Method to close Admin window
     private void closeAdminWindow(ActionEvent event) {
         // Get the current window and close it
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
-    // Method to open the login window
     private void openLoginWindow() throws Exception {
         // Load the login view and show it
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/login-view.fxml"));
