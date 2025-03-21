@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<TabPane stylesheets="@styles.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.AdminViewController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.AdminViewController">
   <tabs>
     <Tab fx:id="usersTab" text="Users">
       <content>
@@ -79,9 +79,9 @@
                               </GridPane>
                               <ButtonBar buttonMinWidth="80.0" prefHeight="40.0" prefWidth="281.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="5.0">
                                 <buttons>
-                                  <Button mnemonicParsing="false" text="Add" />
-                                    <Button mnemonicParsing="false" text="Edit" />
-                                    <Button mnemonicParsing="false" text="Delete" />
+                                  <Button fx:id="addUserButton" mnemonicParsing="false" text="Add" />
+                                    <Button fx:id="editUserButton" mnemonicParsing="false" text="Edit" />
+                                    <Button fx:id="deleteUserButton" mnemonicParsing="false" text="Delete" />
                                 </buttons>
                               </ButtonBar>
                               <GridPane AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="25.0">

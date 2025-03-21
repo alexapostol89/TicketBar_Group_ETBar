@@ -1,8 +1,11 @@
 package dk.easv.ticketbar2.bll;
 
+import dk.easv.ticketbar2.PasswordUtils;
 import dk.easv.ticketbar2.be.Users;
 import dk.easv.ticketbar2.dal.web.UsersDAO;
 import javafx.collections.ObservableList;
+
+import static dk.easv.ticketbar2.PasswordUtils.hashPassword;
 
 public class UsersManager {
     private final UsersDAO usersDAO;
@@ -28,8 +31,35 @@ public class UsersManager {
         return usersDAO.getAllUsers();
     }
 
+    // Add User
+    public boolean addUser(Users user, String password) {
+        // Hash password using PasswordUtils
+        user.setPasswordHash(hashPassword(password));
+        return usersDAO.addUser(user);
+    }
+
+    // Edit User
+    public boolean editUser(Users user, String password) {
+        if (password != null && !password.isEmpty()) {
+            // Hash password using PasswordUtils if provided
+            user.setPasswordHash(hashPassword(password));
+        }
+        return usersDAO.editUser(user);
+    }
+
     // Get user by ID
     public Users getUserById(int userId) {
         return usersDAO.getUserById(userId);
+    }
+
+    // Validate user login
+    public boolean validateUserLogin(String username, String password) {
+        Users user = usersDAO.validateUser(username, password);
+        if (user == null) {
+            return false; // No user found with that username
+        }
+
+        // Use PasswordUtils to check the password
+        return PasswordUtils.checkPassword(password, user.getPasswordHash());
     }
 }

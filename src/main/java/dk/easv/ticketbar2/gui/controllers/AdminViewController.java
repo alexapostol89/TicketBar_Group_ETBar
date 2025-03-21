@@ -5,6 +5,7 @@ import dk.easv.ticketbar2.be.Users;
 import dk.easv.ticketbar2.bll.EventsManager;
 import dk.easv.ticketbar2.bll.UsersManager;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,7 +48,7 @@ public class AdminViewController {
     private Label nameLabel, startDateLabel, endDateLabel, locationLabel, descriptionLabel, coordinatorLabel, guideLabel, notesLabel;
 
     @FXML
-    private Button signOutButton1, signOutButton2;
+    private Button signOutButton1, signOutButton2, addUserButton, editUserButton, deleteUserButton;
 
     private UsersManager usersManager = new UsersManager();
     private EventsManager eventsManager = new EventsManager();
@@ -81,6 +82,12 @@ public class AdminViewController {
         // Sign out button action
         signOutButton1.setOnAction(this::signOut);
         signOutButton2.setOnAction(this::signOut);
+
+        // Add User button action
+        addUserButton.setOnAction(this::handleAddUser);
+
+        // Edit User button action
+        editUserButton.setOnAction(this::handleEditUser);
     }
 
     private void populateUserDetails(Users user) {
@@ -103,6 +110,61 @@ public class AdminViewController {
         coordinatorLabel.setText(Integer.toString(event.getCoordinatorID()));
         guideLabel.setText(event.getLocationGuide());
         notesLabel.setText(event.getNotes());
+    }
+
+    // Method to handle Add User button
+    private void handleAddUser(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/add-edit-view.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller of the dialog
+            AddEditUsersController dialogController = loader.getController();
+            dialogController.setDialogType("add");
+
+            // Open the dialog
+            Stage dialogStage = new Stage();
+            dialogStage.setScene(new Scene(root));
+            dialogStage.setTitle("Create New User");
+            dialogStage.showAndWait();
+
+            // After the dialog closes, refresh the Users TableView
+            usersTableView.setItems(FXCollections.observableArrayList(usersManager.getAllUsers()));
+
+        } catch (Exception e) {
+            showErrorDialog("Error", "Failed to open the Add User dialog");
+        }
+    }
+
+    // Method to handle Edit User button
+    private void handleEditUser(ActionEvent event) {
+        Users selectedUser = usersTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedUser != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/add-edit-view.fxml"));
+                Parent root = loader.load();
+
+                // Get the controller of the dialog
+                AddEditUsersController dialogController = loader.getController();
+                dialogController.setDialogType("edit");
+                dialogController.setUser(selectedUser);
+
+                // Open the dialog
+                Stage dialogStage = new Stage();
+                dialogStage.setScene(new Scene(root));
+                dialogStage.setTitle("Edit User");
+                dialogStage.showAndWait();
+
+                // After the dialog closes, refresh the Users TableView
+                usersTableView.setItems(FXCollections.observableArrayList(usersManager.getAllUsers()));
+
+            } catch (Exception e) {
+                showErrorDialog("Error", "Failed to open the Edit User dialog.");
+            }
+        } else {
+            showErrorDialog("Error", "Please select a user to edit.");
+        }
     }
 
     private void signOut(ActionEvent event) {
@@ -135,12 +197,6 @@ public class AdminViewController {
         stage.show();
     }
 
-    /**
-     *
-     * A helper method for error handling
-     * Displays a user-friendly dialog when an error occurs (FXML loading error, invalid credentials, etc.)
-     * You no longer need to import IOException
-     */
     private void showErrorDialog(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
