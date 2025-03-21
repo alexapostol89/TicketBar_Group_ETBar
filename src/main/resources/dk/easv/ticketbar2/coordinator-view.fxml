@@ -96,7 +96,7 @@
          <center>
             <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <GridPane prefHeight="489.0" prefWidth="576.0">
+                  <GridPane prefHeight="510.0" prefWidth="576.0" styleClass="gridPane" stylesheets="@Main.css">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -111,46 +111,67 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Name" />
-                        <Label text="Start Date" GridPane.rowIndex="1" />
-                        <Label text="End Date" GridPane.rowIndex="2" />
-                        <Label text="Created By" GridPane.rowIndex="3" />
-                        <Label text="Location guidance" GridPane.rowIndex="4" />
-                        <Label text="Number of guests" GridPane.rowIndex="5" />
-                        <Label text="Notes/Extra information about the event" GridPane.rowIndex="6" />
-                        <Label text="...." GridPane.columnIndex="1" />
-                        <Label text="...." GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label text="...." GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label text="...." GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="...." GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label text="...." GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label text="....." GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label text="Name">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding></Label>
+                        <Label text="Start Date" GridPane.rowIndex="1">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding></Label>
+                        <Label text="End Date" GridPane.rowIndex="2">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding></Label>
+                        <Label text="Created By" GridPane.rowIndex="3">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding></Label>
+                        <Label text="Location guidance" GridPane.rowIndex="4">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding></Label>
+                        <Label text="Number of guests" GridPane.rowIndex="5">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding></Label>
+                        <Label text="Notes/Extra information about the event" GridPane.rowIndex="6">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding></Label>
+                        <Label text=".............." GridPane.columnIndex="1" />
+                        <Label text=".............." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text=".............." GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text=".............." GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text=".............." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text=".............." GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text=".............." GridPane.columnIndex="1" GridPane.rowIndex="6" />
                      </children>
                   </GridPane>
                </children>
             </FlowPane>
          </center>
          <bottom>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="gridPane" stylesheets="@Main.css" BorderPane.alignment="CENTER">
                <children>
                   <Button mnemonicParsing="false" styleClass="buttons" stylesheets="@Main.css" text="Print Ticket">
                      <HBox.margin>
-                        <Insets right="12.0" />
+                        <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
                   <Button mnemonicParsing="false" styleClass="buttons" stylesheets="@Main.css" text="E-mail ticket">
                      <HBox.margin>
-                        <Insets right="12.0" />
+                        <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
                   <Button mnemonicParsing="false" styleClass="buttons" stylesheets="@Main.css" text="Delete event">
                      <HBox.margin>
-                        <Insets right="12.0" />
+                        <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
                   <Button mnemonicParsing="false" styleClass="buttons" stylesheets="@Main.css" text="Assign EC">
                      <HBox.margin>
-                        <Insets right="12.0" />
+                        <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
                </children>
@@ -161,11 +182,26 @@
    <top>
       <HBox alignment="CENTER" prefHeight="38.0" prefWidth="1306.0" styleClass="eventsHeader" stylesheets="@Main.css" BorderPane.alignment="CENTER">
          <children>
-            <Label text="M" />
-            <Label text="A" />
-            <Label text="K" />
-            <Label text="I" />
-            <Label text="N" />
+            <Label text="M">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="A">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="K">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="I">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="N">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
             <Label text="G">
                <HBox.margin>
                   <Insets right="15.0" />
@@ -173,30 +209,78 @@
             </Label>
             <Label text="E">
                <HBox.margin>
-                  <Insets />
+                  <Insets right="1.0" />
                </HBox.margin>
             </Label>
-            <Label text="V" />
-            <Label text="E" />
-            <Label text="N" />
-            <Label text="T" />
+            <Label text="V">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="E">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="N">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="T">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
             <Label text="S">
                <HBox.margin>
                   <Insets right="15.0" />
                </HBox.margin>
             </Label>
-            <Label text="U" />
-            <Label text="N" />
-            <Label text="F" />
-            <Label text="O" />
-            <Label text="R" />
-            <Label text="G" />
-            <Label text="E" />
-            <Label text="T" />
-            <Label text="T" />
-            <Label text="A" />
-            <Label text="B" />
-            <Label text="L" />
+            <Label text="U">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="N">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="F">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="O">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="R">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="G">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="E">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="T">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="T">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="A">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="B">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
+            <Label text="L">
+               <HBox.margin>
+                  <Insets right="1.0" />
+               </HBox.margin></Label>
             <Label text="E" />
          </children>
       </HBox>

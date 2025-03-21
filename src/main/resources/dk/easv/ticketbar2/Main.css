@@ -1,6 +1,3 @@
-. background {
-    -fx-background-color: "#FFE3B3";
-}
 
 . backgroundLogin {
     -fx-background-image: url("pictures/1.jpg");
@@ -44,14 +41,6 @@
     -fx-background-color: "#FFE3B3";
 }
 
-. loginBtn {
-    -fx-font-family: "Comic Sans MS";
-    -fx-background-color: "#DEF2F0";
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-
-}
-
 . labelEvent {
     -fx-background-color: rgba(255, 255, 255, 0.15); /* Light opacity for transparency */
     -fx-background-radius: 20;
@@ -65,9 +54,6 @@
 
 }
 
-. backButton {
-    -fx-background-color: black;
-}
 
 
 . eventsHeader {
@@ -82,3 +68,9 @@
 
 }
 
+. gridPane {
+
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}

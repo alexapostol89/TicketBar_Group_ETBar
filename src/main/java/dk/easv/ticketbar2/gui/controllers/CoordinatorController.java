@@ -142,4 +142,27 @@ public class CoordinatorController {
             e.printStackTrace();
         }
     }
+   /* @FXML
+    private void onButtonClick() {
+        openTicket();
+    }
+    private void openTicket() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/ticket.fxml"));
+            Parent root = loader.load();
+
+            EditEvents editEventsController = loader.getController();
+            editEventsController.setCoordinatorController(this);
+
+            Stage stage = new Stage();
+            stage.setTitle("Add Event");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+
+
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -35,15 +34,12 @@
       <!-- TextField for visible password (hidden by default) -->
       <TextField fx:id="textFieldPassword" layoutX="207.0" layoutY="253.0" managed="false" prefHeight="25.0" prefWidth="274.0" style="-fx-background-radius: 20px;" styleClass="labelLogin" stylesheets="@Main.css" visible="false" />
 
-      <!-- Forgot Password Hyperlink -->
-      <Hyperlink layoutX="557.0" layoutY="433.0" text="Forgot my password" />
-
       <!-- Eye Button to Toggle Password Visibility -->
       <Button fx:id="togglePasswordButton" layoutX="443.0" layoutY="253.0" onAction="#togglePasswordVisibility" prefHeight="25.0" prefWidth="38.0" style="-fx-background-color: transparent;">
          <graphic>
       
             <!-- Eye Icon -->
-            <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="22.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@pictures/icons8-eye-48.png" />
                </image>
