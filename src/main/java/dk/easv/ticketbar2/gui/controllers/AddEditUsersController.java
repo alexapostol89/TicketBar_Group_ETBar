@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.util.regex.Pattern;
+
 public class AddEditUsersController {
 
     @FXML
@@ -58,10 +60,32 @@ public class AddEditUsersController {
 
         // Get the password from the input field
         String password = passwordField.getText();
+        String username = usernameField.getText();
+        String email = emailField.getText();
+
+        // Validate mandatory fields and email format
+        if (username.isEmpty() || password.isEmpty() || rankComboBox.getValue() == null || email.isEmpty()) {
+            showErrorDialog("Validation Error", "Username, Password, Rank and Email are mandatory fields");
+            return;
+        }
+
+        // Validate email format using a regular expression
+        String emailPattern = "^[A-Za-z0-9+_.-]+@(.+)$";
+        if (!Pattern.matches(emailPattern, email)) {
+            showErrorDialog("Validation Error", "Please enter a valid email address");
+            return;
+        }
+
+        // Check if the username already exists (unique constraint)
+        if (dialogType.equals("add") && usersManager.doesUsernameExist(username)) {
+            showErrorDialog("Validation Error", "Username already exists");
+            return;
+        }
 
         Task<Boolean> saveTask = new Task<>() {
             @Override
             protected Boolean call() throws Exception {
+
                 boolean success = false;
 
                 if (dialogType.equals("add")) {
@@ -70,10 +94,10 @@ public class AddEditUsersController {
 
                     // Create a new user and add it to the database
                     Users newUser = new Users();
-                    newUser.setUsername(usernameField.getText());
+                    newUser.setUsername(username);
                     newUser.setFirstName(firstNameField.getText());
                     newUser.setLastName(lastNameField.getText());
-                    newUser.setEmail(emailField.getText());
+                    newUser.setEmail(email);
                     newUser.setPhone(phoneField.getText());
                     newUser.setRank(rankComboBox.getValue().equals("Admin") ? 1 : 2);
 
@@ -88,10 +112,10 @@ public class AddEditUsersController {
                     System.out.println("Editing user");
 
                     // Update the existing user
-                    user.setUsername(usernameField.getText());
+                    user.setUsername(username);
                     user.setFirstName(firstNameField.getText());
                     user.setLastName(lastNameField.getText());
-                    user.setEmail(emailField.getText());
+                    user.setEmail(email);
                     user.setPhone(phoneField.getText());
                     user.setRank(rankComboBox.getValue().equals("Admin") ? 1 : 2);
 
@@ -111,9 +135,9 @@ public class AddEditUsersController {
         saveTask.setOnSucceeded(event -> {
             boolean success = saveTask.getValue();
             if (success) {
-                showInfoDialog("User Created", "New user created successfully.");
+                showInfoDialog("User Created", "New user created successfully");
             } else {
-                showErrorDialog("Error", "Failed to create user.");
+                showErrorDialog("Error", "Failed to create user");
             }
             // Close the dialog
             Stage stage = (Stage) saveButton.getScene().getWindow();
@@ -121,7 +145,7 @@ public class AddEditUsersController {
         });
 
         saveTask.setOnFailed(event -> {
-            showErrorDialog("Error", "An error occurred while saving the user.");
+            showErrorDialog("Error", "An error occurred while saving the user");
             saveTask.getException().printStackTrace();
             // Close the dialog
             Stage stage = (Stage) saveButton.getScene().getWindow();

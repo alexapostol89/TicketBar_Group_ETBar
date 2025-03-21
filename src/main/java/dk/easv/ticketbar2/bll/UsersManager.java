@@ -38,6 +38,11 @@ public class UsersManager {
         return usersDAO.addUser(user);
     }
 
+    // Check if the username already exists
+    public boolean doesUsernameExist(String username) {
+        return usersDAO.doesUsernameExist(username);
+    }
+
     // Edit User
     public boolean editUser(Users user, String password) {
         if (password != null && !password.isEmpty()) {

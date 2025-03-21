@@ -29,7 +29,7 @@
                                 <columns>
                                   <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First Name" />
                                   <TableColumn fx:id="usernameColumn" prefWidth="75.0" text="Username" />
-                                    <TableColumn fx:id="rankColumn" prefWidth="75.0" text="Rank" />
+                                    <TableColumn fx:id="rankColumn" prefWidth="75.0" text="Role" />
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -59,7 +59,7 @@
                                  <children>
                                     <Label text="First Name:" />
                                     <Label text="Last Name:" GridPane.rowIndex="1" />
-                                    <Label text="Rank:" GridPane.rowIndex="2" />
+                                    <Label text="Role:" GridPane.rowIndex="2" />
                                     <Label text="Username:" GridPane.rowIndex="3" />
                                     <Label text="Email:" GridPane.rowIndex="5" />
                                     <Label text="Phone:" GridPane.rowIndex="6" />

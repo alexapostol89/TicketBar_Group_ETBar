@@ -104,6 +104,24 @@ public class UsersDAO {
         return false; // If no rows were affected, return false
     }
 
+    // Check if Username already exists
+    public boolean doesUsernameExist(String username) {
+        String sql = "SELECT COUNT(*) FROM Users WHERE Username = ?";
+        try (Connection c = connection.getConnection();
+             PreparedStatement stmt = c.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    return count > 0; // If count > 0, username exists
+                }
+            }
+        } catch (SQLException e) {
+            throw new UsersException("Database error while checking username existence: " + e.getMessage());
+        }
+        return false;
+    }
+
     // Edit User
     public boolean editUser(Users user) {
         String sql = "UPDATE Users SET Username = ?, PasswordHash = ?, Rank = ?, FirstName = ?, LastName = ?, " +
