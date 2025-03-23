@@ -1,69 +1,64 @@
 package dk.easv.ticketbar2.be;
 
 public class Events {
-    private int Event_id;
-    private int Created_by;
-    private String Event_name;
-    private String Event_date;
-    private String End_date;
-    private String Location;
-    private String Event_description;
-    private String Event_notes;
-    private String Event_location_guide;
-    private String Event_image_path;
+    private int EventID;
+    private String EventName;
 
-
-    public Events(int event_id, int created_by, String event_name, String event_date, String end_date, String location, String event_description, String event_notes, String event_location_guide, String event_image_path) {
-        Event_id = event_id;
-        Created_by = created_by;
-        Event_name = event_name;
-        Event_date = event_date;
-        End_date = end_date;
+    public Events(int eventID, String eventName, String startDateTime, String endDateTime, String location, String description, String notes, String locationGuide, int coordinatorID, String eventImagePath) {
+        EventID = eventID;
+        EventName = eventName;
+        StartDateTime = startDateTime;
+        EndDateTime = endDateTime;
         Location = location;
-        Event_description = event_description;
-        Event_notes = event_notes;
-        Event_location_guide = event_location_guide;
-        Event_image_path = event_image_path;
+        Description = description;
+        Notes = notes;
+        LocationGuide = locationGuide;
+        CoordinatorID = coordinatorID;
+        EventImagePath = eventImagePath;
     }
 
-    public int getEvent_id() {
-        return Event_id;
+    private String StartDateTime;
+    private String EndDateTime;
+    private String Location;
+
+    public String getDescription() {
+        return Description;
     }
 
-    public void setEvent_id(int event_id) {
-        Event_id = event_id;
+    public void setDescription(String description) {
+        Description = description;
     }
 
-    public int getCreated_by() {
-        return Created_by;
+    public int getEventID() {
+        return EventID;
     }
 
-    public void setCreated_by(int created_by) {
-        Created_by = created_by;
+    public void setEventID(int eventID) {
+        EventID = eventID;
     }
 
-    public String getEvent_name() {
-        return Event_name;
+    public String getEventName() {
+        return EventName;
     }
 
-    public void setEvent_name(String event_name) {
-        Event_name = event_name;
+    public void setEventName(String eventName) {
+        EventName = eventName;
     }
 
-    public String getEvent_date() {
-        return Event_date;
+    public String getStartDateTime() {
+        return StartDateTime;
     }
 
-    public void setEvent_date(String event_date) {
-        Event_date = event_date;
+    public void setStartDateTime(String startDateTime) {
+        StartDateTime = startDateTime;
     }
 
-    public String getEnd_date() {
-        return End_date;
+    public String getEndDateTime() {
+        return EndDateTime;
     }
 
-    public void setEnd_date(String end_date) {
-        End_date = end_date;
+    public void setEndDateTime(String endDateTime) {
+        EndDateTime = endDateTime;
     }
 
     public String getLocation() {
@@ -74,35 +69,44 @@ public class Events {
         Location = location;
     }
 
-    public String getEvent_description() {
-        return Event_description;
+    public String getNotes() {
+        return Notes;
     }
 
-    public void setEvent_description(String event_description) {
-        Event_description = event_description;
+    public void setNotes(String notes) {
+        Notes = notes;
     }
 
-    public String getEvent_notes() {
-        return Event_notes;
+    public String getLocationGuide() {
+        return LocationGuide;
     }
 
-    public void setEvent_notes(String event_notes) {
-        Event_notes = event_notes;
+    public void setLocationGuide(String locationGuide) {
+        LocationGuide = locationGuide;
     }
 
-    public String getEvent_location_guide() {
-        return Event_location_guide;
+    public int getCoordinatorID() {
+        return CoordinatorID;
     }
 
-    public void setEvent_location_guide(String event_location_guide) {
-        Event_location_guide = event_location_guide;
+    public void setCoordinatorID(int coordinatorID) {
+        CoordinatorID = coordinatorID;
     }
 
-    public String getEvent_image_path() {
-        return Event_image_path;
+    public String getEventImagePath() {
+        return EventImagePath;
     }
 
-    public void setEvent_image_path(String event_image_path) {
-        Event_image_path = event_image_path;
+    public void setEventImagePath(String eventImagePath) {
+        EventImagePath = eventImagePath;
     }
+
+    private String Description;
+    private String Notes;
+    private String LocationGuide;
+    private int CoordinatorID;
+    private String EventImagePath;
+
+
+
 }

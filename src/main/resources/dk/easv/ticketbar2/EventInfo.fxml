@@ -31,19 +31,10 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label text="Name">
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                  </Label>
-                  <Label text="Location guidance" GridPane.rowIndex="4">
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                  </Label>
-                  <Label text="Created By" GridPane.rowIndex="3">
                      <padding>
                         <Insets left="20.0" />
                      </padding>
@@ -53,28 +44,45 @@
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <Label text="Number of guests" GridPane.rowIndex="5">
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                  </Label>
-                  <Label text="....." GridPane.columnIndex="1" />
-                  <Label text="......" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Label text="...." GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label text="....." GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label text="...." GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="End date" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="20.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Notes/Extra information about the event." GridPane.rowIndex="6">
+                  <Label text="Location" GridPane.rowIndex="3">
                      <padding>
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <Label text="......" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <Label text="......" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Descripton" GridPane.rowIndex="4">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Cretated by" GridPane.rowIndex="5">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Location guidance" GridPane.rowIndex="6">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="159.0" text="Notes" GridPane.rowIndex="7">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="nameLabel" text="....." GridPane.columnIndex="1" />
+                  <Label fx:id="startDateLabel" text="....." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="endDateLabel" text="......" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="locationLabel" text="....." GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="descriptionLabel" text="....." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="coordinatorLabel" text="......" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="guideLabel" text="......" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label fx:id="notesLabel" text="....." GridPane.columnIndex="1" GridPane.rowIndex="7" />
+
                </children>
             </GridPane>
          </children>

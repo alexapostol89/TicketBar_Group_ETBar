@@ -1,66 +1,94 @@
 package dk.easv.ticketbar2.dal.web;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dk.easv.ticketbar2.be.Events;
 import dk.easv.ticketbar2.dal.db.DBConnection;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import dk.easv.ticketbar2.dal.exceptions.EventsException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.*;
 
 public class EventsDAO {
-    private DBConnection conn = new DBConnection();
+    private DBConnection connection = new DBConnection();
 
-    public List<Events> getEvents() {
-        List<Events> events = new ArrayList<>();
-        try {
-            Connection c = conn.getConnection();
-            System.out.println("database connected successful");
-            String sql = "SELECT * FROM Events";
-            PreparedStatement statement = c.prepareStatement(sql);
-            ResultSet rs = statement.executeQuery();
+    // Get all events from the database
+    public ObservableList<Events> getAllEvents() throws EventsException {
+        ObservableList<Events> eventsList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Events"; // Adjust the query as needed
+        try (Connection conn = connection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
             while (rs.next()) {
-
-                int eventId = rs.getInt("EventID");
-                int createdBy = rs.getInt("CoordinatorID");
-                String eventName = rs.getString("EventName");
-                String eventDate = rs.getString("StartDateTime");
-                String endDate = rs.getString("EndDateTime");
-                String location = rs.getString("Location");
-                String eventDescription = rs.getString("Description");
-                String notes = rs.getString("Notes");
-                String locationGuide = rs.getString("LocationGuide");
-                String eventImagePath = rs.getString("EventImagePath");
-
-
-                Events eventsTable = new Events (eventId, createdBy,eventName, eventDate, endDate, location, eventDescription, notes, locationGuide, eventImagePath);
-                events.add(eventsTable);
-
-
-
+                Events event = new Events(
+                        rs.getInt("EventID"),
+                        rs.getString("EventName"),
+                        rs.getString("StartDateTime"),
+                        rs.getString("EndDateTime"),
+                        rs.getString("Location"),
+                        rs.getString("Description"),
+                        rs.getString("Notes"),
+                        rs.getString("LocationGuide"),
+                        rs.getInt("CoordinatorID"),
+                        rs.getString("EventImagePath")
+                );
+                eventsList.add(event);
             }
-        } catch (SQLServerException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        }
-        return events;
-}
-
-    public void saveEvent(String eventName, String imagePath) {
-        try {
-            Connection c = conn.getConnection();
-            String sql = "INSERT INTO Events (EventName, EventImagePath) VALUES (?, ?)";
-            PreparedStatement statement = c.prepareStatement(sql);
-            statement.setString(1, eventName);
-            statement.setString(2, imagePath);
-            statement.executeUpdate();
-            System.out.println("Event saved successfully!");
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new EventsException(e);
         }
+        return eventsList;
     }
 
+    // Get an event by ID
+    public Events getEventById(int eventId) throws EventsException {
+        String sql = "SELECT * FROM Events WHERE EventID = ?";
+        try (Connection conn = connection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, eventId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Events(
+                        rs.getInt("EventID"),
+                        rs.getString("EventName"),
+                        rs.getString("StartDateTime"),
+                        rs.getString("EndDateTime"),
+                        rs.getString("Location"),
+                        rs.getString("Description"),
+                        rs.getString("Notes"),
+                        rs.getString("LocationGuide"),
+                        rs.getInt("CoordinatorID"),
+                        rs.getString("EventImagePath")
+                );
+            }
+        } catch (SQLException e) {
+            throw new EventsException(e);
+        }
+        return null;
+    }
+
+    public int saveEvent(String eventName, String imagePath) throws EventsException {
+        String insertSql = "INSERT INTO Events (EventName, EventImagePath) VALUES (?, ?)";
+
+        try (Connection conn = connection.getConnection();
+             PreparedStatement insertStmt = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)) {
+
+            // Insert the event
+            insertStmt.setString(1, eventName);
+            insertStmt.setString(2, imagePath);
+            insertStmt.executeUpdate();
+
+            // Retrieve the auto-generated key (eventID)
+            try (ResultSet generatedKeys = insertStmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int eventID = generatedKeys.getInt(1);
+                    System.out.println("New event, Id: " + eventID + "added"); // Debugging
+                    return eventID; // Returning the generated eventID
+                } else {
+                }
+            }
+        } catch (SQLException e) {
+        }
+        return 0;
+    }
 }

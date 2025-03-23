@@ -1,14 +1,16 @@
 package dk.easv.ticketbar2.gui.controllers;
 
+import dk.easv.ticketbar2.be.Events;
+import dk.easv.ticketbar2.dal.exceptions.EventsException;
 import dk.easv.ticketbar2.dal.web.EventsDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.List;
 
 public class EditEvents {
 
@@ -16,7 +18,7 @@ public class EditEvents {
     private Button searchBtn;
 
     @FXML
-        private TextField nameId;  // TextField to enter the name
+    private TextField nameId;  // TextField to enter the event name
 
     @FXML
     private Button btnSave;  // Save button to save the entered name and image
@@ -25,14 +27,19 @@ public class EditEvents {
 
     private CoordinatorController coordinatorController;
 
-    // Method to initialize the window (optional)
     @FXML
     public void initialize() {
-        // Open file chooser when choice box is triggered
+        // Open file chooser when the search button is clicked
         searchBtn.setOnAction(event -> openFileChooser());
 
         // Handle save button click
-        btnSave.setOnAction(event -> saveEvent());
+        btnSave.setOnAction(event -> {
+            try {
+                saveEvent();
+            } catch (EventsException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
     }
 
@@ -71,25 +78,25 @@ public class EditEvents {
         }
     }
 
-
     // Method to save the event data
-    private void saveEvent() {
+    private void saveEvent() throws EventsException {
         String eventName = nameId.getText();
         if (eventName.isEmpty()) {
             System.out.println("Event name is empty!");
             return;
         }
 
-        // Save event to database
+        // Save the event and get the eventID
         EventsDAO eventsDAO = new EventsDAO();
-        eventsDAO.saveEvent(eventName, selectedImagePath);
+        int eventID = eventsDAO.saveEvent(eventName, selectedImagePath);
+        System.out.println("New event ID: " + eventID); // Debugging
 
-        // Update UI
+        // Add the new event to the coordinator controller
         if (coordinatorController != null) {
-            coordinatorController.updateCoordinatorView(eventName, selectedImagePath);
+            coordinatorController.updateCoordinatorView(eventName, selectedImagePath, eventID); // Add the new event
         }
 
-        // Close the EditEvents window
+        // Close the window
         Stage stage = (Stage) btnSave.getScene().getWindow();
         stage.close();
     }
