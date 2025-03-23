@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.AdminViewController">
   <tabs>
@@ -25,7 +26,7 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <TableView fx:id="usersTableView" prefHeight="428.0" prefWidth="639.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="usersTableView" prefHeight="428.0" prefWidth="639.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                 <columns>
                                   <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First Name" />
                                   <TableColumn fx:id="usernameColumn" prefWidth="75.0" text="Username" />
@@ -39,8 +40,12 @@
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <Label text="User Details:" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
-                              <GridPane AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0">
+                              <Label text="User Details:" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="10.0">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <GridPane AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="35.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -84,7 +89,7 @@
                                     <Button fx:id="deleteUserButton" mnemonicParsing="false" text="Delete" />
                                 </buttons>
                               </ButtonBar>
-                              <GridPane prefHeight="60.0" prefWidth="170.0" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="25.0">
+                              <GridPane prefHeight="60.0" prefWidth="170.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="25.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -96,10 +101,14 @@
                                  <children>
                                     <CheckBox fx:id="adminCheckBox" mnemonicParsing="false" text="Admin" GridPane.rowIndex="1" />
                                     <CheckBox fx:id="coordinatorCheckBox" mnemonicParsing="false" text="Coordinator" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label text="Filter:" />
+                                     <Label text="Filter by:">
+                                         <font>
+                                             <Font name="System Bold" size="12.0" />
+                                         </font>
+                                     </Label>
                                  </children>
                               </GridPane>
-                              <TextField fx:id="usernameTextField" layoutX="14.0" layoutY="598.0" prefHeight="25.0" prefWidth="170.0" promptText="Username" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="25.0" />
+                              <TextField fx:id="usernameTextField" layoutX="14.0" layoutY="598.0" prefHeight="25.0" prefWidth="170.0" promptText="Username" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="25.0" />
                               <Button fx:id="signOutButton1" layoutX="409.0" layoutY="636.0" mnemonicParsing="false" prefWidth="80.0" text="Sign out" AnchorPane.bottomAnchor="27.0" AnchorPane.rightAnchor="30.0" />
                            </children>
                         </AnchorPane>
@@ -116,7 +125,7 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <TableView fx:id="eventsTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="eventsTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                 <columns>
                                   <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
                                   <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Date &amp; Time" />
@@ -129,8 +138,12 @@
                            </children></AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <Label text="Event Details:" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
-                              <GridPane AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0">
+                              <Label text="Event Details:" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="10.0">
+                                  <font>
+                                      <Font name="System Bold" size="12.0" />
+                                  </font>
+                              </Label>
+                              <GridPane AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="35.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -164,7 +177,7 @@
                                     <Label fx:id="notesLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                  </children>
                               </GridPane>
-                              <GridPane AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="25.0">
+                              <GridPane AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="25.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -174,18 +187,22 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label text="Filter:" />
-                                    <CheckBox mnemonicParsing="false" text="Created by" GridPane.rowIndex="1" />
+                                    <Label text="Filter by:">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <CheckBox mnemonicParsing="false" text="Yet to assign" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
-                              <ButtonBar buttonMinWidth="80.0" prefHeight="40.0" prefWidth="191.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="5.0">
+                              <ButtonBar buttonMinWidth="80.0" prefHeight="40.0" prefWidth="235.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="5.0">
                                 <buttons>
-                                  <Button mnemonicParsing="false" text="Delete" />
-                                    <Button mnemonicParsing="false" text="Assign Coordinator" />
+                                  <Button fx:id="assignCoordinator" mnemonicParsing="false" prefWidth="125.0" text="Assign Coordinator" />
+                                    <Button fx:id="deleteCoordinator" maxWidth="80.0" mnemonicParsing="false" text="Delete" />
                                 </buttons>
                               </ButtonBar>
                               <Button fx:id="signOutButton2" mnemonicParsing="false" prefWidth="80.0" text="Sign out" AnchorPane.bottomAnchor="27.0" AnchorPane.rightAnchor="30.0" />
-                              <TextField prefHeight="25.0" prefWidth="170.0" promptText="Event Name" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="25.0" />
+                              <TextField prefHeight="25.0" prefWidth="170.0" promptText="Event Name" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="25.0" />
                            </children></AnchorPane>
                     </items>
                   </SplitPane>
