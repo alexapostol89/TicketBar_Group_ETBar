@@ -1,4 +1,4 @@
-package dk.easv.ticketbar2.dal.exceptions;
+package dk.easv.ticketbar2.exceptions;
 
 public class EventsException extends RuntimeException {
   public EventsException(String message) {

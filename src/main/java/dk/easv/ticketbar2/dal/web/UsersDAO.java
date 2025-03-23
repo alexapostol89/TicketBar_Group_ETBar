@@ -2,7 +2,7 @@ package dk.easv.ticketbar2.dal.web;
 
 import dk.easv.ticketbar2.be.Users;
 import dk.easv.ticketbar2.dal.db.DBConnection;
-import dk.easv.ticketbar2.dal.exceptions.UsersException;
+import dk.easv.ticketbar2.exceptions.UsersException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

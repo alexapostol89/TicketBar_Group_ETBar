@@ -2,7 +2,7 @@ package dk.easv.ticketbar2.dal.web;
 
 import dk.easv.ticketbar2.be.Events;
 import dk.easv.ticketbar2.dal.db.DBConnection;
-import dk.easv.ticketbar2.dal.exceptions.EventsException;
+import dk.easv.ticketbar2.exceptions.EventsException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
