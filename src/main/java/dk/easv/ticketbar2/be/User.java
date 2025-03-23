@@ -13,7 +13,7 @@ public class User {
     private String LastLogin;
     private String RankName; // This will hold the Rank's name ("Admin", "Coordinator")
 
-    public User(){
+    public User() {
 
     }
 
