@@ -1,12 +1,20 @@
 .tab:selected {
-    -fx-background-color: #4da9ff; /* Green color when selected */
-    -fx-text-fill: white; /* White text */
+    -fx-background-color: #ffcc00; /* #66b5ff */
+    -fx-text-fill: black;
     -fx-font-weight: bold;
+
+    -fx-border-width: 1px;
+    -fx-border-color: #000000;
+    -fx-border-radius: 2px;
+
+    /*
+    -fx-effect: dropshadow(gaussian, #000000, 10, 0, 0, 2);
+    */
 }
 
 .tab {
-    -fx-background-color: #ffcc00; /* Default background color */
-    -fx-text-fill: black; /* Default text color */
+    -fx-background-color: #66ccff;
+    -fx-text-fill: black;
 }
 
 /* Set a background color for the SplitPane */
