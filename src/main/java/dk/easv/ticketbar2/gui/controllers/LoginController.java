@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class LoginController {
-
     @FXML
     private TextField usernameTextfield, passwordTextfield;
 
@@ -86,11 +85,9 @@ public class LoginController {
     }
 
     /**
-     *
      * A helper method for error handling
      * Displays a user-friendly dialog when an error occurs (FXML loading error, invalid credentials, etc.)
-     * You no longer need to import IOException
-     */
+     * */
     private void showErrorDialog(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import java.util.regex.Pattern;
 
 public class AddEditUserController {
-
     @FXML
     private TextField usernameField, firstNameField, lastNameField, emailField, phoneField;
 

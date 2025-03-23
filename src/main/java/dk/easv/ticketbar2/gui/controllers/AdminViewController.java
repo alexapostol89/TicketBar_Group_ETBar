@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 import java.util.Optional;
 
 public class AdminViewController {
-
     @FXML
     private TableView<User> usersTableView;
 
@@ -103,6 +102,7 @@ public class AdminViewController {
         // Edit User button action
         editUserButton.setOnAction(this::handleEditUser);
 
+        // Edit User button action
         deleteUserButton.setOnAction(this::handleDeleteUser);
     }
 
