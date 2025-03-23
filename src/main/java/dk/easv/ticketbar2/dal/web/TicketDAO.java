@@ -1,4 +1,4 @@
 package dk.easv.ticketbar2.dal.web;
 
-public class TicketsDAO {
+public class TicketDAO {
 }

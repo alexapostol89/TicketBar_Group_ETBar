@@ -1,6 +1,6 @@
 package dk.easv.ticketbar2.be;
 
-public class Tickets {
+public class Ticket {
     private int TicketID;
     private int EventID;
     private String CustomerName;
@@ -11,7 +11,7 @@ public class Tickets {
     private String QRCode;
     private boolean IsScanned;
 
-    public Tickets(int ticketID, int eventID, String customerName, String customerEmail, String ticketType, String purchaseDate, String barcode, String QRCode, boolean isScanned) {
+    public Ticket(int ticketID, int eventID, String customerName, String customerEmail, String ticketType, String purchaseDate, String barcode, String QRCode, boolean isScanned) {
         TicketID = ticketID;
         EventID = eventID;
         CustomerName = customerName;

@@ -1,6 +1,6 @@
 package dk.easv.ticketbar2.be;
 
-public class Events {
+public class Event {
     private int EventID;
     private String EventName;
     private String StartDateTime;
@@ -11,7 +11,7 @@ public class Events {
     private String LocationGuide;
     private int CoordinatorID;
 
-    public Events(int eventID, String eventName, String startDateTime, String endDateTime, String location, String description, String notes, String locationGuide, int coordinatorID) {
+    public Event(int eventID, String eventName, String startDateTime, String endDateTime, String location, String description, String notes, String locationGuide, int coordinatorID) {
         EventID = eventID;
         EventName = eventName;
         StartDateTime = startDateTime;

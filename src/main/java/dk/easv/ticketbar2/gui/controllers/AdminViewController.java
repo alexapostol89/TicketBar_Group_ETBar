@@ -1,9 +1,9 @@
 package dk.easv.ticketbar2.gui.controllers;
 
-import dk.easv.ticketbar2.be.Events;
-import dk.easv.ticketbar2.be.Users;
-import dk.easv.ticketbar2.bll.EventsManager;
-import dk.easv.ticketbar2.bll.UsersManager;
+import dk.easv.ticketbar2.be.Event;
+import dk.easv.ticketbar2.be.User;
+import dk.easv.ticketbar2.bll.EventManager;
+import dk.easv.ticketbar2.bll.UserManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,31 +21,31 @@ import java.util.Optional;
 public class AdminViewController {
 
     @FXML
-    private TableView<Users> usersTableView;
+    private TableView<User> usersTableView;
 
     @FXML
-    private TableColumn<Users, String> firstNameColumn;
+    private TableColumn<User, String> firstNameColumn;
 
     @FXML
-    private TableColumn<Users, String> usernameColumn;
+    private TableColumn<User, String> usernameColumn;
 
     @FXML
-    private TableColumn<Users, String> rankColumn;
+    private TableColumn<User, String> rankColumn;
 
     @FXML
     private Label firstNameLabel, lastNameLabel, rankLabel, usernameLabel, passwordLabel, emailLabel, phoneLabel, dateCreatedLabel, lastLoginLabel;
 
     @FXML
-    private TableView<Events> eventsTableView;
+    private TableView<Event> eventsTableView;
 
     @FXML
-    private TableColumn<Events, String> nameColumn;
+    private TableColumn<Event, String> nameColumn;
 
     @FXML
-    private TableColumn<Events, String> dateColumn;
+    private TableColumn<Event, String> dateColumn;
 
     @FXML
-    private TableColumn<Events, String> coordinatorColumn;
+    private TableColumn<Event, String> coordinatorColumn;
 
     @FXML
     private Label nameLabel, startDateLabel, endDateLabel, locationLabel, descriptionLabel, coordinatorLabel, guideLabel, notesLabel;
@@ -59,21 +59,21 @@ public class AdminViewController {
     @FXML
     private TextField usernameTextField;
 
-    private UsersManager usersManager = new UsersManager();
-    private EventsManager eventsManager = new EventsManager();
+    private UserManager userManager = new UserManager();
+    private EventManager eventManager = new EventManager();
 
     public void initialize() {
         // Setup Users TableView
         firstNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFirstName()));
         usernameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsername()));
         rankColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRankName()));
-        usersTableView.setItems(usersManager.getAllUsers());
+        usersTableView.setItems(userManager.getAllUsers());
 
         // Setup Events TableView
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEventName()));
         dateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStartDateTime()));
         coordinatorColumn.setCellValueFactory(cellData -> new SimpleStringProperty(Integer.toString(cellData.getValue().getCoordinatorID())));
-        eventsTableView.setItems(eventsManager.getAllEvents());
+        eventsTableView.setItems(eventManager.getAllEvents());
 
         // Add listeners to populate details when a row is selected
         usersTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -106,7 +106,7 @@ public class AdminViewController {
         deleteUserButton.setOnAction(this::handleDeleteUser);
     }
 
-    private void populateUserDetails(Users user) {
+    private void populateUserDetails(User user) {
         firstNameLabel.setText(user.getFirstName());
         lastNameLabel.setText(user.getLastName());
         rankLabel.setText(user.getRankName());
@@ -117,7 +117,7 @@ public class AdminViewController {
         lastLoginLabel.setText(user.getLastLogin());
     }
 
-    private void populateEventDetails(Events event) {
+    private void populateEventDetails(Event event) {
         nameLabel.setText(event.getEventName());
         startDateLabel.setText(event.getStartDateTime());
         endDateLabel.setText(event.getEndDateTime());
@@ -135,7 +135,7 @@ public class AdminViewController {
             Parent root = loader.load();
 
             // Get the controller of the dialog
-            AddEditUsersController dialogController = loader.getController();
+            AddEditUserController dialogController = loader.getController();
             dialogController.setDialogType("add");
 
             // Open the dialog
@@ -145,7 +145,7 @@ public class AdminViewController {
             dialogStage.showAndWait();
 
             // After the dialog closes, refresh the Users TableView
-            usersTableView.setItems(FXCollections.observableArrayList(usersManager.getAllUsers()));
+            usersTableView.setItems(FXCollections.observableArrayList(userManager.getAllUsers()));
 
         } catch (Exception e) {
             showErrorDialog("Error", "Failed to open the Add User dialog");
@@ -154,7 +154,7 @@ public class AdminViewController {
 
     // Method to handle Edit User button
     private void handleEditUser(ActionEvent event) {
-        Users selectedUser = usersTableView.getSelectionModel().getSelectedItem();
+        User selectedUser = usersTableView.getSelectionModel().getSelectedItem();
 
         if (selectedUser != null) {
             try {
@@ -162,7 +162,7 @@ public class AdminViewController {
                 Parent root = loader.load();
 
                 // Get the controller of the dialog
-                AddEditUsersController dialogController = loader.getController();
+                AddEditUserController dialogController = loader.getController();
                 dialogController.setDialogType("edit");
                 dialogController.setUser(selectedUser);
 
@@ -173,7 +173,7 @@ public class AdminViewController {
                 dialogStage.showAndWait();
 
                 // After the dialog closes, refresh the Users TableView
-                usersTableView.setItems(FXCollections.observableArrayList(usersManager.getAllUsers()));
+                usersTableView.setItems(FXCollections.observableArrayList(userManager.getAllUsers()));
 
             } catch (Exception e) {
                 showErrorDialog("Error", "Failed to open the Edit User dialog");
@@ -186,7 +186,7 @@ public class AdminViewController {
     // Method to handle Delete User button
     private void handleDeleteUser(ActionEvent event) {
         // Get the selected user from the table
-        Users selectedUser = usersTableView.getSelectionModel().getSelectedItem();
+        User selectedUser = usersTableView.getSelectionModel().getSelectedItem();
 
         if (selectedUser != null) {
             // Show a confirmation dialog
@@ -205,7 +205,7 @@ public class AdminViewController {
 
             if (result.isPresent() && result.get() == yesButton) {
                 // If the user clicks "Yes", delete the user
-                usersManager.deleteUser(selectedUser);
+                userManager.deleteUser(selectedUser);
                 // Remove the user from the TableView
                 usersTableView.getItems().remove(selectedUser);
             }
@@ -224,9 +224,9 @@ public class AdminViewController {
         String usernameFilter = usernameTextField.getText().trim().toLowerCase();
 
         // Get all users, filtered by role and username
-        ObservableList<Users> filteredUsers = FXCollections.observableArrayList();
+        ObservableList<User> filteredUsers = FXCollections.observableArrayList();
 
-        for (Users user : usersManager.getAllUsers()) {
+        for (User user : userManager.getAllUsers()) {
             boolean matchesRole = false;
             if (showAdmin && user.getRankName().equals("Admin")) {
                 matchesRole = true;

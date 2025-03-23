@@ -1,7 +1,7 @@
 package dk.easv.ticketbar2.gui.controllers;
 
-import dk.easv.ticketbar2.be.Users;
-import dk.easv.ticketbar2.bll.UsersManager;
+import dk.easv.ticketbar2.be.User;
+import dk.easv.ticketbar2.bll.UserManager;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.util.regex.Pattern;
 
-public class AddEditUsersController {
+public class AddEditUserController {
 
     @FXML
     private TextField usernameField, firstNameField, lastNameField, emailField, phoneField;
@@ -23,8 +23,8 @@ public class AddEditUsersController {
     @FXML
     private Button saveButton;
 
-    private UsersManager usersManager = new UsersManager();
-    private Users user; // To hold the user when editing
+    private UserManager userManager = new UserManager();
+    private User user; // To hold the user when editing
     private String dialogType; // To distinguish between add and edit
 
     public void initialize() {
@@ -38,7 +38,7 @@ public class AddEditUsersController {
     }
 
     // Set user data for editing
-    public void setUser(Users user) {
+    public void setUser(User user) {
         this.user = user;
 
         // Populate fields with existing user data
@@ -77,7 +77,7 @@ public class AddEditUsersController {
         }
 
         // Check if the username already exists (unique constraint)
-        if (dialogType.equals("add") && usersManager.doesUsernameExist(username)) {
+        if (dialogType.equals("add") && userManager.doesUsernameExist(username)) {
             showErrorDialog("Validation Error", "Username already exists");
             return;
         }
@@ -93,7 +93,7 @@ public class AddEditUsersController {
                     System.out.println("Adding user");
 
                     // Create a new user and add it to the database
-                    Users newUser = new Users();
+                    User newUser = new User();
                     newUser.setUsername(username);
                     newUser.setFirstName(firstNameField.getText());
                     newUser.setLastName(lastNameField.getText());
@@ -102,7 +102,7 @@ public class AddEditUsersController {
                     newUser.setRank(rankComboBox.getValue().equals("Admin") ? 1 : 2);
 
                     // Passing the password
-                    success = usersManager.addUser(newUser, password);
+                    success = userManager.addUser(newUser, password);
 
                     // Debugging statement
                     System.out.println("addUser result: " + success);
@@ -122,7 +122,7 @@ public class AddEditUsersController {
                     // Use the new password if edited
                     String existingPassword = passwordField.getText();
                     // Passing the new or existing password
-                    success = usersManager.editUser(user, existingPassword);
+                    success = userManager.editUser(user, existingPassword);
 
                     // Debugging statement
                     System.out.println("editUser result: " + success);

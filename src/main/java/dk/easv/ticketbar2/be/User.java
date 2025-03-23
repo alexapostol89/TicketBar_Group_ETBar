@@ -1,6 +1,6 @@
 package dk.easv.ticketbar2.be;
 
-public class Users {
+public class User {
     private int UserID;
     private String Username;
     private String PasswordHash;
@@ -13,7 +13,7 @@ public class Users {
     private String LastLogin;
     private String RankName; // This will hold the Rank's name ("Admin", "Coordinator")
 
-    public Users(){
+    public User(){
 
     }
 

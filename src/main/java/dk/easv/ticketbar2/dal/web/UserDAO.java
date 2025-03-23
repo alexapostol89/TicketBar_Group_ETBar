@@ -1,8 +1,8 @@
 package dk.easv.ticketbar2.dal.web;
 
-import dk.easv.ticketbar2.be.Users;
+import dk.easv.ticketbar2.be.User;
 import dk.easv.ticketbar2.dal.db.DBConnection;
-import dk.easv.ticketbar2.exceptions.UsersException;
+import dk.easv.ticketbar2.exceptions.UserException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,12 +12,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UsersDAO {
+public class UserDAO {
     private DBConnection connection = new DBConnection();
     private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     // Validate User sign or log in
-    public Users validateUser(String username, String password) {
+    public User validateUser(String username, String password) {
         String sql = "SELECT u.UserID, u.Username, u.PasswordHash, u.Rank, ur.rank AS RankName FROM Users u " +
                 "JOIN User_rank ur ON u.Rank = ur.id " +
                 "WHERE u.Username = ?";
@@ -34,7 +34,7 @@ public class UsersDAO {
                 String hashedPassword = rs.getString("PasswordHash");
                 // Use BCrypt to check if the raw password matches the stored hash
                 if (passwordEncoder.matches(password, hashedPassword)) {
-                    Users user = new Users();
+                    User user = new User();
                     user.setUserID(rs.getInt("UserID"));
                     user.setUsername(rs.getString("Username"));
                     user.setPasswordHash(rs.getString("PasswordHash"));
@@ -44,14 +44,14 @@ public class UsersDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new UsersException(e.getMessage());
+            throw new UserException(e.getMessage());
         }
         return null;
     }
 
     // Get all users from the database
-    public ObservableList<Users> getAllUsers() {
-        ObservableList<Users> usersList = FXCollections.observableArrayList();
+    public ObservableList<User> getAllUsers() {
+        ObservableList<User> userList = FXCollections.observableArrayList();
         String sql = "SELECT u.UserID, u.Username, u.PasswordHash, u.Rank, ur.rank AS RankName, u.FirstName, u.LastName, u.Email, u.Phone, u.CreatedDate, u.LastLogin " +
                 "FROM Users u " +
                 "JOIN User_rank ur ON u.Rank = ur.id";
@@ -60,7 +60,7 @@ public class UsersDAO {
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                Users user = new Users();
+                User user = new User();
                 user.setUserID(rs.getInt("UserID"));
                 user.setUsername(rs.getString("Username"));
                 user.setPasswordHash(rs.getString("PasswordHash"));
@@ -72,17 +72,17 @@ public class UsersDAO {
                 user.setPhone(rs.getString("Phone"));
                 user.setCreatedDate(rs.getString("CreatedDate"));
                 user.setLastLogin(rs.getString("LastLogin"));
-                usersList.add(user);
+                userList.add(user);
             }
         } catch (SQLException e) {
-            throw new UsersException(e.getMessage());
+            throw new UserException(e.getMessage());
         }
-        return usersList;
+        return userList;
     }
 
     // Get filtered users from the database based on selected filters
-    public ObservableList<Users> getFilteredUsers(boolean showAdmin, boolean showCoordinator, String usernameFilter) {
-        ObservableList<Users> filteredUsers = FXCollections.observableArrayList();
+    public ObservableList<User> getFilteredUsers(boolean showAdmin, boolean showCoordinator, String usernameFilter) {
+        ObservableList<User> filteredUsers = FXCollections.observableArrayList();
 
         // Base query for fetching users
         String sql = "SELECT u.UserID, u.Username, u.PasswordHash, u.Rank, ur.rank AS RankName, u.FirstName, u.LastName, u.Email, u.Phone, u.CreatedDate, u.LastLogin " +
@@ -113,7 +113,7 @@ public class UsersDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Users user = new Users();
+                User user = new User();
                 user.setUserID(rs.getInt("UserID"));
                 user.setUsername(rs.getString("Username"));
                 user.setPasswordHash(rs.getString("PasswordHash"));
@@ -128,13 +128,13 @@ public class UsersDAO {
                 filteredUsers.add(user);
             }
         } catch (SQLException e) {
-            throw new UsersException(e.getMessage());
+            throw new UserException(e.getMessage());
         }
         return filteredUsers;
     }
 
     // Add User
-    public boolean addUser(Users user) {
+    public boolean addUser(User user) {
         String sql = "INSERT INTO Users (Username, PasswordHash, Rank, FirstName, LastName, Email, Phone) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection c = connection.getConnection();
@@ -170,13 +170,13 @@ public class UsersDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new UsersException("Database error while checking username existence: " + e.getMessage());
+            throw new UserException("Database error while checking username existence: " + e.getMessage());
         }
         return false;
     }
 
     // Edit User
-    public boolean editUser(Users user) {
+    public boolean editUser(User user) {
         String sql = "UPDATE Users SET Username = ?, PasswordHash = ?, Rank = ?, FirstName = ?, LastName = ?, " +
                 "Email = ?, Phone = ? WHERE UserID = ?";
         try (Connection c = connection.getConnection();
@@ -200,7 +200,7 @@ public class UsersDAO {
     }
 
     // Method to delete a user from the database
-    public void deleteUser(Users user) {
+    public void deleteUser(User user) {
         String sql = "DELETE FROM Users WHERE UserID = ?";
 
         try (Connection c = connection.getConnection();
@@ -210,12 +210,12 @@ public class UsersDAO {
             stmt.setInt(1, user.getUserID());
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new UsersException(e.getMessage());
+            throw new UserException(e.getMessage());
         }
     }
 
     // Get a user by ID
-    public Users getUserById(int userId) {
+    public User getUserById(int userId) {
         String sql = "SELECT u.UserID, u.Username, u.PasswordHash, u.Rank, ur.rank AS RankName, u.FirstName, u.LastName, u.Email, u.Phone, u.CreatedDate, u.LastLogin " +
                 "FROM Users u " +
                 "JOIN User_rank ur ON u.Rank = ur.id " +
@@ -225,7 +225,7 @@ public class UsersDAO {
             stmt.setInt(1, userId);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                Users user = new Users();
+                User user = new User();
                 user.setUserID(rs.getInt("UserID"));
                 user.setUsername(rs.getString("Username"));
                 user.setPasswordHash(rs.getString("PasswordHash"));
@@ -240,7 +240,7 @@ public class UsersDAO {
                 return user;
             }
         } catch (SQLException e) {
-            throw new UsersException(e.getMessage());
+            throw new UserException(e.getMessage());
         }
         return null;
     }

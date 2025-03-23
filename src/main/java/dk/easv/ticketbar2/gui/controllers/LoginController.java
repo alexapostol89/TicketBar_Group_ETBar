@@ -1,6 +1,6 @@
 package dk.easv.ticketbar2.gui.controllers;
 
-import dk.easv.ticketbar2.bll.UsersManager;
+import dk.easv.ticketbar2.bll.UserManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,10 +15,10 @@ public class LoginController {
     @FXML
     private TextField usernameTextfield, passwordTextfield;
 
-    private UsersManager usersManager;
+    private UserManager userManager;
 
     public LoginController() {
-        usersManager = new UsersManager();
+        userManager = new UserManager();
     }
 
     public void login(ActionEvent actionEvent) {
@@ -26,7 +26,7 @@ public class LoginController {
         String password = passwordTextfield.getText();
 
         // Validate Admin Login
-        if (usersManager.validateAdmin(username, password)) {
+        if (userManager.validateAdmin(username, password)) {
             try {
                 openAdmin();
                 closeLoginWindow(actionEvent);  // Close the login window after successful login
@@ -35,7 +35,7 @@ public class LoginController {
             }
         }
         // Validate Coordinator Login
-        else if (usersManager.validateCoordinator(username, password)) {
+        else if (userManager.validateCoordinator(username, password)) {
             try {
                 openCoordinator();
                 closeLoginWindow(actionEvent);  // Close the login window after successful login

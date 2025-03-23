@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.AddEditUsersController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.AddEditUserController">
    <children>
        <Label layoutX="140.0" layoutY="64.0" text="Username*" />
        <Label layoutX="140.0" layoutY="104.0" text="Password*" />
