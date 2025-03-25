@@ -2,18 +2,12 @@ package dk.easv.ticketbar2.gui.controllers;
 
 import dk.easv.ticketbar2.be.Events;
 import dk.easv.ticketbar2.dal.web.EventsDAO;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import dk.easv.ticketbar2.dal.exceptions.EventsException;
 
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
-import java.io.File;
 
-public class EventInfo {
+public class EventDetailsController {
 
     @FXML
     private Label nameLabel, startDateLabel, endDateLabel, locationLabel, descriptionLabel, coordinatorLabel, guideLabel, notesLabel;

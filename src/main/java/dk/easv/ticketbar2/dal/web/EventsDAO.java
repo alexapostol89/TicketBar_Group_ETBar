@@ -67,22 +67,32 @@ public class EventsDAO {
         return null;
     }
 
-    public int saveEvent(String eventName, String imagePath) throws EventsException {
-        String insertSql = "INSERT INTO Events (EventName, EventImagePath) VALUES (?, ?)";
+    public int saveEvent(String eventName, String imagePath, String startDate, String endDate,String location, String description, String notes, String locationGuide, int coordinator) throws EventsException {
+        String insertSql = "INSERT INTO Events (EventName, EventImagePath, StartDateTime, EndDateTime, Location, Description, Notes, LocationGuide, CoordinatorID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = connection.getConnection();
              PreparedStatement insertStmt = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)) {
 
-            // Insert the event
+            // Insert the event info
             insertStmt.setString(1, eventName);
             insertStmt.setString(2, imagePath);
+            insertStmt.setString(3, startDate);
+            insertStmt.setString(4, endDate);
+            insertStmt.setString(5, location);
+            insertStmt.setString(6, description);
+            insertStmt.setString(7, notes);
+            insertStmt.setString(8, locationGuide);
+            insertStmt.setInt(9, coordinator);
+
+
+
             insertStmt.executeUpdate();
 
             // Retrieve the auto-generated key (eventID)
             try (ResultSet generatedKeys = insertStmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     int eventID = generatedKeys.getInt(1);
-                    System.out.println("New event, Id: " + eventID + "added"); // Debugging
+                    System.out.println("Event "+ eventName + "added to the database"); // Debugging
                     return eventID; // Returning the generated eventID
                 } else {
                 }

@@ -1,6 +1,5 @@
 package dk.easv.ticketbar2.gui.controllers;
 
-import dk.easv.ticketbar2.be.Events;
 import dk.easv.ticketbar2.dal.exceptions.EventsException;
 import dk.easv.ticketbar2.dal.web.EventsDAO;
 import javafx.fxml.FXML;
@@ -10,15 +9,16 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.util.List;
 
-public class EditEvents {
+
+public class AddEventsController {
 
     @FXML
     private Button searchBtn;
 
+
     @FXML
-    private TextField nameId;  // TextField to enter the event name
+    private TextField nameText, startDateText, endDateText, locationText, descriptionText, guidanceText, notesText, coordinatorText;
 
     @FXML
     private Button btnSave;  // Save button to save the entered name and image
@@ -80,7 +80,15 @@ public class EditEvents {
 
     // Method to save the event data
     private void saveEvent() throws EventsException {
-        String eventName = nameId.getText();
+        String eventName = nameText.getText();
+        String startDate = startDateText.getText();
+        String endDate = endDateText.getText();
+        String location = locationText.getText();
+        String description = descriptionText.getText();
+        String locationGuide = guidanceText.getText();
+        String notes = notesText.getText();
+        int coordinatorId = Integer.parseInt(coordinatorText.getText());
+
         if (eventName.isEmpty()) {
             System.out.println("Event name is empty!");
             return;
@@ -88,7 +96,7 @@ public class EditEvents {
 
         // Save the event and get the eventID
         EventsDAO eventsDAO = new EventsDAO();
-        int eventID = eventsDAO.saveEvent(eventName, selectedImagePath);
+        int eventID = eventsDAO.saveEvent(eventName, selectedImagePath,startDate,endDate,location,description,locationGuide,notes,coordinatorId);
         System.out.println("New event ID: " + eventID); // Debugging
 
         // Add the new event to the coordinator controller

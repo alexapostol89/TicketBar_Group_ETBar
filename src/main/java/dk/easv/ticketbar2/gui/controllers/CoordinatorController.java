@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CoordinatorController {
@@ -48,10 +47,10 @@ public class CoordinatorController {
 
     private void openEditEventWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/add-edit-event.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/add-event.fxml"));
             Parent root = loader.load();
 
-            EditEvents editEventsController = loader.getController();
+            AddEventsController editEventsController = loader.getController();
             editEventsController.setCoordinatorController(this);
 
             Stage stage = new Stage();
@@ -83,6 +82,7 @@ public class CoordinatorController {
         // Store the eventID in the ImageView's userData property
         imageView.setUserData(eventID);
 
+
         Label label = new Label(eventName);
         label.setWrapText(true);
         label.setMaxWidth(200);
@@ -109,11 +109,11 @@ public class CoordinatorController {
     private void openDetailsWindow(int eventID) {
         System.out.println("Opening details for event ID: " + eventID); // Debugging
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/EventInfo.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/event-info.fxml"));
             Parent root = loader.load();
 
             // Get the EventInfo controller and pass the eventID
-            EventInfo eventInfoController = loader.getController();
+            EventDetailsController eventInfoController = loader.getController();
             eventInfoController.populateEventInfo(eventID);
 
             Stage stage = new Stage();

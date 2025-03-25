@@ -3,6 +3,15 @@ package dk.easv.ticketbar2.be;
 public class Events {
     private int EventID;
     private String EventName;
+    private String StartDateTime;
+    private String EndDateTime;
+    private String Location;
+    private String Description;
+    private String Notes;
+    private String LocationGuide;
+    private int CoordinatorID;
+    private String EventImagePath;
+
 
     public Events(int eventID, String eventName, String startDateTime, String endDateTime, String location, String description, String notes, String locationGuide, int coordinatorID, String eventImagePath) {
         EventID = eventID;
@@ -15,11 +24,11 @@ public class Events {
         LocationGuide = locationGuide;
         CoordinatorID = coordinatorID;
         EventImagePath = eventImagePath;
+
+
     }
 
-    private String StartDateTime;
-    private String EndDateTime;
-    private String Location;
+
 
     public String getDescription() {
         return Description;
@@ -101,11 +110,6 @@ public class Events {
         EventImagePath = eventImagePath;
     }
 
-    private String Description;
-    private String Notes;
-    private String LocationGuide;
-    private int CoordinatorID;
-    private String EventImagePath;
 
 
 

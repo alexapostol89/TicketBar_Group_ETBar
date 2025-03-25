@@ -22,10 +22,6 @@ public class ETBarApplication extends Application {
 
     public static void main(String[] args) throws EventsException {
         launch();
-EventsDAO eventsDAO = new EventsDAO();
-eventsDAO.getAllEvents();
-UsersDAO usersDAO = new UsersDAO();
-usersDAO.getUsers();
     }
 
 }
