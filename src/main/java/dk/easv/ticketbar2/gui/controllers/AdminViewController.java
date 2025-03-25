@@ -7,13 +7,18 @@ import dk.easv.ticketbar2.bll.UserManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.Optional;
@@ -32,7 +37,7 @@ public class AdminViewController {
     private TableColumn<User, String> rankColumn;
 
     @FXML
-    private Label firstNameLabel, lastNameLabel, rankLabel, usernameLabel, passwordLabel, emailLabel, phoneLabel, dateCreatedLabel, lastLoginLabel;
+    private Label firstNameLabel, lastNameLabel, rankLabel, usernameLabel, emailLabel, phoneLabel, dateCreatedLabel, lastLoginLabel;
 
     @FXML
     private TableView<Event> eventsTableView;
@@ -50,13 +55,13 @@ public class AdminViewController {
     private Label nameLabel, startDateLabel, endDateLabel, locationLabel, descriptionLabel, coordinatorLabel, guideLabel, notesLabel;
 
     @FXML
-    private Button signOutButton1, signOutButton2, addUserButton, editUserButton, deleteUserButton;
+    private Button signOutButton1, signOutButton2, addUserButton, editUserButton, deleteUserButton, assignCoordinatorButton, deleteEventButton;
 
     @FXML
-    private CheckBox adminCheckBox, coordinatorCheckBox;
+    private CheckBox adminCheckBox, coordinatorCheckBox, missingCoordinatorCheckBox;
 
     @FXML
-    private TextField usernameTextField;
+    private TextField usernameTextField, eventNameTextField;
 
     private UserManager userManager = new UserManager();
     private EventManager eventManager = new EventManager();
@@ -71,7 +76,21 @@ public class AdminViewController {
         // Setup Events TableView
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEventName()));
         dateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStartDateTime()));
-        coordinatorColumn.setCellValueFactory(cellData -> new SimpleStringProperty(Integer.toString(cellData.getValue().getCoordinatorID())));
+        // coordinatorColumn.setCellValueFactory(cellData -> new SimpleStringProperty(Integer.toString(cellData.getValue().getCoordinatorID())));
+
+        // Modify the cell value factory for the Coordinator column
+        coordinatorColumn.setCellValueFactory(cellData -> {
+            Event event = cellData.getValue();
+            // Check if the event has a coordinator (CoordinatorID != 0)
+            if (event.getCoordinatorID() == 0) {
+                return new SimpleStringProperty("Not Assigned");
+            } else {
+                // Get the coordinator's username by CoordinatorID
+                String coordinatorUsername = eventManager.getCoordinatorUsername(event.getCoordinatorID());
+                return new SimpleStringProperty(coordinatorUsername);
+            }
+        });
+
         eventsTableView.setItems(eventManager.getAllEvents());
 
         // Add listeners to populate details when a row is selected
@@ -92,18 +111,27 @@ public class AdminViewController {
         coordinatorCheckBox.setOnAction(e -> filterUsers());
         usernameTextField.textProperty().addListener((observable, oldValue, newValue) -> filterUsers());
 
-        // Sign out button action
+        missingCoordinatorCheckBox.setOnAction(e -> filterEvents());
+        eventNameTextField.textProperty().addListener((observable, oldValue, newValue) -> filterEvents());
+
+        // 'Sign out' button action
         signOutButton1.setOnAction(this::signOut);
         signOutButton2.setOnAction(this::signOut);
 
-        // Add User button action
+        // 'Add User' button action
         addUserButton.setOnAction(this::handleAddUser);
 
-        // Edit User button action
+        // 'Edit User' button action
         editUserButton.setOnAction(this::handleEditUser);
 
-        // Edit User button action
+        // 'Delete User' button action
         deleteUserButton.setOnAction(this::handleDeleteUser);
+
+        // 'Assign Coordinator' button action
+        assignCoordinatorButton.setOnAction(this::handleAssignCoordinator);
+
+        // 'Delete Event' button action
+        deleteEventButton.setOnAction(this::handleDeleteEvent);
     }
 
     private void populateUserDetails(User user) {
@@ -123,9 +151,95 @@ public class AdminViewController {
         endDateLabel.setText(event.getEndDateTime());
         locationLabel.setText(event.getLocation());
         descriptionLabel.setText(event.getDescription());
-        coordinatorLabel.setText(Integer.toString(event.getCoordinatorID()));
+
+        // Fetch the coordinator's username and display it
+        String coordinatorUsername = event.getCoordinatorID() == 0
+                ? "Not Assigned"
+                : eventManager.getCoordinatorUsername(event.getCoordinatorID());
+
+        coordinatorLabel.setText(coordinatorUsername);
         guideLabel.setText(event.getLocationGuide());
         notesLabel.setText(event.getNotes());
+    }
+
+    private void handleAssignCoordinator(ActionEvent event) {
+        // Get the selected event from the TableView
+        Event selectedEvent = eventsTableView.getSelectionModel().getSelectedItem();
+
+        // Check if an event is selected
+        if (selectedEvent == null) {
+            showErrorDialog("Error", "Please select an event");
+            return;
+        }
+
+        // Check if the selected event already has a coordinator assigned
+        if (selectedEvent.getCoordinatorID() != 0) {
+            showErrorDialog("Error", "A coordinator is already assigned to this event");
+            return;
+        }
+
+        // Open the ListView dialog to select a coordinator
+        openAssignCoordinatorDialog(selectedEvent);
+    }
+
+    private void openAssignCoordinatorDialog(Event selectedEvent) {
+        // Create a new stage for the dialog
+        Stage dialogStage = new Stage();
+        dialogStage.initModality(Modality.APPLICATION_MODAL);  // Make sure it's modal
+        dialogStage.setTitle("Assign Coordinator");
+
+        // Create a ListView for the coordinators
+        ListView<String> coordinatorListView = new ListView<>();
+
+        // Fetch all users with the "Coordinator" role
+        ObservableList<String> coordinatorUsernames = FXCollections.observableArrayList();
+        for (User user : userManager.getAllUsers()) {
+            if (user.getRankName().equals("Coordinator")) {
+                coordinatorUsernames.add(user.getUsername());
+            }
+        }
+
+        coordinatorListView.setItems(coordinatorUsernames);
+
+        // Confirm button action
+        Button confirmButton = new Button("Confirm");
+        confirmButton.setOnAction(e -> {
+            String selectedCoordinatorUsername = coordinatorListView.getSelectionModel().getSelectedItem();
+
+            if (selectedCoordinatorUsername != null) {
+                // Find user by Username (i.e. fetch the UserID from the selected coordinator's username)
+                User selectedCoordinator = null;
+                for (User user : userManager.getAllUsers()) {
+                    if (user.getUsername().equals(selectedCoordinatorUsername)) {
+                        selectedCoordinator = user;
+                        break;
+                    }
+                }
+
+                if (selectedCoordinator != null) {
+                    // Update the selected event coordinator
+                    selectedEvent.setCoordinatorID(selectedCoordinator.getUserID());
+
+                    // Update the event
+                    eventManager.updateEventCoordinator(selectedEvent);
+
+                    // Close the dialog window and refresh the table view
+                    dialogStage.close();
+                    eventsTableView.refresh();
+                } else {
+                    showErrorDialog("Error","Coordinator not found.");
+                }
+            } else {
+                showErrorDialog("Error","Please select a coordinator.");
+            }
+        });
+
+        // Layout for the dialog window (ListView + Confirm button)
+        VBox vbox = new VBox(10, coordinatorListView, confirmButton);
+        vbox.setAlignment(Pos.CENTER);
+        Scene scene = new Scene(vbox, 300, 400);
+        dialogStage.setScene(scene);
+        dialogStage.show();
     }
 
     // Method to handle Add User button
@@ -215,6 +329,31 @@ public class AdminViewController {
         }
     }
 
+    // Method to handle Delete Event button
+    private void handleDeleteEvent(ActionEvent event) {
+        Event selectedEvent = eventsTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedEvent == null) {
+            // Show an error message if no event is selected
+            showErrorDialog("Error","Please select an event to delete");
+            return;
+        }
+
+        // Show a confirmation dialog before deleting
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Event");
+        alert.setHeaderText("Are you sure you want to delete this event?");
+        alert.setContentText("Event: " + selectedEvent.getEventName());
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Delete the event from the database
+            eventManager.deleteEvent(selectedEvent);
+            // Refresh the events TableView
+            eventsTableView.setItems(eventManager.getAllEvents());
+        }
+    }
+
     private void filterUsers() {
         // Get the selected role filters
         boolean showAdmin = adminCheckBox.isSelected();
@@ -248,6 +387,30 @@ public class AdminViewController {
 
         // Update the table view with the filtered users
         usersTableView.setItems(filteredUsers);
+    }
+
+    private void filterEvents() {
+        boolean missingCoordinatorSelected = missingCoordinatorCheckBox.isSelected();
+        String eventNameFilter = eventNameTextField.getText().toLowerCase();
+
+        // Get all events
+        ObservableList<Event> allEvents = eventManager.getAllEvents();
+
+        // Filter the events based on the event name and the checkbox
+        ObservableList<Event> filteredEvents = FXCollections.observableArrayList();
+
+        for (Event event : allEvents) {
+            boolean matchesName = event.getEventName().toLowerCase().contains(eventNameFilter);  // Filter by event name (case-insensitive)
+            boolean matchesCoordinator = !missingCoordinatorSelected || event.getCoordinatorID() == 0;  // Filter by coordinator if checkbox is selected
+
+            // Only add event if it matches both criteria
+            if (matchesName && matchesCoordinator) {
+                filteredEvents.add(event);
+            }
+        }
+
+        // Update the TableView with the filtered events
+        eventsTableView.setItems(filteredEvents);
     }
 
     private void signOut(ActionEvent event) {

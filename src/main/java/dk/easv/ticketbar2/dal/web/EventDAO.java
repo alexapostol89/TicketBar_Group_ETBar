@@ -67,4 +67,50 @@ public class EventDAO {
         }
         return null;
     }
+
+    // Method to get the coordinator's username by their UserID (CoordinatorID in Events)
+    public String getCoordinatorUsername(int coordinatorID) {
+        String username = null;
+        String sql = "SELECT Username FROM Users WHERE UserID = ?";
+        try (Connection conn = connection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, coordinatorID);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    username = rs.getString("Username");
+                }
+            }
+        } catch (SQLException e) {
+            throw new EventException(e);
+        }
+        return username;
+    }
+
+    // Method to update the coordinator of the event
+    public void updateEventCoordinator(Event event) {
+        String sql = "UPDATE Events SET CoordinatorID = ? WHERE EventID = ?";
+        try (Connection conn = connection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, event.getCoordinatorID()); // Set the new CoordinatorID
+            stmt.setInt(2, event.getEventID()); // Set the EventID
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new EventException("An error occurred while updating the coordinator. Please try again later.");
+        }
+    }
+
+    public void deleteEvent(Event event) {
+        String sql = "DELETE FROM Events WHERE EventID = ?";
+        try (Connection conn = connection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, event.getEventID()); // Set the EventID of the event to delete
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new EventException("An error occurred while deleting the event. Please try again later.");
+        }
+    }
 }

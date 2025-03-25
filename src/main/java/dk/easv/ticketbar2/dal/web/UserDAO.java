@@ -210,7 +210,7 @@ public class UserDAO {
             stmt.setInt(1, user.getUserID());
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new UserException(e.getMessage());
+            throw new UserException(e);
         }
     }
 

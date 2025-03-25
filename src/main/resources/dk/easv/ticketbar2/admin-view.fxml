@@ -59,27 +59,24 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
                                     <Label text="First Name:" />
                                     <Label text="Last Name:" GridPane.rowIndex="1" />
                                     <Label text="Role:" GridPane.rowIndex="2" />
                                     <Label text="Username:" GridPane.rowIndex="3" />
-                                    <Label text="Email:" GridPane.rowIndex="5" />
-                                    <Label text="Phone:" GridPane.rowIndex="6" />
-                                    <Label text="Date Created:" GridPane.rowIndex="7" />
-                                    <Label text="Last Login:" GridPane.rowIndex="8" />
+                                    <Label text="Email:" GridPane.rowIndex="4" />
+                                    <Label text="Phone:" GridPane.rowIndex="5" />
+                                    <Label text="Date Created:" GridPane.rowIndex="6" />
+                                    <Label text="Last Login:" GridPane.rowIndex="7" />
                                     <Label fx:id="firstNameLabel" text="Label" GridPane.columnIndex="1" />
                                     <Label fx:id="lastNameLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <Label fx:id="rankLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <Label fx:id="usernameLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Label fx:id="emailLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                    <Label fx:id="phoneLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                    <Label fx:id="dateCreatedLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                    <Label fx:id="lastLoginLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                    <Label text="Password:" GridPane.rowIndex="4" />
-                                    <Label fx:id="passwordLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label fx:id="emailLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label fx:id="phoneLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Label fx:id="dateCreatedLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <Label fx:id="lastLoginLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                  </children>
                               </GridPane>
                               <ButtonBar buttonMinWidth="80.0" prefHeight="40.0" prefWidth="281.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="5.0">
@@ -192,17 +189,17 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <CheckBox mnemonicParsing="false" text="Missing coordinator" GridPane.rowIndex="1" />
+                                    <CheckBox fx:id="missingCoordinatorCheckBox" mnemonicParsing="false" text="Missing coordinator" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
                               <ButtonBar buttonMinWidth="80.0" prefHeight="40.0" prefWidth="235.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="5.0">
                                 <buttons>
-                                  <Button fx:id="assignCoordinator" mnemonicParsing="false" prefWidth="125.0" text="Assign Coordinator" />
-                                    <Button fx:id="deleteCoordinator" maxWidth="80.0" mnemonicParsing="false" text="Delete" />
+                                  <Button fx:id="assignCoordinatorButton" mnemonicParsing="false" prefWidth="125.0" text="Assign Coordinator" />
+                                    <Button fx:id="deleteEventButton" maxWidth="80.0" mnemonicParsing="false" text="Delete" />
                                 </buttons>
                               </ButtonBar>
                               <Button fx:id="signOutButton2" mnemonicParsing="false" prefWidth="80.0" text="Sign out" AnchorPane.bottomAnchor="27.0" AnchorPane.rightAnchor="30.0" />
-                              <TextField prefHeight="25.0" prefWidth="170.0" promptText="Event Name" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="25.0" />
+                              <TextField fx:id="eventNameTextField" prefHeight="25.0" prefWidth="170.0" promptText="Event Name" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="25.0" />
                            </children></AnchorPane>
                     </items>
                   </SplitPane>
