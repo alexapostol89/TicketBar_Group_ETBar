@@ -16,19 +16,7 @@
 <BorderPane prefHeight="741.0" prefWidth="1306.0" styleClass="backgroundC" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.CoordinatorController">
 
    <center>
-      <FlowPane fx:id="contentPane" prefHeight="685.0" prefWidth="970.0" styleClass="flowPaneC" BorderPane.alignment="CENTER">
-
-         <!-- Template VBox for an Event -->
-         <VBox fx:id="eventBox" alignment="CENTER" visible="false">
-            <ImageView fx:id="eventImage" fitHeight="150" fitWidth="200" />
-            <Label fx:id="eventLabel" styleClass="labelEvent" stylesheets="@Main.css" text="Event Name" />
-            <FlowPane.margin>
-               <Insets />
-            </FlowPane.margin>
-
-         </VBox>
-
-      </FlowPane>
+      <FlowPane fx:id="contentPane" prefHeight="685.0" prefWidth="970.0" styleClass="flowPaneC" BorderPane.alignment="CENTER" />
    </center>
 
    <bottom>
@@ -97,19 +85,19 @@
             <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <GridPane prefHeight="510.0" prefWidth="576.0" styleClass="gridPane" stylesheets="@Main.css">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
                      <children>
                         <Label text="Name">
                            <padding>
@@ -139,13 +127,13 @@
                            <padding>
                               <Insets left="10.0" />
                            </padding></Label>
-                        <Label text=".............." GridPane.columnIndex="1" />
-                        <Label text=".............." GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label text=".............." GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label text=".............." GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text=".............." GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label text=".............." GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label text=".............." GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label fx:id="nameLabel" text=".............." GridPane.columnIndex="1" />
+                        <Label fx:id="startDateLabel" text=".............." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="endDateLabel" text=".............." GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="coordinatorLabel" text=".............." GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="guideLabel" text=".............." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="descriptionLabel" text=".............." GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="notesLabel" text=".............." GridPane.columnIndex="1" GridPane.rowIndex="6" />
                      </children>
                   </GridPane>
                </children>
@@ -285,5 +273,4 @@
          </children>
       </HBox>
    </top>
-
 </BorderPane>

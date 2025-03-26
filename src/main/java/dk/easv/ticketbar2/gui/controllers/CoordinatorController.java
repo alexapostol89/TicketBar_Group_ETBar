@@ -4,6 +4,7 @@ import dk.easv.ticketbar2.be.Events;
 import dk.easv.ticketbar2.dal.exceptions.EventsException;
 import dk.easv.ticketbar2.dal.web.EventsDAO;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -23,12 +24,15 @@ import java.io.IOException;
 import java.util.List;
 
 public class CoordinatorController {
+    @FXML
+    private Label nameLabel, startDateLabel, endDateLabel, coordinatorLabel, descriptionLabel, guideLabel, notesLabel;
 
     @FXML
     private Button addEvents;  // Button to open the "Add Event" window
 
     @FXML
     private FlowPane contentPane;  // FlowPane to dynamically add new images and labels
+
 
     @FXML
     public void initialize() throws EventsException {
@@ -92,18 +96,34 @@ public class CoordinatorController {
 
         vbox.getChildren().addAll(imageView, label);
 
-        // Add double-click event to open EventInfo window
         imageView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) {
+            if (event.getClickCount() == 1) { //show the event info in 1 click
+
+                int clickedEventID = (int) imageView.getUserData(); // Retrieve the eventID from the ImageView
+                try {
+                    EventsDAO eventsDAO = new EventsDAO();
+                    Events clickedEvent = eventsDAO.getEventById(clickedEventID);
+                    if (clickedEvent != null) {
+                        nameLabel.setText(clickedEvent.getEventName());
+                        startDateLabel.setText(clickedEvent.getStartDateTime());
+                        endDateLabel.setText(clickedEvent.getEndDateTime());
+                        coordinatorLabel.setText(String.valueOf(clickedEvent.getCoordinatorID()));
+                        descriptionLabel.setText(clickedEvent.getDescription());
+                        guideLabel.setText(clickedEvent.getLocationGuide());
+                        notesLabel.setText(clickedEvent.getNotes());
+                    }
+                } catch (EventsException e) {
+                    throw new RuntimeException(e);
+                }
+            } else if (event.getClickCount() == 2) {
                 int clickedEventID = (int) imageView.getUserData(); // Retrieve the eventID from the ImageView
                 System.out.println("Clicked event ID: " + clickedEventID); // Debugging
-                openDetailsWindow(clickedEventID); // Open the details window with the eventID
+                openDetailsWindow(clickedEventID);
             }
-        });
 
+        });
         contentPane.getChildren().add(vbox);
     }
-
 
 
     private void openDetailsWindow(int eventID) {
@@ -124,9 +144,10 @@ public class CoordinatorController {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void logout(ActionEvent event) {
-        try{
+        try {
             //Load Login screen
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/login-view.fxml"));
             Parent root = loader.load();
