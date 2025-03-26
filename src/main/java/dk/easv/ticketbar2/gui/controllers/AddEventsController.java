@@ -1,5 +1,6 @@
 package dk.easv.ticketbar2.gui.controllers;
 
+import dk.easv.ticketbar2.bll.EventsManager;
 import dk.easv.ticketbar2.dal.exceptions.EventsException;
 import dk.easv.ticketbar2.dal.web.EventsDAO;
 import javafx.fxml.FXML;
@@ -27,6 +28,7 @@ public class AddEventsController {
 
     private CoordinatorController coordinatorController;
 
+    private final EventsManager eventsManager = new EventsManager();
     @FXML
     public void initialize() {
         // Open file chooser when the search button is clicked
@@ -95,8 +97,7 @@ public class AddEventsController {
         }
 
         // Save the event and get the eventID
-        EventsDAO eventsDAO = new EventsDAO();
-        int eventID = eventsDAO.saveEvent(eventName, selectedImagePath,startDate,endDate,location,description,locationGuide,notes,coordinatorId);
+        int eventID = eventsManager.saveEvent(eventName, selectedImagePath,startDate,endDate,location,description,locationGuide,notes,coordinatorId);
         System.out.println("New event ID: " + eventID); // Debugging
 
         // Add the new event to the coordinator controller

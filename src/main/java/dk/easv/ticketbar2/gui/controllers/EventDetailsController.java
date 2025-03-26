@@ -1,6 +1,7 @@
 package dk.easv.ticketbar2.gui.controllers;
 
 import dk.easv.ticketbar2.be.Events;
+import dk.easv.ticketbar2.bll.EventsManager;
 import dk.easv.ticketbar2.dal.web.EventsDAO;
 import javafx.fxml.FXML;
 import dk.easv.ticketbar2.dal.exceptions.EventsException;
@@ -11,11 +12,11 @@ public class EventDetailsController {
 
     @FXML
     private Label nameLabel, startDateLabel, endDateLabel, locationLabel, descriptionLabel, coordinatorLabel, guideLabel, notesLabel;
-    private EventsDAO eventsDAO = new EventsDAO();
+    private final EventsManager eventsManager = new EventsManager();
 
     public void populateEventInfo(int eventID) throws EventsException {
 
-        Events event = eventsDAO.getEventById(eventID);
+        Events event = eventsManager.getEventById(eventID);
         if (event != null) {
             nameLabel.setText(event.getEventName());
             startDateLabel.setText(event.getStartDateTime());

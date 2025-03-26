@@ -1,6 +1,7 @@
 package dk.easv.ticketbar2.gui.controllers;
 
 import dk.easv.ticketbar2.be.Events;
+import dk.easv.ticketbar2.bll.EventsManager;
 import dk.easv.ticketbar2.dal.exceptions.EventsException;
 import dk.easv.ticketbar2.dal.web.EventsDAO;
 import javafx.event.ActionEvent;
@@ -33,6 +34,8 @@ public class CoordinatorController {
     @FXML
     private FlowPane contentPane;  // FlowPane to dynamically add new images and labels
 
+    private final EventsManager eventsManager = new EventsManager();
+
 
     @FXML
     public void initialize() throws EventsException {
@@ -41,9 +44,7 @@ public class CoordinatorController {
     }
 
     public void loadExistingEvents() throws EventsException {
-        EventsDAO eventsDAO = new EventsDAO();
-        List<Events> events = eventsDAO.getAllEvents();
-
+        List<Events> events = eventsManager.getEvents();
         for (Events event : events) {
             updateCoordinatorView(event.getEventName(), event.getEventImagePath(), event.getEventID());
         }
@@ -101,8 +102,7 @@ public class CoordinatorController {
 
                 int clickedEventID = (int) imageView.getUserData(); // Retrieve the eventID from the ImageView
                 try {
-                    EventsDAO eventsDAO = new EventsDAO();
-                    Events clickedEvent = eventsDAO.getEventById(clickedEventID);
+                    Events clickedEvent = eventsManager.getEventById(clickedEventID);
                     if (clickedEvent != null) {
                         nameLabel.setText(clickedEvent.getEventName());
                         startDateLabel.setText(clickedEvent.getStartDateTime());
