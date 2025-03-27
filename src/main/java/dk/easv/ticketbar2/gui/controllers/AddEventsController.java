@@ -1,22 +1,25 @@
 package dk.easv.ticketbar2.gui.controllers;
 
+import dk.easv.ticketbar2.bll.EventsManager;
+import dk.easv.ticketbar2.dal.exceptions.EventsException;
 import dk.easv.ticketbar2.dal.web.EventsDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 
-public class EditEvents {
+
+public class AddEventsController {
 
     @FXML
     private Button searchBtn;
 
+
     @FXML
-        private TextField nameId;  // TextField to enter the name
+    private TextField nameText, startDateText, endDateText, locationText, descriptionText, guidanceText, notesText, coordinatorText;
 
     @FXML
     private Button btnSave;  // Save button to save the entered name and image
@@ -25,14 +28,20 @@ public class EditEvents {
 
     private CoordinatorController coordinatorController;
 
-    // Method to initialize the window (optional)
+    private final EventsManager eventsManager = new EventsManager();
     @FXML
     public void initialize() {
-        // Open file chooser when choice box is triggered
+        // Open file chooser when the search button is clicked
         searchBtn.setOnAction(event -> openFileChooser());
 
         // Handle save button click
-        btnSave.setOnAction(event -> saveEvent());
+        btnSave.setOnAction(event -> {
+            try {
+                saveEvent();
+            } catch (EventsException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
     }
 
@@ -71,25 +80,32 @@ public class EditEvents {
         }
     }
 
-
     // Method to save the event data
-    private void saveEvent() {
-        String eventName = nameId.getText();
+    private void saveEvent() throws EventsException {
+        String eventName = nameText.getText();
+        String startDate = startDateText.getText();
+        String endDate = endDateText.getText();
+        String location = locationText.getText();
+        String description = descriptionText.getText();
+        String locationGuide = guidanceText.getText();
+        String notes = notesText.getText();
+        int coordinatorId = Integer.parseInt(coordinatorText.getText());
+
         if (eventName.isEmpty()) {
             System.out.println("Event name is empty!");
             return;
         }
 
-        // Save event to database
-        EventsDAO eventsDAO = new EventsDAO();
-        eventsDAO.saveEvent(eventName, selectedImagePath);
+        // Save the event and get the eventID
+        int eventID = eventsManager.saveEvent(eventName, selectedImagePath,startDate,endDate,location,description,locationGuide,notes,coordinatorId);
+        System.out.println("New event ID: " + eventID); // Debugging
 
-        // Update UI
+        // Add the new event to the coordinator controller
         if (coordinatorController != null) {
-            coordinatorController.updateCoordinatorView(eventName, selectedImagePath);
+            coordinatorController.updateCoordinatorView(eventName, selectedImagePath, eventID); // Add the new event
         }
 
-        // Close the EditEvents window
+        // Close the window
         Stage stage = (Stage) btnSave.getScene().getWindow();
         stage.close();
     }

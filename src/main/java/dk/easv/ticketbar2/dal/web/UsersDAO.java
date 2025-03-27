@@ -25,15 +25,15 @@ public class UsersDAO {
             while (rs.next()) {
 
                 int userid = rs.getInt("UserId");
-                String username = rs.getString("Username"); //X
+                String username = rs.getString("Username");
                 String passwordHash = rs.getString("PasswordHash");
-                int rank = rs.getInt("Rank"); //X
-                String firstName = rs.getString("FirstName"); //X
+                int rank = rs.getInt("Rank");
+                String firstName = rs.getString("FirstName");
                 String lastName = rs.getString("LastName");
-                String email = rs.getString("Email"); //X
-                String lastLogin = rs.getString("LastLogin"); //X
-                String createdDate = rs.getString("CreatedDate"); //X
-                String phone = rs.getString("Phone"); //X
+                String email = rs.getString("Email");
+                String lastLogin = rs.getString("LastLogin");
+                String createdDate = rs.getString("CreatedDate");
+                String phone = rs.getString("Phone");
 
                 Users usersTable = new Users(userid, username, passwordHash, rank, firstName,
                         lastName, email, phone, lastLogin, createdDate);

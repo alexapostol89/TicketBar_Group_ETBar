@@ -1,5 +1,6 @@
 package dk.easv.ticketbar2;
 
+import dk.easv.ticketbar2.dal.exceptions.EventsException;
 import dk.easv.ticketbar2.dal.web.EventsDAO;
 import dk.easv.ticketbar2.dal.web.UsersDAO;
 import javafx.application.Application;
@@ -19,12 +20,8 @@ public class ETBarApplication extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws EventsException {
         launch();
-EventsDAO eventsDAO = new EventsDAO();
-eventsDAO.getEvents();
-UsersDAO usersDAO = new UsersDAO();
-usersDAO.getUsers();
     }
 
 }
