@@ -9,7 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,6 +23,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class CoordinatorController {
 
@@ -174,23 +177,42 @@ public class CoordinatorController {
     @FXML
     private void onActionDelete(ActionEvent event) {
         if (lastSelectedVBox != null) {
-            // Get the event ID from the selected event
-            ImageView imageView = (ImageView) lastSelectedVBox.getChildren().get(0); // First child is the image
-            int eventID = (int) imageView.getUserData();
+            // Show confirmation alert
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Deletion");
+            alert.setHeaderText("Are you sure you want to delete this event?");
+            alert.setContentText("Event: " + nameLabel.getText() + "\n\nThis action cannot be undone.");
 
-            // Delete the event from the database
-            try {
-                boolean success = eventsManager.deleteEvent(eventID);
-                if (success) {
-                    // Remove the event from the UI
-                    contentPane.getChildren().remove(lastSelectedVBox);
-                    System.out.println("Event deleted successfully from the database and UI.");
-                } else {
-                    System.out.println("Failed to delete the event from the database.");
+            // Wait for user response
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                // Get the event ID from the selected event
+                ImageView imageView = (ImageView) lastSelectedVBox.getChildren().get(0); // First child is the image
+                int eventID = (int) imageView.getUserData();
+
+                // Delete the event from the database
+                try {
+                    boolean success = eventsManager.deleteEvent(eventID);
+                    if (success) {
+                        // Remove the event from the UI
+                        contentPane.getChildren().remove(lastSelectedVBox);
+                        System.out.println("Event deleted successfully from the database and UI.");
+                    } else {
+                        System.out.println("Failed to delete the event from the database.");
+                    }
+                } catch (EventsException e) {
+                    e.printStackTrace();
                 }
-            } catch (EventsException e) {
-                e.printStackTrace();
+            } else {
+                System.out.println("Event deletion canceled.");
             }
+        } else {
+            // Show a warning alert if no event is selected
+            Alert warningAlert = new Alert(Alert.AlertType.WARNING);
+            warningAlert.setTitle("No Event Selected");
+            warningAlert.setHeaderText(null);
+            warningAlert.setContentText("Please select an event to delete.");
+            warningAlert.showAndWait();
         }
     }
 
