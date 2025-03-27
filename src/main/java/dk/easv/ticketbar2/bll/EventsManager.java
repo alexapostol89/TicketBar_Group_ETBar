@@ -3,6 +3,7 @@ package dk.easv.ticketbar2.bll;
 import dk.easv.ticketbar2.be.Events;
 import dk.easv.ticketbar2.dal.exceptions.EventsException;
 import dk.easv.ticketbar2.dal.web.EventsDAO;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 
@@ -26,7 +27,10 @@ public class EventsManager {
     }
     public boolean deleteEvent(int eventID) throws EventsException {
         return eventsDAO.deleteEvent(eventID);
-}
+    }
 
+    public ObservableList<String> getEventNames() throws EventsException {
+        return eventsDAO.getEventNames();
+    }
 }
 

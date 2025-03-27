@@ -61,7 +61,7 @@
                   <Insets bottom="45.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" styleClass="buttons" stylesheets="@Main.css" text="Assign EC">
+            <Button fx:id="assignCoordinatorButton" mnemonicParsing="false" onAction="#btnAssignCoordinator" prefHeight="26.0" prefWidth="130.0" styleClass="buttons" stylesheets="@Main.css" text="Assign EC">
                <VBox.margin>
                   <Insets bottom="45.0" />
                </VBox.margin>

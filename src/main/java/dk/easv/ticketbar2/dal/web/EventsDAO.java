@@ -124,5 +124,23 @@ public class EventsDAO {
             return false;
         }
     }
+
+    public ObservableList<String> getEventNames() throws EventsException {
+        ObservableList<String> eventNames = FXCollections.observableArrayList();
+        String sql = "SELECT EventName FROM Events";
+
+        try (Connection conn = connection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                eventNames.add(rs.getString("EventName"));
+            }
+        } catch (SQLException e) {
+            throw new EventsException(e);
+        }
+        return eventNames;
+    }
+
 }
 

@@ -26,16 +26,14 @@ import java.util.List;
 import java.util.Optional;
 
 public class CoordinatorController {
-
+    @FXML
+    private Button assignCoordinatorButton;
     @FXML
     private Label nameLabel, startDateLabel, endDateLabel, coordinatorLabel, descriptionLabel, guideLabel, notesLabel;
-
     @FXML
     private Button addEvents;  // Button to open the "Add Event" window
-
     @FXML
     private Button deleteBtn;  // Button to delete an event
-
     @FXML
     private FlowPane contentPane;  // FlowPane to dynamically add new images and labels
 
@@ -231,6 +229,25 @@ public class CoordinatorController {
             Stage stage = new Stage();
             stage.setTitle("Login");
             stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void btnAssignCoordinator(ActionEvent event) {
+        System.out.println("Assign Coordinator button clicked!");
+        openAssignCoordinatorView();
+    }
+
+    private void openAssignCoordinatorView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/coordinator-list.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Assign Coordinator");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
