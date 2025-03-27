@@ -16,7 +16,7 @@
 . eventsC {
     -fx-font-family: "Comic Sans MS";
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 0); /* Blur effect */
-    -fx-background-color: rgba(255, 255, 255, 0.1); /* Light opacity for transparency */
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Light opacity for transparency */
     -fx-background-radius: 20;
     -fx-border-radius: 20;
     -fx-content-display: top;
@@ -48,7 +48,7 @@
 }
 
 . labelLogin {
-    -fx-background-color: rgba(255, 255, 255, 0.15); /* Light opacity for transparency */
+    /*-fx-background-color: rgba(255, 255, 255, 0.15); /* Light opacity for transparency */
     -fx-background-radius: 20;
     -fx-border-radius: 20;
 
