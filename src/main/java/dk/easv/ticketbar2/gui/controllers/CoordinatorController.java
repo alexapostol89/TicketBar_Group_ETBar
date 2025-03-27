@@ -86,8 +86,11 @@ public class CoordinatorController {
     public void updateCoordinatorView(String eventName, String imagePath, int eventID) {
         VBox vbox = new VBox();
         vbox.setSpacing(10);
+
         vbox.setPadding(new javafx.geometry.Insets(10));
         vbox.setStyle("-fx-border-color: transparent; -fx-border-width: 2;"); // Default no border
+        vbox.setStyle("-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0)");
+
 
         ImageView imageView = new ImageView();
         if (imagePath != null && !imagePath.isEmpty()) {
@@ -118,7 +121,7 @@ public class CoordinatorController {
             }
 
             // Apply a blue border to the selected event
-            vbox.setStyle("-fx-border-color: blue; -fx-border-width: 2; -fx-border-radius: 5;");
+            vbox.setStyle("-fx-border-color: #9AD0E7; -fx-border-width: 2; -fx-border-radius: 5;");
             lastSelectedVBox = vbox;
 
             if (event.getClickCount() == 1) { // Show event details on single click
