@@ -24,7 +24,9 @@ public class EventsManager {
         return eventsDAO.saveEvent(eventName, imagePath, startDate, endDate, location,
                 description, locationGuide, notes, coordinatorId);
     }
-
+    public boolean deleteEvent(int eventID) throws EventsException {
+        return eventsDAO.deleteEvent(eventID);
+}
 
 }
 

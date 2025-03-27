@@ -152,7 +152,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" styleClass="buttons" stylesheets="@Main.css" text="Delete event">
+                  <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#onActionDelete" styleClass="buttons" stylesheets="@Main.css" text="Delete event">
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin>

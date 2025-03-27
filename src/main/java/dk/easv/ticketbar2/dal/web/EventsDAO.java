@@ -67,7 +67,7 @@ public class EventsDAO {
         return null;
     }
 
-    public int saveEvent(String eventName, String imagePath, String startDate, String endDate,String location, String description, String notes, String locationGuide, int coordinator) throws EventsException {
+    public int saveEvent(String eventName, String imagePath, String startDate, String endDate, String location, String description, String notes, String locationGuide, int coordinator) throws EventsException {
         String insertSql = "INSERT INTO Events (EventName, EventImagePath, StartDateTime, EndDateTime, Location, Description, Notes, LocationGuide, CoordinatorID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = connection.getConnection();
@@ -85,14 +85,13 @@ public class EventsDAO {
             insertStmt.setInt(9, coordinator);
 
 
-
             insertStmt.executeUpdate();
 
             // Retrieve the auto-generated key (eventID)
             try (ResultSet generatedKeys = insertStmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     int eventID = generatedKeys.getInt(1);
-                    System.out.println("Event "+ eventName + "added to the database"); // Debugging
+                    System.out.println("Event " + eventName + "added to the database"); // Debugging
                     return eventID; // Returning the generated eventID
                 } else {
                 }
@@ -101,4 +100,29 @@ public class EventsDAO {
         }
         return 0;
     }
+
+    public boolean deleteEvent(int eventId) {
+
+        String query = "DELETE FROM Events WHERE EventID = ?";
+        try (Connection conn = connection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, eventId);
+            System.out.println("Executing DELETE for event ID: " + eventId); // Debugging
+            int affectedRows = stmt.executeUpdate();
+
+            if (affectedRows > 0) {
+                System.out.println("Event deleted successfully: ID = " + eventId);
+                return true;
+            } else {
+                System.out.println("No event found with ID = " + eventId);
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage()); // Print error message
+            e.printStackTrace(); // Print full stack trace
+            return false;
+        }
+    }
 }
+

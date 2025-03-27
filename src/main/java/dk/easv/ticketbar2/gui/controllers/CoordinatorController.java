@@ -3,9 +3,7 @@ package dk.easv.ticketbar2.gui.controllers;
 import dk.easv.ticketbar2.be.Events;
 import dk.easv.ticketbar2.bll.EventsManager;
 import dk.easv.ticketbar2.dal.exceptions.EventsException;
-import dk.easv.ticketbar2.dal.web.EventsDAO;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -25,6 +23,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class CoordinatorController {
+
     @FXML
     private Label nameLabel, startDateLabel, endDateLabel, coordinatorLabel, descriptionLabel, guideLabel, notesLabel;
 
@@ -32,17 +31,31 @@ public class CoordinatorController {
     private Button addEvents;  // Button to open the "Add Event" window
 
     @FXML
+    private Button deleteBtn;  // Button to delete an event
+
+    @FXML
     private FlowPane contentPane;  // FlowPane to dynamically add new images and labels
 
     private final EventsManager eventsManager = new EventsManager();
 
+    private VBox lastSelectedVBox = null; // Track the last selected event
 
     @FXML
     public void initialize() throws EventsException {
-        addEvents.setOnAction(event -> openEditEventWindow());
+        // Initially disable the delete button
+        deleteBtn.setDisable(false);
+
+        // Load existing events
         loadExistingEvents();
+
+        // Setup the action for the "Add Event" button
+        addEvents.setOnAction(event -> openEditEventWindow());
+
+        // Setup the action for the "Delete Event" button
+        deleteBtn.setOnAction(this::onActionDelete);
     }
 
+    // Load existing events into the content pane
     public void loadExistingEvents() throws EventsException {
         List<Events> events = eventsManager.getEvents();
         for (Events event : events) {
@@ -50,6 +63,7 @@ public class CoordinatorController {
         }
     }
 
+    // Open the "Add Event" window
     private void openEditEventWindow() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/add-event.fxml"));
@@ -68,10 +82,12 @@ public class CoordinatorController {
         }
     }
 
+    // Update the coordinator view with the list of events
     public void updateCoordinatorView(String eventName, String imagePath, int eventID) {
         VBox vbox = new VBox();
         vbox.setSpacing(10);
         vbox.setPadding(new javafx.geometry.Insets(10));
+        vbox.setStyle("-fx-border-color: transparent; -fx-border-width: 2;"); // Default no border
 
         ImageView imageView = new ImageView();
         if (imagePath != null && !imagePath.isEmpty()) {
@@ -84,9 +100,7 @@ public class CoordinatorController {
             }
         }
 
-        // Store the eventID in the ImageView's userData property
         imageView.setUserData(eventID);
-
 
         Label label = new Label(eventName);
         label.setWrapText(true);
@@ -97,10 +111,18 @@ public class CoordinatorController {
 
         vbox.getChildren().addAll(imageView, label);
 
-        imageView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 1) { //show the event info in 1 click
+        vbox.setOnMouseClicked(event -> {
+            // Remove the border from the previously selected event
+            if (lastSelectedVBox != null) {
+                lastSelectedVBox.setStyle("-fx-border-color: transparent; -fx-border-width: 2;");
+            }
 
-                int clickedEventID = (int) imageView.getUserData(); // Retrieve the eventID from the ImageView
+            // Apply a blue border to the selected event
+            vbox.setStyle("-fx-border-color: blue; -fx-border-width: 2; -fx-border-radius: 5;");
+            lastSelectedVBox = vbox;
+
+            if (event.getClickCount() == 1) { // Show event details on single click
+                int clickedEventID = (int) imageView.getUserData();
                 try {
                     Events clickedEvent = eventsManager.getEventById(clickedEventID);
                     if (clickedEvent != null) {
@@ -115,17 +137,17 @@ public class CoordinatorController {
                 } catch (EventsException e) {
                     throw new RuntimeException(e);
                 }
-            } else if (event.getClickCount() == 2) {
-                int clickedEventID = (int) imageView.getUserData(); // Retrieve the eventID from the ImageView
-                System.out.println("Clicked event ID: " + clickedEventID); // Debugging
+            } else if (event.getClickCount() == 2) { // Open details window on double click
+                int clickedEventID = (int) imageView.getUserData();
+                System.out.println("Clicked event ID: " + clickedEventID);
                 openDetailsWindow(clickedEventID);
             }
-
         });
+
         contentPane.getChildren().add(vbox);
     }
 
-
+    // Open the details window for the selected event
     private void openDetailsWindow(int eventID) {
         System.out.println("Opening details for event ID: " + eventID); // Debugging
         try {
@@ -145,14 +167,39 @@ public class CoordinatorController {
         }
     }
 
+    // Method to delete the selected event from the app and database
+    @FXML
+    private void onActionDelete(ActionEvent event) {
+        if (lastSelectedVBox != null) {
+            // Get the event ID from the selected event
+            ImageView imageView = (ImageView) lastSelectedVBox.getChildren().get(0); // First child is the image
+            int eventID = (int) imageView.getUserData();
+
+            // Delete the event from the database
+            try {
+                boolean success = eventsManager.deleteEvent(eventID);
+                if (success) {
+                    // Remove the event from the UI
+                    contentPane.getChildren().remove(lastSelectedVBox);
+                    System.out.println("Event deleted successfully from the database and UI.");
+                } else {
+                    System.out.println("Failed to delete the event from the database.");
+                }
+            } catch (EventsException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Method for logging out
     @FXML
     private void logout(ActionEvent event) {
         try {
-            //Load Login screen
+            // Load Login screen
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/login-view.fxml"));
             Parent root = loader.load();
 
-            //Closes actual stage
+            // Close the current stage
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.close();
 
