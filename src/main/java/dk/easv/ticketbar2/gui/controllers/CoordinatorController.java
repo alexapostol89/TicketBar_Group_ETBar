@@ -132,11 +132,11 @@ public class CoordinatorController {
                     if (clickedEvent != null) {
                         nameLabel.setText(clickedEvent.getEventName());
                         startDateLabel.setText(clickedEvent.getStartDateTime());
-                        endDateLabel.setText(clickedEvent.getEndDateTime());
-                        coordinatorLabel.setText(String.valueOf(clickedEvent.getCoordinatorID()));
+                        //endDateLabel.setText(clickedEvent.getEndDateTime());
+                        //coordinatorLabel.setText(String.valueOf(clickedEvent.getCoordinatorID()));
                         descriptionLabel.setText(clickedEvent.getDescription());
-                        guideLabel.setText(clickedEvent.getLocationGuide());
-                        notesLabel.setText(clickedEvent.getNotes());
+                        //guideLabel.setText(clickedEvent.getLocationGuide());
+                        //notesLabel.setText(clickedEvent.getNotes());
                     }
                 } catch (EventsException e) {
                     throw new RuntimeException(e);
@@ -229,25 +229,6 @@ public class CoordinatorController {
             Stage stage = new Stage();
             stage.setTitle("Login");
             stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void btnAssignCoordinator(ActionEvent event) {
-        System.out.println("Assign Coordinator button clicked!");
-        openAssignCoordinatorView();
-    }
-
-    private void openAssignCoordinatorView() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/coordinator-list.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Assign Coordinator");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

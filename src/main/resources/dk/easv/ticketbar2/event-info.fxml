@@ -132,7 +132,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" styleClass="buttons" stylesheets="@Main.css" text="Assign EC">
+                  <Button fx:id="assignCoordinatorButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnAssignCoordinator" styleClass="buttons" stylesheets="@Main.css" text="Assign EC">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>

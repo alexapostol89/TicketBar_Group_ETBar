@@ -51,21 +51,6 @@
                   <Insets bottom="45.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" styleClass="buttons" stylesheets="@Main.css" text="Print Ticket">
-               <VBox.margin>
-                  <Insets bottom="45.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="112.0" styleClass="buttons" stylesheets="@Main.css" text="E-mail ticket">
-               <VBox.margin>
-                  <Insets bottom="45.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="assignCoordinatorButton" mnemonicParsing="false" onAction="#btnAssignCoordinator" prefHeight="26.0" prefWidth="130.0" styleClass="buttons" stylesheets="@Main.css" text="Assign EC">
-               <VBox.margin>
-                  <Insets bottom="45.0" />
-               </VBox.margin>
-            </Button>
          </children>
          <BorderPane.margin>
             <Insets bottom="45.0" />
@@ -79,54 +64,30 @@
                <children>
                   <GridPane alignment="TOP_RIGHT" prefHeight="496.0" prefWidth="469.0" styleClass="gridPane" stylesheets="@Main.css">
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.199951171875" minWidth="10.0" prefWidth="102.20001983642578" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="372.59996795654297" minWidth="10.0" prefWidth="367.7999801635742" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="160.59998168945313" minHeight="10.0" prefHeight="56.59998168945313" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="310.2000183105469" minHeight="10.0" prefHeight="274.2000183105469" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label text="Name">
+                        <Label text="Event  :">
                            <padding>
                               <Insets left="10.0" />
                            </padding></Label>
-                        <Label text="Start Date" GridPane.rowIndex="1">
+                        <Label text="Start Date :" GridPane.rowIndex="1">
                            <padding>
                               <Insets left="10.0" />
                            </padding></Label>
-                        <Label text="End Date" GridPane.rowIndex="2">
+                        <Label text="Description :" GridPane.rowIndex="2">
                            <padding>
                               <Insets left="10.0" />
                            </padding></Label>
-                        <Label text="Created By" GridPane.rowIndex="3">
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding></Label>
-                        <Label text="Location guidance" GridPane.rowIndex="4">
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding></Label>
-                        <Label text="Number of guests" GridPane.rowIndex="5">
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding></Label>
-                        <Label text="Notes/Extra information about the event" GridPane.rowIndex="6">
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding></Label>
-                        <Label fx:id="nameLabel" text=".............." GridPane.columnIndex="1" />
-                        <Label fx:id="startDateLabel" text=".............." GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="endDateLabel" text=".............." GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="coordinatorLabel" text=".............." GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label fx:id="guideLabel" text=".............." GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label fx:id="descriptionLabel" text=".............." GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label fx:id="notesLabel" text=".............." GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label fx:id="nameLabel" GridPane.columnIndex="1" />
+                        <Label fx:id="startDateLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="descriptionLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>
