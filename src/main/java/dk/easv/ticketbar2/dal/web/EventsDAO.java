@@ -125,6 +125,8 @@ public class EventsDAO {
         }
     }
 
+
+
     public ObservableList<String> getEventNames() throws EventsException {
         ObservableList<String> eventNames = FXCollections.observableArrayList();
         String sql = "SELECT EventName FROM Events";
