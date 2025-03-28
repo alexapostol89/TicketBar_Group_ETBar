@@ -9,23 +9,64 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="741.0" prefWidth="1306.0" styleClass="backgroundC" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.CoordinatorController">
 
-   <center>
-      <FlowPane fx:id="contentPane" prefHeight="620.0" prefWidth="800.0" styleClass="flowPaneC" BorderPane.alignment="CENTER" />
-   </center>
-
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="83.0" prefWidth="1306.0" BorderPane.alignment="CENTER">
+<BorderPane prefHeight="573.0" prefWidth="1089.0" styleClass="backgroundC" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.CoordinatorController">
+   <right>
+      <GridPane alignment="TOP_RIGHT" prefHeight="164.0" prefWidth="405.0" styleClass="gridPane" stylesheets="@Main.css" BorderPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.199951171875" minWidth="10.0" prefWidth="150.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="372.59996795654297" minWidth="10.0" prefWidth="255.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="160.59998168945313" minHeight="8.0" prefHeight="31.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="464.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <Button layoutX="289.0" layoutY="24.0" mnemonicParsing="false" onAction="#logout" prefHeight="64.0" prefWidth="109.0" styleClass="buttons" stylesheets="@Main.css" text="Log out">
-               <HBox.margin>
-                  <Insets left="900.0" />
-               </HBox.margin>
+            <Label text="Event  :">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label text="Start Date :" GridPane.rowIndex="1">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label text="Description :" GridPane.rowIndex="2">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label fx:id="nameLabel" GridPane.columnIndex="1" />
+            <Label fx:id="startDateLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="descriptionLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="400.0" />
+         </BorderPane.margin>
+      </GridPane>
+   </right>
+   <center>
+      <FlowPane fx:id="contentPane" prefHeight="550.0" prefWidth="469.0" BorderPane.alignment="TOP_LEFT" />
+   </center>
+   <left>
+      <VBox alignment="CENTER" prefHeight="573.0" prefWidth="114.0" styleClass="eventsC" stylesheets="@Main.css" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="addEvents" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" styleClass="buttons" stylesheets="@Main.css" text="Add">
+               <VBox.margin>
+                  <Insets bottom="45.0" top="80.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#onActionDelete" prefHeight="26.0" prefWidth="102.0" styleClass="buttons" stylesheets="@Main.css" text="Delete event">
+               <VBox.margin>
+                  <Insets bottom="300.0" />
+               </VBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#logout" prefHeight="74.0" prefWidth="109.0" styleClass="buttons" stylesheets="@Main.css" text="Log out">
                <graphic>
                   <ImageView fitHeight="43.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -33,172 +74,11 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-         </children>
-      </HBox>
-   </bottom>
-
-   <left>
-      <VBox alignment="CENTER" prefHeight="575.0" prefWidth="91.0" styleClass="eventsC" stylesheets="@Main.css" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="addEvents" mnemonicParsing="false" prefHeight="26.0" prefWidth="120.0" styleClass="buttons" stylesheets="@Main.css" text="Add">
                <VBox.margin>
-                  <Insets bottom="45.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#onActionDelete" prefHeight="26.0" prefWidth="102.0" styleClass="buttons" stylesheets="@Main.css" text="Delete event">
-               <VBox.margin>
-                  <Insets bottom="45.0" />
+                  <Insets />
                </VBox.margin>
             </Button>
          </children>
-         <BorderPane.margin>
-            <Insets bottom="45.0" />
-         </BorderPane.margin>
       </VBox>
    </left>
-   <right>
-      <BorderPane prefHeight="620.0" prefWidth="475.0" BorderPane.alignment="TOP_RIGHT">
-         <center>
-            <FlowPane alignment="TOP_RIGHT" prefHeight="620.0" prefWidth="465.0" BorderPane.alignment="TOP_RIGHT">
-               <children>
-                  <GridPane alignment="TOP_RIGHT" prefHeight="496.0" prefWidth="469.0" styleClass="gridPane" stylesheets="@Main.css">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.199951171875" minWidth="10.0" prefWidth="102.20001983642578" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="372.59996795654297" minWidth="10.0" prefWidth="367.7999801635742" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="160.59998168945313" minHeight="10.0" prefHeight="56.59998168945313" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="310.2000183105469" minHeight="10.0" prefHeight="274.2000183105469" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <Label text="Event  :">
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding></Label>
-                        <Label text="Start Date :" GridPane.rowIndex="1">
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding></Label>
-                        <Label text="Description :" GridPane.rowIndex="2">
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding></Label>
-                        <Label fx:id="nameLabel" GridPane.columnIndex="1" />
-                        <Label fx:id="startDateLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="descriptionLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                     </children>
-                  </GridPane>
-               </children>
-            </FlowPane>
-         </center>
-      </BorderPane>
-   </right>
-   <top>
-      <HBox alignment="CENTER" prefHeight="38.0" prefWidth="1306.0" styleClass="eventsHeader" stylesheets="@Main.css" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="M">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="A">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="K">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="I">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="N">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="G">
-               <HBox.margin>
-                  <Insets right="15.0" />
-               </HBox.margin>
-            </Label>
-            <Label text="E">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin>
-            </Label>
-            <Label text="V">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="E">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="N">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="T">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="S">
-               <HBox.margin>
-                  <Insets right="15.0" />
-               </HBox.margin>
-            </Label>
-            <Label text="U">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="N">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="F">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="O">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="R">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="G">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="E">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="T">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="T">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="A">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="B">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="L">
-               <HBox.margin>
-                  <Insets right="1.0" />
-               </HBox.margin></Label>
-            <Label text="E" />
-         </children>
-      </HBox>
-   </top>
 </BorderPane>
