@@ -7,6 +7,7 @@ import dk.easv.ticketbar2.bll.UsersManager;
 import dk.easv.ticketbar2.dal.exceptions.EventsException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -26,6 +27,7 @@ public class CoordinatorListController {
     @FXML
     public void initialize() {
         colEvent.setCellValueFactory(data -> new SimpleStringProperty(data.getValue())); // Bind String values
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         loadUserNames();
     }
 
