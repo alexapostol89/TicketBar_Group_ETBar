@@ -1,112 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" styleClass="backgroundC" stylesheets="@Main.css"
-            xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="dk.easv.ticketbar2.gui.controllers.AddEventsController">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" styleClass="backgroundC" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.AddEventsController">
 
-   <VBox alignment="TOP_CENTER" spacing="15" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+   <VBox alignment="TOP_CENTER" spacing="15" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
       <padding>
-         <Insets top="10" right="10" bottom="10" left="10"/>
+         <Insets bottom="10" left="10" right="10" top="10" />
       </padding>
 
       <GridPane hgap="10" vgap="10">
          <columnConstraints>
-            <ColumnConstraints hgrow="NEVER" minWidth="150"/>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="200"/>
+            <ColumnConstraints hgrow="NEVER" minWidth="150" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="200" />
          </columnConstraints>
 
-         <Label text="Name" styleClass="labels" textFill="#3b4343" GridPane.rowIndex="0" GridPane.columnIndex="0">
+         <Label styleClass="labels" text="Name*" textFill="#3b4343" GridPane.columnIndex="0" GridPane.rowIndex="0">
             <font>
-               <Font size="14.0"/>
+               <Font size="14.0" />
             </font>
          </Label>
-         <TextField fx:id="nameText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;"
-                    GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+         <TextField fx:id="nameText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-         <Label text="Start Date" styleClass="labels" textFill="#3b4343" GridPane.rowIndex="1" GridPane.columnIndex="0">
+         <Label styleClass="labels" text="Start Date*" textFill="#3b4343" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <font>
-               <Font size="14.0"/>
+               <Font size="14.0" />
             </font>
          </Label>
-         <TextField fx:id="startDateText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;"
-                    GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+         <TextField fx:id="startDateText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
          <!-- Row 2: End Date -->
-         <Label text="End Date" styleClass="labels" textFill="#3b4343" GridPane.rowIndex="2" GridPane.columnIndex="0">
+         <Label styleClass="labels" text="End Date" textFill="#3b4343" GridPane.columnIndex="0" GridPane.rowIndex="2">
             <font>
-               <Font size="14.0"/>
+               <Font size="14.0" />
             </font>
          </Label>
-         <TextField fx:id="endDateText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;"
-                    GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+         <TextField fx:id="endDateText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-         <Label text="Location" styleClass="labels" textFill="#3b4343" GridPane.rowIndex="3" GridPane.columnIndex="0">
+         <Label styleClass="labels" text="Location*" textFill="#3b4343" GridPane.columnIndex="0" GridPane.rowIndex="3">
             <font>
-               <Font size="14.0"/>
+               <Font size="14.0" />
             </font>
          </Label>
-         <TextField fx:id="locationText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;"
-                    GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+         <TextField fx:id="locationText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-         <Label text="Location Guidance" styleClass="labels" textFill="#3b4343" GridPane.rowIndex="4" GridPane.columnIndex="0">
+         <Label styleClass="labels" text="Location Guidance" textFill="#3b4343" GridPane.columnIndex="0" GridPane.rowIndex="4">
             <font>
-               <Font size="14.0"/>
+               <Font size="14.0" />
             </font>
          </Label>
-         <TextField fx:id="guidanceText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;"
-                    GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+         <TextField fx:id="guidanceText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-         <Label text="Description" styleClass="labels" textFill="#3b4343" GridPane.rowIndex="5" GridPane.columnIndex="0">
+         <Label styleClass="labels" text="Description" textFill="#3b4343" GridPane.columnIndex="0" GridPane.rowIndex="5">
             <font>
-               <Font size="14.0"/>
+               <Font size="14.0" />
             </font>
          </Label>
-         <TextField fx:id="descriptionText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;"
-                    GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+         <TextField fx:id="descriptionText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
-         <Label text="Notes" styleClass="labels" textFill="#3b4343" GridPane.rowIndex="6" GridPane.columnIndex="0">
+         <Label styleClass="labels" text="Notes*" textFill="#3b4343" GridPane.columnIndex="0" GridPane.rowIndex="6">
             <font>
-               <Font size="14.0"/>
+               <Font size="14.0" />
             </font>
          </Label>
-         <TextField fx:id="notesText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;"
-                    GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+         <TextField fx:id="notesText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
-         <Label text="Created By" styleClass="labels" textFill="#3b4343" GridPane.rowIndex="7" GridPane.columnIndex="0">
+         <Label styleClass="labels" text="Created By*" textFill="#3b4343" GridPane.columnIndex="0" GridPane.rowIndex="7">
             <font>
-               <Font size="14.0"/>
+               <Font size="14.0" />
             </font>
          </Label>
-         <TextField fx:id="coordinatorText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;"
-                    GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+         <TextField fx:id="coordinatorText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
       </GridPane>
 
       <HBox alignment="CENTER_LEFT" spacing="10">
-         <Label text="Search image" styleClass="labels" textFill="#3b4343">
+         <Label styleClass="labels" text="Search image" textFill="#3b4343">
             <font>
-               <Font size="14.0"/>
+               <Font size="14.0" />
             </font>
          </Label>
          <Button fx:id="searchBtn" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-background-color: white;">
             <graphic>
                <Label text="🔍">
                   <font>
-                     <Font size="16.0"/>
+                     <Font size="16.0" />
                   </font>
                </Label>
             </graphic>
          </Button>
-         <Label fx:id="imageFilePath"/>
+         <Label fx:id="imageFilePath" />
       </HBox>
 
       <HBox alignment="CENTER" spacing="20">
-         <Button fx:id="btnSave" text="Save" styleClass="buttons" prefWidth="100"/>
-         <Button fx:id="btnCancel" text="Cancel" styleClass="buttons" prefWidth="100"/>
+         <Button fx:id="btnSave" prefWidth="100" styleClass="buttons" text="Save" />
+         <Button fx:id="btnCancel" prefWidth="100" styleClass="buttons" text="Cancel" />
       </HBox>
    </VBox>
 </AnchorPane>

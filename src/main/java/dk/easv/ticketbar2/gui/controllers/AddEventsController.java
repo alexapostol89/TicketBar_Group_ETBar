@@ -4,6 +4,7 @@ import dk.easv.ticketbar2.bll.EventsManager;
 import dk.easv.ticketbar2.dal.exceptions.EventsException;
 import dk.easv.ticketbar2.dal.web.EventsDAO;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -91,8 +92,8 @@ public class AddEventsController {
         String notes = notesText.getText();
         int coordinatorId = Integer.parseInt(coordinatorText.getText());
 
-        if (eventName.isEmpty()) {
-            System.out.println("Event name is empty!");
+        if (eventName.isEmpty() || startDate.isEmpty() || location.isEmpty() || notes.isEmpty()) {
+            showAlert();
             return;
         }
 
@@ -108,6 +109,13 @@ public class AddEventsController {
         // Close the window
         Stage stage = (Stage) btnSave.getScene().getWindow();
         stage.close();
+    }
+    public void showAlert(){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("WARNING");
+        alert.setHeaderText("Mandatory Fields Missing");
+        alert.setContentText("Please fill in all the mandatory fields.");
+        alert.showAndWait();
     }
 
 }
