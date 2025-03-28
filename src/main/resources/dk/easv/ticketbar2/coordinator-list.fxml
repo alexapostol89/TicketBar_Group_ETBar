@@ -5,13 +5,11 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="350.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.CoordinatorListController">
-    <TableView fx:id="tableView" prefHeight="400.0" prefWidth="414.0">
+<AnchorPane prefHeight="445.0" prefWidth="437.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.CoordinatorListController">
+    <TableView fx:id="tableView" layoutX="9.0" layoutY="14.0" prefHeight="394.0" prefWidth="418.0">
         <columns>
-            <TableColumn fx:id="colEvent" prefWidth="207.20000916719437" text="Event" />
-            <TableColumn fx:id="colEventCoord" prefWidth="206.40003967285156" text="Event Coordinators" />
+            <TableColumn fx:id="colEvent" prefWidth="413.6000244259834" text="Events Coordinators" />
         </columns>
     </TableView>
-   <Button layoutX="267.0" layoutY="398.0" mnemonicParsing="false" text="Cancel" />
-   <Button layoutX="129.0" layoutY="398.0" mnemonicParsing="false" text="SAVE" />
+   <Button layoutX="197.0" layoutY="408.0" mnemonicParsing="false" text="SAVE" />
 </AnchorPane>

@@ -3,6 +3,9 @@ package dk.easv.ticketbar2.dal.web;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dk.easv.ticketbar2.be.Users;
 import dk.easv.ticketbar2.dal.db.DBConnection;
+import dk.easv.ticketbar2.dal.exceptions.EventsException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UsersDAO {
-    private DBConnection conn = new DBConnection();
+    private static DBConnection conn = new DBConnection();
 
     public List<Users> getUsers() {
         List<Users> users = new ArrayList<>();
@@ -46,5 +49,23 @@ public class UsersDAO {
             throw new RuntimeException(ex);
         }
         return users;
-}
+    }
+
+    public static ObservableList<String> getUsersNames() throws EventsException {
+        ObservableList<String> UserNames = FXCollections.observableArrayList();
+        String sql = "SELECT FirstName + ' ' + LastName AS FullName FROM Users WHERE RANK = 2"; // Correct SQL syntax
+
+        try (Connection c = conn.getConnection();
+             PreparedStatement stmt = c.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                UserNames.add(rs.getString("FullName")); // Use alias from SQL query
+            }
+        } catch (SQLException e) {
+            throw new EventsException(e);
+        }
+        return UserNames;
+    }
+
 }

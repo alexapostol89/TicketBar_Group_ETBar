@@ -28,9 +28,5 @@ public class EventsManager {
     public boolean deleteEvent(int eventID) throws EventsException {
         return eventsDAO.deleteEvent(eventID);
     }
-
-    public ObservableList<String> getEventNames() throws EventsException {
-        return eventsDAO.getEventNames();
-    }
 }
 
