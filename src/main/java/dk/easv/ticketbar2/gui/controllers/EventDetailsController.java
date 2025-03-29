@@ -21,9 +21,13 @@ public class EventDetailsController {
     private Label nameLabel, startDateLabel, endDateLabel, locationLabel, descriptionLabel, coordinatorLabel, guideLabel, notesLabel;
     private final EventsManager eventsManager = new EventsManager();
 
+    private int eventID; // Store the current event ID
+
     public void populateEventInfo(int eventID) throws EventsException {
+        this.eventID = eventID; // Store the event ID
 
         Events event = eventsManager.getEventById(eventID);
+
         if (event != null) {
             nameLabel.setText(event.getEventName());
             startDateLabel.setText(event.getStartDateTime());
@@ -33,26 +37,34 @@ public class EventDetailsController {
             coordinatorLabel.setText(String.valueOf(event.getCoordinatorID()));
             guideLabel.setText(event.getLocationGuide());
             notesLabel.setText(event.getNotes());
-
         }
     }
+
+    public int getEventID() {  // Add this method
+        return this.eventID;
+    }
+
     @FXML
     private void btnAssignCoordinator(ActionEvent event) {
         System.out.println("Assign Coordinator button clicked!");
-        openAssignCoordinatorView();
+
+        openCoordinatorList(eventID); // Now eventID is properly stored
     }
 
-    private void openAssignCoordinatorView() {
+    private void openCoordinatorList(int eventID) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/coordinator-list.fxml"));
             Parent root = loader.load();
+
+            CoordinatorListController controller = loader.getController();
+            controller.setEventID(eventID); // Pass event ID
+
             Stage stage = new Stage();
+            stage.setTitle("Assign Coordinators");
             stage.setScene(new Scene(root));
-            stage.setTitle("Assign Coordinator");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 }

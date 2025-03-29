@@ -18,7 +18,7 @@
       <FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="264.0" prefWidth="600.0">
          <children>
             <HBox alignment="CENTER" />
-            <GridPane prefHeight="211.0" prefWidth="595.0" styleClass="gridPane" stylesheets="@Main.css">
+            <GridPane prefHeight="266.0" prefWidth="595.0" styleClass="gridPane" stylesheets="@Main.css">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -123,11 +123,6 @@
                      </HBox.margin>
                   </Button>
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" styleClass="buttons" stylesheets="@Main.css" text="E-mail Ticket">
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" styleClass="buttons" stylesheets="@Main.css" text="Delete Event">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>

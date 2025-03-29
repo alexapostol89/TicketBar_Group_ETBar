@@ -68,4 +68,22 @@ public class UsersDAO {
         return UserNames;
     }
 
+    public int getUserIDByName(String fullName) throws EventsException {
+        String sql = "SELECT UserID FROM Users WHERE FirstName + ' ' + LastName = ?";
+        try (Connection c = conn.getConnection();
+             PreparedStatement stmt = c.prepareStatement(sql)) {
+
+            stmt.setString(1, fullName); // Correctly passing the full name
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("UserID");
+            } else {
+                throw new EventsException("User not found: " + fullName);
+            }
+        } catch (SQLException e) {
+            throw new EventsException("Error retrieving UserID for: " + fullName, e);
+        }
+        }
 }
+

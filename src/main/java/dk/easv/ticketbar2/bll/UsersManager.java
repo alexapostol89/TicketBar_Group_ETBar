@@ -18,4 +18,8 @@ public class UsersManager {
     public ObservableList<String> getUsersNames() throws EventsException {
         return UsersDAO.getUsersNames();
     }
+
+    public int getUserIDByName(String fullName) throws EventsException {
+        return usersDAO.getUserIDByName(fullName); // Calls the DAO method properly
+    }
 }
