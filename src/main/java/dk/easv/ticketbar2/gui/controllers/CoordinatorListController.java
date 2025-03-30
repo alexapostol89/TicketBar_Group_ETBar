@@ -36,18 +36,18 @@ public class CoordinatorListController {
     public void initialize() {
         colEvent.setCellValueFactory(data -> new SimpleStringProperty(data.getValue())); // Bind data
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); // Allow multiple selection
-        loadUserNames(); // Load user list
 
         // Assign coordinators when button is clicked
         assignButton.setOnAction(this::assignCoordinators);
     }
 
     private void loadUserNames() {
+
         try {
-            ObservableList<String> userNames = userManager.getUsersNames();
+            ObservableList<String> userNames = userManager.getUsersNamesNotAssignedToEvent(eventID);
             tableView.setItems(userNames);
         } catch (EventsException e) {
-            e.printStackTrace(); // Handle exception
+            e.printStackTrace(); // Handle properly in production
         }
     }
 
@@ -88,6 +88,8 @@ public class CoordinatorListController {
     // Set the event ID when opening the Coordinator List
     public void setEventID(int eventID) {
         this.eventID = eventID;
+        System.out.println("Event ID set to: " + this.eventID);
+        loadUserNames(); // When the system gets the EventID it load the Users not Assing to that event
     }
 }
 

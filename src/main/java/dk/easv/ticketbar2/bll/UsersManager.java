@@ -15,8 +15,8 @@ public class UsersManager {
         return users;
     }
 
-    public ObservableList<String> getUsersNames() throws EventsException {
-        return UsersDAO.getUsersNames();
+    public ObservableList<String> getUsersNamesNotAssignedToEvent(int eventID) throws EventsException {
+        return usersDAO.getUsersNamesNotAssignedToEvent(eventID);
     }
 
     public int getUserIDByName(String fullName) throws EventsException {
