@@ -201,14 +201,20 @@ public class UserDAO {
 
     // Method to delete a user from the database
     public void deleteUser(User user) {
-        String sql = "DELETE FROM Users WHERE UserID = ?";
+        String updateEventsSQL = "UPDATE Events SET CoordinatorID = NULL WHERE CoordinatorID = ?";
+        String deleteUserSQL = "DELETE FROM Users WHERE UserID = ?";
 
         try (Connection c = connection.getConnection();
-             PreparedStatement stmt = c.prepareStatement(sql)) {
+             PreparedStatement updateStmt = c.prepareStatement(updateEventsSQL);
+             PreparedStatement deleteStmt = c.prepareStatement(deleteUserSQL)) {
 
-            // Set the UserID for the user to delete
-            stmt.setInt(1, user.getUserID());
-            stmt.executeUpdate();
+            // Set the UserID of the user in the Events table to NULL
+            updateStmt.setInt(1, user.getUserID());
+            updateStmt.executeUpdate();
+
+            // Delete the user from the Users table
+            deleteStmt.setInt(1, user.getUserID());
+            deleteStmt.executeUpdate();
         } catch (SQLException e) {
             throw new UserException(e);
         }
