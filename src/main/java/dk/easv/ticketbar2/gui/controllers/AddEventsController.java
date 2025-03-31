@@ -94,7 +94,6 @@ public class AddEventsController {
         String description = descriptionText.getText();
         String locationGuide = guidanceText.getText();
         String notes = notesText.getText();
-        int coordinatorId = Integer.parseInt(coordinatorText.getText());
 
         if (eventName.isEmpty() || startDate.isEmpty() || location.isEmpty() || notes.isEmpty()) {
             showAlert();
@@ -111,7 +110,7 @@ public class AddEventsController {
             eventToEdit.setDescription(description);
             eventToEdit.setLocationGuide(locationGuide);
             eventToEdit.setNotes(notes);
-            eventToEdit.setCoordinatorID(coordinatorId);
+
 
             boolean success = eventsManager.updateEvent(eventToEdit);
             if (success) {
@@ -125,7 +124,7 @@ public class AddEventsController {
         } else {
             // Create new event
             int eventID = eventsManager.saveEvent(eventName, selectedImagePath, startDate, endDate,
-                    location, description, locationGuide, notes, coordinatorId);
+                    location, description, locationGuide, notes);
             System.out.println("New event ID: " + eventID);
 
             if (coordinatorController != null) {
@@ -148,7 +147,6 @@ public class AddEventsController {
             descriptionText.setText(event.getDescription());
             guidanceText.setText(event.getLocationGuide());
             notesText.setText(event.getNotes());
-            coordinatorText.setText(String.valueOf(event.getCoordinatorID()));
             selectedImagePath = event.getEventImagePath();
         }
     }

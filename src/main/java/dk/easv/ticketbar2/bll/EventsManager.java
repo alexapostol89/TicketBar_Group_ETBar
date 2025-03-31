@@ -22,9 +22,9 @@ public class EventsManager {
 
     public int saveEvent(String eventName, String imagePath, String startDate, String endDate,
                          String location, String description, String locationGuide,
-                         String notes, int coordinatorId) throws EventsException {
+                         String notes) throws EventsException {
         return eventsDAO.saveEvent(eventName, imagePath, startDate, endDate, location,
-                description, locationGuide, notes, coordinatorId);
+                description, locationGuide, notes);
     }
 
     public boolean deleteEvent(int eventID) throws EventsException {

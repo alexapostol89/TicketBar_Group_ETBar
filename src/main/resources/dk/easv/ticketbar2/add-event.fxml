@@ -74,13 +74,6 @@
             </font>
          </Label>
          <TextField fx:id="notesText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-
-         <Label styleClass="labels" text="Created By*" textFill="#3b4343" GridPane.columnIndex="0" GridPane.rowIndex="7">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </Label>
-         <TextField fx:id="coordinatorText" style="-fx-background-radius: 20px; -fx-border-radius: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          <rowConstraints>
             <RowConstraints />
             <RowConstraints />

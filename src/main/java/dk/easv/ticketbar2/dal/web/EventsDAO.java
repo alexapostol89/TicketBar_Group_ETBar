@@ -67,8 +67,8 @@ public class EventsDAO {
         return null;
     }
 
-    public int saveEvent(String eventName, String imagePath, String startDate, String endDate, String location, String description, String notes, String locationGuide, int coordinator) throws EventsException {
-        String insertSql = "INSERT INTO Events (EventName, EventImagePath, StartDateTime, EndDateTime, Location, Description, Notes, LocationGuide, CoordinatorID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public int saveEvent(String eventName, String imagePath, String startDate, String endDate, String location, String description, String notes, String locationGuide) throws EventsException {
+        String insertSql = "INSERT INTO Events (EventName, EventImagePath, StartDateTime, EndDateTime, Location, Description, Notes, LocationGuide) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = connection.getConnection();
              PreparedStatement insertStmt = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)) {
@@ -82,7 +82,7 @@ public class EventsDAO {
             insertStmt.setString(6, description);
             insertStmt.setString(7, notes);
             insertStmt.setString(8, locationGuide);
-            insertStmt.setInt(9, coordinator);
+
 
 
             insertStmt.executeUpdate();
