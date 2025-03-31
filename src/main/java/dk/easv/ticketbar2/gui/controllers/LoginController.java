@@ -20,12 +20,6 @@ public class LoginController {
     @FXML
     private Button togglePasswordButton;
 
-    private UserManager userManager;
-
-    public LoginController() {
-        userManager = new UserManager();
-    }
-
     // Method to toggle password visibility
     @FXML
     private void togglePasswordVisibility() {
@@ -67,6 +61,12 @@ public class LoginController {
             // Update the reference to the new PasswordField
             passwordTextfield = passwordField;
         }
+    }
+
+    private UserManager userManager;
+
+    public LoginController() {
+        userManager = new UserManager();
     }
 
     public void login(ActionEvent actionEvent) {

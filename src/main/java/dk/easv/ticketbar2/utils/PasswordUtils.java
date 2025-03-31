@@ -1,4 +1,4 @@
-package dk.easv.ticketbar2;
+package dk.easv.ticketbar2.utils;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

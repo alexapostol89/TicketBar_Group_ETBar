@@ -1,11 +1,11 @@
 package dk.easv.ticketbar2.bll;
 
-import dk.easv.ticketbar2.PasswordUtils;
+import dk.easv.ticketbar2.utils.PasswordUtils;
 import dk.easv.ticketbar2.be.User;
 import dk.easv.ticketbar2.dal.web.UserDAO;
 import javafx.collections.ObservableList;
 
-import static dk.easv.ticketbar2.PasswordUtils.hashPassword;
+import static dk.easv.ticketbar2.utils.PasswordUtils.hashPassword;
 
 public class UserManager {
     private final UserDAO userDAO;

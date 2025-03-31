@@ -7,10 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UserDAO {
     private DBConnection connection = new DBConnection();
@@ -18,9 +15,10 @@ public class UserDAO {
 
     // Validate User sign or log in
     public User validateUser(String username, String password) {
-        String sql = "SELECT u.UserID, u.Username, u.PasswordHash, u.Rank, ur.rank AS RankName FROM Users u " +
+        String sql = "SELECT u.UserID, u.Username, u.PasswordHash, u.Rank, ur.rank AS RankName, u.LastLogin FROM Users u " +
                 "JOIN User_rank ur ON u.Rank = ur.id " +
                 "WHERE u.Username = ?";
+        String updateLastLoginSQL = "UPDATE Users SET LastLogin = ? WHERE UserID = ?"; // SQL to update the LastLogin field
         try {
             Connection c = connection.getConnection();
             PreparedStatement stmt = c.prepareStatement(sql);
@@ -40,6 +38,14 @@ public class UserDAO {
                     user.setPasswordHash(rs.getString("PasswordHash"));
                     user.setRank(rs.getInt("Rank"));
                     user.setRankName(rs.getString("RankName"));
+                    user.setLastLogin(rs.getTimestamp("LastLogin")); // Fetch last login timestamp
+
+                    // Update the lastLogin field to the current timestamp
+                    try (PreparedStatement updateStmt = c.prepareStatement(updateLastLoginSQL)) {
+                        updateStmt.setTimestamp(1, new Timestamp(System.currentTimeMillis())); // Set current time
+                        updateStmt.setInt(2, user.getUserID()); // Set the UserID
+                        updateStmt.executeUpdate();
+                    }
                     return user;
                 }
             }
@@ -71,7 +77,7 @@ public class UserDAO {
                 user.setEmail(rs.getString("Email"));
                 user.setPhone(rs.getString("Phone"));
                 user.setCreatedDate(rs.getString("CreatedDate"));
-                user.setLastLogin(rs.getString("LastLogin"));
+                user.setLastLogin(rs.getTimestamp("LastLogin"));
                 userList.add(user);
             }
         } catch (SQLException e) {
@@ -124,7 +130,7 @@ public class UserDAO {
                 user.setEmail(rs.getString("Email"));
                 user.setPhone(rs.getString("Phone"));
                 user.setCreatedDate(rs.getString("CreatedDate"));
-                user.setLastLogin(rs.getString("LastLogin"));
+                user.setLastLogin(rs.getTimestamp("LastLogin"));
                 filteredUsers.add(user);
             }
         } catch (SQLException e) {
@@ -242,7 +248,7 @@ public class UserDAO {
                 user.setEmail(rs.getString("Email"));
                 user.setPhone(rs.getString("Phone"));
                 user.setCreatedDate(rs.getString("CreatedDate"));
-                user.setLastLogin(rs.getString("LastLogin"));
+                user.setLastLogin(rs.getTimestamp("LastLogin"));
                 return user;
             }
         } catch (SQLException e) {

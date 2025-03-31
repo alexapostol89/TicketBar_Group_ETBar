@@ -1,5 +1,7 @@
 package dk.easv.ticketbar2.be;
 
+import java.sql.Timestamp;
+
 public class User {
     private int UserID;
     private String Username;
@@ -10,7 +12,7 @@ public class User {
     private String Email;
     private String Phone;
     private String CreatedDate;
-    private String LastLogin;
+    private Timestamp LastLogin;
     private String RankName; // This will hold the Rank's name ("Admin", "Coordinator")
 
     public User() {
@@ -89,11 +91,11 @@ public class User {
         CreatedDate = createdDate;
     }
 
-    public String getLastLogin() {
+    public Timestamp getLastLogin() {
         return LastLogin;
     }
 
-    public void setLastLogin(String lastLogin) {
+    public void setLastLogin(Timestamp lastLogin) {
         LastLogin = lastLogin;
     }
 
