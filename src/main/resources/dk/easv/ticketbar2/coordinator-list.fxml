@@ -11,5 +11,5 @@
             <TableColumn fx:id="colEvent" prefWidth="413.6000244259834" text="Events Coordinators" />
         </columns>
     </TableView>
-   <Button fx:id="assignButton" layoutX="197.0" layoutY="408.0" mnemonicParsing="false" onAction="#assignCoordinators" text="SAVE" />
+   <Button fx:id="assignButton" layoutX="197.0" layoutY="408.0" mnemonicParsing="false" onAction="#assignCoordinators" styleClass="buttons" stylesheets="@Main.css" text="SAVE" />
 </AnchorPane>

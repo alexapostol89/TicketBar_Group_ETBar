@@ -46,7 +46,6 @@ public class EventDetailsController {
 
     @FXML
     private void btnAssignCoordinator(ActionEvent event) {
-        System.out.println("Assign Coordinator button clicked!");
 
         openCoordinatorList(eventID); // Now eventID is properly stored
     }

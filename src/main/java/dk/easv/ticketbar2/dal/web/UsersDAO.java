@@ -51,21 +51,28 @@ public class UsersDAO {
         return users;
     }
 
-    public static ObservableList<String> getUsersNames() throws EventsException {
-        ObservableList<String> UserNames = FXCollections.observableArrayList();
-        String sql = "SELECT FirstName + ' ' + LastName AS FullName FROM Users WHERE RANK = 2"; // Correct SQL syntax
+    public static ObservableList<String> getUsersNamesNotAssignedToEvent(int eventID) throws EventsException {
+        ObservableList<String> userNames = FXCollections.observableArrayList();
+
+        String sql = "SELECT u.FirstName + ' ' + u.LastName AS FullName " +
+                "FROM Users u " +
+                "LEFT JOIN UserEvent ue ON u.UserID = ue.UserID AND ue.EventID = ? " +
+                "WHERE u.Rank = 2 AND ue.UserID IS NULL";
 
         try (Connection c = conn.getConnection();
-             PreparedStatement stmt = c.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = c.prepareStatement(sql)) {
+
+            stmt.setInt(1, eventID);
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                UserNames.add(rs.getString("FullName")); // Use alias from SQL query
+                userNames.add(rs.getString("FullName"));
             }
         } catch (SQLException e) {
-            throw new EventsException(e);
+            throw new EventsException("Error fetching unassigned event coordinators", e);
         }
-        return UserNames;
+
+        return userNames;
     }
 
     public int getUserIDByName(String fullName) throws EventsException {
