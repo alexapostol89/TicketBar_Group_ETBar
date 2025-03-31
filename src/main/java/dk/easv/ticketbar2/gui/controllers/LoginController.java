@@ -6,18 +6,67 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class LoginController {
     @FXML
     private TextField usernameTextfield, passwordTextfield;
 
+    @FXML
+    private Button togglePasswordButton;
+
     private UserManager userManager;
 
     public LoginController() {
         userManager = new UserManager();
+    }
+
+    // Method to toggle password visibility
+    @FXML
+    private void togglePasswordVisibility() {
+        // Get the parent AnchorPane
+        AnchorPane parent = (AnchorPane) passwordTextfield.getParent();
+
+        // Check if the password field is currently a PasswordField or TextField
+        if (passwordTextfield instanceof PasswordField) {
+            // Convert to TextField to reveal the password
+            TextField textField = new TextField(passwordTextfield.getText());
+            textField.setLayoutX(passwordTextfield.getLayoutX());
+            textField.setLayoutY(passwordTextfield.getLayoutY());
+            textField.setPrefWidth(passwordTextfield.getPrefWidth());
+
+            // Remove the PasswordField and add the TextField
+            parent.getChildren().remove(passwordTextfield);
+            parent.getChildren().add(textField);
+
+            // Change button text to "Hide"
+            togglePasswordButton.setText("Hide");
+
+            // Update the reference to the new TextField
+            passwordTextfield = textField;
+        } else {
+            // Convert back to PasswordField to hide the password
+            PasswordField passwordField = new PasswordField();
+            passwordField.setText(passwordTextfield.getText());
+            passwordField.setLayoutX(passwordTextfield.getLayoutX());
+            passwordField.setLayoutY(passwordTextfield.getLayoutY());
+            passwordField.setPrefWidth(passwordTextfield.getPrefWidth());
+
+            // Remove the TextField and add the PasswordField
+            parent.getChildren().remove(passwordTextfield);
+            parent.getChildren().add(passwordField);
+
+            // Change button text to "Show"
+            togglePasswordButton.setText("Show");
+
+            // Update the reference to the new PasswordField
+            passwordTextfield = passwordField;
+        }
     }
 
     public void login(ActionEvent actionEvent) {
