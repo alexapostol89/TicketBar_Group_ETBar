@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane prefHeight="573.0" prefWidth="1089.0" styleClass="backgroundC" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.CoordinatorController">
    <right>
       <GridPane alignment="TOP_RIGHT" prefHeight="164.0" prefWidth="405.0" styleClass="gridPane" stylesheets="@Main.css" BorderPane.alignment="CENTER">
@@ -51,7 +50,7 @@
       </GridPane>
    </right>
    <center>
-      <FlowPane fx:id="contentPane" prefHeight="550.0" prefWidth="469.0" BorderPane.alignment="TOP_LEFT" />
+      <FlowPane fx:id="contentPane" prefHeight="659.0" prefWidth="570.0" BorderPane.alignment="TOP_LEFT" />
    </center>
    <left>
       <VBox alignment="CENTER" prefHeight="573.0" prefWidth="114.0" styleClass="eventsC" stylesheets="@Main.css" BorderPane.alignment="CENTER">
@@ -66,6 +65,7 @@
                   <Insets bottom="300.0" />
                </VBox.margin>
             </Button>
+            <Button fx:id="editEvents" layoutX="16.0" layoutY="101.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" styleClass="buttons" stylesheets="@Main.css" text="Edit" />
             <Button mnemonicParsing="false" onAction="#logout" prefHeight="74.0" prefWidth="109.0" styleClass="buttons" stylesheets="@Main.css" text="Log out">
                <graphic>
                   <ImageView fitHeight="43.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">

@@ -87,7 +87,6 @@ public class EventsDAO {
 
             insertStmt.executeUpdate();
 
-            // Retrieve the auto-generated key (eventID)
             try (ResultSet generatedKeys = insertStmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     int eventID = generatedKeys.getInt(1);
@@ -123,6 +122,33 @@ public class EventsDAO {
             e.printStackTrace(); // Print full stack trace
             return false;
         }
+    }
+
+    public boolean updateEvent(Events event) {
+        String sql = "UPDATE Events SET EventName = ?, EventImagePath = ?, StartDateTime = ?, " +
+                "EndDateTime = ?, Location = ?, Description = ?, Notes = ?, " +
+                "LocationGuide = ? WHERE EventID = ?";
+
+        try (Connection conn = connection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, event.getEventName());
+            stmt.setString(2, event.getEventImagePath());
+            stmt.setString(3, event.getStartDateTime());
+            stmt.setString(4, event.getEndDateTime());
+            stmt.setString(5, event.getLocation());
+            stmt.setString(6, event.getDescription());
+            stmt.setString(7, event.getNotes());
+            stmt.setString(8, event.getLocationGuide());
+            stmt.setInt(9, event.getEventID());
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
 

@@ -3,6 +3,7 @@ package dk.easv.ticketbar2.gui.controllers;
 import dk.easv.ticketbar2.be.Events;
 import dk.easv.ticketbar2.bll.EventsManager;
 import dk.easv.ticketbar2.dal.exceptions.EventsException;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,11 +30,12 @@ public class CoordinatorController {
     @FXML
     private Button assignCoordinatorButton;
     @FXML
-    private Label nameLabel, startDateLabel, endDateLabel, coordinatorLabel, descriptionLabel, guideLabel, notesLabel;
+    private Label nameLabel, startDateLabel, descriptionLabel;
     @FXML
-    private Button addEvents;  // Button to open the "Add Event" window
+    private Button addEvents,editEvents;
     @FXML
-    private Button deleteBtn;  // Button to delete an event
+    private Button deleteBtn;
+
     @FXML
     private FlowPane contentPane;  // FlowPane to dynamically add new images and labels
 
@@ -41,19 +43,25 @@ public class CoordinatorController {
 
     private VBox lastSelectedVBox = null; // Track the last selected event
 
+    private EventDetailsController eventDetailsController;
+
     @FXML
     public void initialize() throws EventsException {
-        // Initially disable the delete button
-        deleteBtn.setDisable(false);
-
-        // Load existing events
+        // Initially disable the delete and edit buttons
+        deleteBtn.setDisable(true);
+        editEvents.setDisable(true);
         loadExistingEvents();
+        addEvents.setOnAction(event -> openAddEditEventWindow(null)); // Pass null for add mode
 
-        // Setup the action for the "Add Event" button
-        addEvents.setOnAction(event -> openEditEventWindow());
-
-        // Setup the action for the "Delete Event" button
         deleteBtn.setOnAction(this::onActionDelete);
+
+        editEvents.setOnAction(event -> {
+            if (lastSelectedVBox != null) {
+                ImageView imageView = (ImageView) lastSelectedVBox.getChildren().get(0);
+                int eventID = (int) imageView.getUserData();
+                openAddEditEventWindow(eventID);
+            }
+        });
     }
 
     // Load existing events into the content pane
@@ -61,11 +69,12 @@ public class CoordinatorController {
         List<Events> events = eventsManager.getEvents();
         for (Events event : events) {
             updateCoordinatorView(event.getEventName(), event.getEventImagePath(), event.getEventID());
+
         }
     }
 
     // Open the "Add Event" window
-    private void openEditEventWindow() {
+    private void openAddEditEventWindow(Integer eventID) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/add-event.fxml"));
             Parent root = loader.load();
@@ -73,20 +82,27 @@ public class CoordinatorController {
             AddEventsController editEventsController = loader.getController();
             editEventsController.setCoordinatorController(this);
 
+            if (eventID != null) {
+                // Edit mode - load existing event data
+                Events eventToEdit = eventsManager.getEventById(eventID);
+                editEventsController.setEventToEdit(eventToEdit);
+            }
+
             Stage stage = new Stage();
-            stage.setTitle("Add Event");
+            stage.setTitle(eventID != null ? "Edit Event" : "Add Event");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
             stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | EventsException e) {
         }
     }
+
 
     // Update the coordinator view with the list of events
     public void updateCoordinatorView(String eventName, String imagePath, int eventID) {
         VBox vbox = new VBox();
         vbox.setSpacing(10);
+
 
         vbox.setPadding(new javafx.geometry.Insets(10));
         vbox.setStyle("-fx-border-color: transparent; -fx-border-width: 2;"); // Default no border
@@ -107,6 +123,9 @@ public class CoordinatorController {
         imageView.setUserData(eventID);
 
         Label label = new Label(eventName);
+
+
+
         label.setWrapText(true);
         label.setMaxWidth(200);
 
@@ -125,6 +144,10 @@ public class CoordinatorController {
             vbox.setStyle("-fx-border-color: #9AD0E7; -fx-border-width: 2; -fx-border-radius: 5;");
             lastSelectedVBox = vbox;
 
+            // Enable edit and delete buttons when an event is selected
+            editEvents.setDisable(false);
+            deleteBtn.setDisable(false);
+
             if (event.getClickCount() == 1) { // Show event details on single click
                 int clickedEventID = (int) imageView.getUserData();
                 try {
@@ -132,18 +155,13 @@ public class CoordinatorController {
                     if (clickedEvent != null) {
                         nameLabel.setText(clickedEvent.getEventName());
                         startDateLabel.setText(clickedEvent.getStartDateTime());
-                        //endDateLabel.setText(clickedEvent.getEndDateTime());
-                        //coordinatorLabel.setText(String.valueOf(clickedEvent.getCoordinatorID()));
                         descriptionLabel.setText(clickedEvent.getDescription());
-                        //guideLabel.setText(clickedEvent.getLocationGuide());
-                        //notesLabel.setText(clickedEvent.getNotes());
+
                     }
                 } catch (EventsException e) {
-                    throw new RuntimeException(e);
                 }
             } else if (event.getClickCount() == 2) { // Open details window on double click
                 int clickedEventID = (int) imageView.getUserData();
-                System.out.println("Clicked event ID: " + clickedEventID);
                 openDetailsWindow(clickedEventID);
             }
         });
@@ -170,6 +188,8 @@ public class CoordinatorController {
             e.printStackTrace();
         }
     }
+
+
 
     // Method to delete the selected event from the app and database
     @FXML
@@ -213,6 +233,27 @@ public class CoordinatorController {
             warningAlert.showAndWait();
         }
     }
+    public void refreshEvents() {
+        try {
+            // Clear existing events
+            contentPane.getChildren().clear();
+
+            // Reload events from database
+            List<Events> events = eventsManager.getEvents();
+
+            // Rebuild the UI
+            for (Events event : events) {
+                updateCoordinatorView(event.getEventName(), event.getEventImagePath(), event.getEventID());
+            }
+
+
+
+        } catch (EventsException e) {
+            e.printStackTrace();
+            // Show error message if needed
+        }
+    }
+
 
     // Method for logging out
     @FXML

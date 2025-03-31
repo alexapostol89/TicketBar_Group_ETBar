@@ -15,6 +15,7 @@ public class EventsManager {
         List<Events> events = eventsDAO.getAllEvents();
         return events;
     }
+
     public Events getEventById(int eventId) throws EventsException {
         return eventsDAO.getEventById(eventId);
     }
@@ -25,8 +26,12 @@ public class EventsManager {
         return eventsDAO.saveEvent(eventName, imagePath, startDate, endDate, location,
                 description, locationGuide, notes, coordinatorId);
     }
+
     public boolean deleteEvent(int eventID) throws EventsException {
         return eventsDAO.deleteEvent(eventID);
     }
-}
 
+    public boolean updateEvent(Events event){
+        return  eventsDAO.updateEvent(event);
+    }
+    }

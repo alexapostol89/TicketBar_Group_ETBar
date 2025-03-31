@@ -1,5 +1,6 @@
 package dk.easv.ticketbar2.gui.controllers;
 
+import dk.easv.ticketbar2.be.Events;
 import dk.easv.ticketbar2.bll.EventsManager;
 import dk.easv.ticketbar2.dal.exceptions.EventsException;
 import dk.easv.ticketbar2.dal.web.EventsDAO;
@@ -30,6 +31,9 @@ public class AddEventsController {
     private CoordinatorController coordinatorController;
 
     private final EventsManager eventsManager = new EventsManager();
+
+    private Events eventToEdit;
+
     @FXML
     public void initialize() {
         // Open file chooser when the search button is clicked
@@ -97,22 +101,61 @@ public class AddEventsController {
             return;
         }
 
-        // Save the event and get the eventID
-        int eventID = eventsManager.saveEvent(eventName, selectedImagePath,startDate,endDate,location,description,locationGuide,notes,coordinatorId);
-        System.out.println("New event ID: " + eventID); // Debugging
+        if (eventToEdit != null) {
+            // Update existing event
+            eventToEdit.setEventName(eventName);
+            eventToEdit.setEventImagePath(selectedImagePath);
+            eventToEdit.setStartDateTime(startDate);
+            eventToEdit.setEndDateTime(endDate);
+            eventToEdit.setLocation(location);
+            eventToEdit.setDescription(description);
+            eventToEdit.setLocationGuide(locationGuide);
+            eventToEdit.setNotes(notes);
+            eventToEdit.setCoordinatorID(coordinatorId);
 
-        // Add the new event to the coordinator controller
-        if (coordinatorController != null) {
-            coordinatorController.updateCoordinatorView(eventName, selectedImagePath, eventID); // Add the new event
+            boolean success = eventsManager.updateEvent(eventToEdit);
+            if (success) {
+                System.out.println("Event updated successfully");
+                if (coordinatorController != null) {
+                    coordinatorController.refreshEvents();
+                }
+            } else {
+                System.out.println("Failed to update event");
+            }
+        } else {
+            // Create new event
+            int eventID = eventsManager.saveEvent(eventName, selectedImagePath, startDate, endDate,
+                    location, description, locationGuide, notes, coordinatorId);
+            System.out.println("New event ID: " + eventID);
+
+            if (coordinatorController != null) {
+                coordinatorController.updateCoordinatorView(eventName, selectedImagePath, eventID);
+            }
         }
 
         // Close the window
         Stage stage = (Stage) btnSave.getScene().getWindow();
         stage.close();
+    }    public void setEventToEdit(Events event) {
+        this.eventToEdit = event;
+        if (event != null) {
+            // Populate the form fields
+
+            nameText.setText(event.getEventName());
+            startDateText.setText(event.getStartDateTime());
+            endDateText.setText(event.getEndDateTime());
+            locationText.setText(event.getLocation());
+            descriptionText.setText(event.getDescription());
+            guidanceText.setText(event.getLocationGuide());
+            notesText.setText(event.getNotes());
+            coordinatorText.setText(String.valueOf(event.getCoordinatorID()));
+            selectedImagePath = event.getEventImagePath();
+        }
     }
+
     public void showAlert(){
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("WARNING");
+        alert.setTitle("Can not save event");
         alert.setHeaderText("Mandatory Fields Missing");
         alert.setContentText("Please fill in all the mandatory fields.");
         alert.showAndWait();
