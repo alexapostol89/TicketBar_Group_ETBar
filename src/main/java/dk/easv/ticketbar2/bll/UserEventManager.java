@@ -11,5 +11,9 @@ public class UserEventManager {
     public void assignUserToEvent(int userID, int eventID) throws EventsException {
         userEventDAO.insertUserEvent(userID, eventID);
     }
+
+    public void unassignUserFromEvent(int userID, int eventID) throws EventsException {
+        userEventDAO.insertUserEvent(userID, eventID);
+    }
 }
 

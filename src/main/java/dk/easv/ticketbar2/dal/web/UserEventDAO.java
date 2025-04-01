@@ -23,5 +23,20 @@ public class UserEventDAO {
             throw new EventsException("Error inserting UserEvent: " + e.getMessage(), e);
         }
     }
+
+    public void unassignUserFromEvent(int userID, int eventID) throws EventsException {
+        String sql = "DELETE FROM UserEvent WHERE UserID = ? AND EventID = ?";
+
+        try (Connection c = connection.getConnection();
+             PreparedStatement stmt = c.prepareStatement(sql)) {
+
+            stmt.setInt(1, userID);
+            stmt.setInt(2, eventID);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new EventsException("Error unassigning coordinator from event", e);
+        }
+    }
 }
 

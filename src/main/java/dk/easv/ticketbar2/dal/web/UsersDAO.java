@@ -75,6 +75,30 @@ public class UsersDAO {
         return userNames;
     }
 
+    public static ObservableList<String> getUsersNamesAssignedToEvent(int eventID) throws EventsException {
+        ObservableList<String> assignedUserNames = FXCollections.observableArrayList();
+
+        String sql = "SELECT u.FirstName + ' ' + u.LastName AS FullName " +
+                "FROM Users u " +
+                "INNER JOIN UserEvent ue ON u.UserID = ue.UserID " +
+                "WHERE ue.EventID = ?";
+
+        try (Connection c = conn.getConnection();
+             PreparedStatement stmt = c.prepareStatement(sql)) {
+
+            stmt.setInt(1, eventID);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                assignedUserNames.add(rs.getString("FullName"));
+            }
+        } catch (SQLException e) {
+            throw new EventsException("Error fetching assigned event coordinators", e);
+        }
+
+        return assignedUserNames;
+    }
+
     public int getUserIDByName(String fullName) throws EventsException {
         String sql = "SELECT UserID FROM Users WHERE FirstName + ' ' + LastName = ?";
         try (Connection c = conn.getConnection();

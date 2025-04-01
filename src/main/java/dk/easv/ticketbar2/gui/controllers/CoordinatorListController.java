@@ -16,6 +16,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+
 public class CoordinatorListController {
 
     @FXML
@@ -42,38 +47,72 @@ public class CoordinatorListController {
     }
 
     private void loadUserNames() {
-
         try {
-            ObservableList<String> userNames = userManager.getUsersNamesNotAssignedToEvent(eventID);
-            tableView.setItems(userNames);
+            ObservableList<String> assignedUsers = userManager.getUsersNamesAssignedToEvent(eventID);
+            ObservableList<String> unassignedUsers = userManager.getUsersNamesNotAssignedToEvent(eventID);
+
+            Set<String> allUsersSet = new LinkedHashSet<>();
+
+            // Modify the display for assigned users
+            Map<String, String> displayMap = new HashMap<>();
+            for (String user : assignedUsers) {
+                String displayText = user + " (Assigned)";
+                allUsersSet.add(displayText);
+                displayMap.put(displayText, user); // Store original name for selection
+            }
+
+            allUsersSet.addAll(unassignedUsers);
+            ObservableList<String> allUsers = FXCollections.observableArrayList(allUsersSet);
+            tableView.setItems(allUsers);
+
+            // Clear selection first
+            tableView.getSelectionModel().clearSelection();
+
+            // Select only assigned coordinators
+            for (String assignedUser : assignedUsers) {
+                String displayText = assignedUser + " (Assigned)";
+                int index = allUsers.indexOf(displayText);
+                if (index >= 0) {
+                    tableView.getSelectionModel().select(index);
+                }
+            }
+
         } catch (EventsException e) {
-            e.printStackTrace(); // Handle properly in production
+            e.printStackTrace();
         }
     }
 
-    // Method to assign selected coordinators to the event
     @FXML
     private void assignCoordinators(ActionEvent event) {
         ObservableList<String> selectedUsers = tableView.getSelectionModel().getSelectedItems();
 
-        if (selectedUsers.isEmpty()) {
-            showAlert("Selection Error", "No coordinator selected.", Alert.AlertType.WARNING);
-            return;
-        }
-
         try {
+            // Get currently assigned users
+            ObservableList<String> assignedUsersBefore = userManager.getUsersNamesAssignedToEvent(eventID);
+
+            // Determine newly assigned users
             for (String userName : selectedUsers) {
-                int userID = userManager.getUserIDByName(userName); // Get UserID from Users table
-                userEventManager.assignUserToEvent(userID, eventID); // Save in UserEvent table
+                if (!assignedUsersBefore.contains(userName)) {
+                    int userID = userManager.getUserIDByName(userName);
+                    userEventManager.assignUserToEvent(userID, eventID);
+                }
             }
-            showAlert("Success", "Coordinators assigned successfully!", Alert.AlertType.INFORMATION);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
+
+            // Determine users to unassign
+            for (String userName : assignedUsersBefore) {
+                if (!selectedUsers.contains(userName)) {
+                    int userID = userManager.getUserIDByName(userName);
+                    userEventManager.unassignUserFromEvent(userID, eventID);
+                }
+            }
+
+            showAlert("Success", "Coordinator assignments updated!", Alert.AlertType.INFORMATION);
+            loadUserNames(); // Refresh the list after assignment
+
         } catch (EventsException e) {
             e.printStackTrace();
-            showAlert("Error", "Failed to assign coordinators.", Alert.AlertType.ERROR);
+            showAlert("Error", "Failed to update coordinator assignments.", Alert.AlertType.ERROR);
         }
-
     }
 
     // Helper method to show alerts
