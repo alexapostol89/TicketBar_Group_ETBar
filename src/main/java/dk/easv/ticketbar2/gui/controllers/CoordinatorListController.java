@@ -16,10 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class CoordinatorListController {
 
@@ -61,21 +58,17 @@ public class CoordinatorListController {
                 displayMap.put(displayText, user); // Store original name for selection
             }
 
-            allUsersSet.addAll(unassignedUsers);
+            // Add unassigned users without modifying their display text
+            for (String user : unassignedUsers) {
+                allUsersSet.add(user);
+                displayMap.put(user, user); // Store original name for selection
+            }
+
             ObservableList<String> allUsers = FXCollections.observableArrayList(allUsersSet);
             tableView.setItems(allUsers);
 
             // Clear selection first
             tableView.getSelectionModel().clearSelection();
-
-            // Select only assigned coordinators
-            for (String assignedUser : assignedUsers) {
-                String displayText = assignedUser + " (Assigned)";
-                int index = allUsers.indexOf(displayText);
-                if (index >= 0) {
-                    tableView.getSelectionModel().select(index);
-                }
-            }
 
         } catch (EventsException e) {
             e.printStackTrace();
@@ -90,19 +83,25 @@ public class CoordinatorListController {
             // Get currently assigned users
             ObservableList<String> assignedUsersBefore = userManager.getUsersNamesAssignedToEvent(eventID);
 
-            // Determine newly assigned users
-            for (String userName : selectedUsers) {
-                if (!assignedUsersBefore.contains(userName)) {
-                    int userID = userManager.getUserIDByName(userName);
-                    userEventManager.assignUserToEvent(userID, eventID);
-                }
-            }
+            // Create sets for easier comparison
+            Set<String> assignedUserNamesBefore = new HashSet<>(assignedUsersBefore);
 
-            // Determine users to unassign
-            for (String userName : assignedUsersBefore) {
-                if (!selectedUsers.contains(userName)) {
+            // Process selected users
+            for (String displayText : selectedUsers) {
+                if (displayText.endsWith(" (Assigned)")) {
+                    // Unassign user with warning
+                    String userName = displayText.replace(" (Assigned)", "");
                     int userID = userManager.getUserIDByName(userName);
-                    userEventManager.unassignUserFromEvent(userID, eventID);
+                    if (showUnassignWarning(userName)) {
+                        userEventManager.unassignUserFromEvent(userID, eventID);
+                    }
+                } else {
+                    // Assign user
+                    String userName = displayText;
+                    if (!assignedUserNamesBefore.contains(userName)) {
+                        int userID = userManager.getUserIDByName(userName);
+                        userEventManager.assignUserToEvent(userID, eventID);
+                    }
                 }
             }
 
@@ -113,6 +112,17 @@ public class CoordinatorListController {
             e.printStackTrace();
             showAlert("Error", "Failed to update coordinator assignments.", Alert.AlertType.ERROR);
         }
+    }
+
+    // Helper method to show unassign warning
+    private boolean showUnassignWarning(String userName) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Unassign Coordinator");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to unassign " + userName + " as a coordinator?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.OK;
     }
 
     // Helper method to show alerts

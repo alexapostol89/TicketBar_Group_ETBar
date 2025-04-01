@@ -13,7 +13,7 @@ public class UserEventManager {
     }
 
     public void unassignUserFromEvent(int userID, int eventID) throws EventsException {
-        userEventDAO.insertUserEvent(userID, eventID);
+        userEventDAO.unassignUserFromEvent(userID, eventID);
     }
 }
 
