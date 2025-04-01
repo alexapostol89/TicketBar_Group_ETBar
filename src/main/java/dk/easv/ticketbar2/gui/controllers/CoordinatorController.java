@@ -3,9 +3,7 @@ package dk.easv.ticketbar2.gui.controllers;
 import dk.easv.ticketbar2.be.Events;
 import dk.easv.ticketbar2.bll.EventsManager;
 import dk.easv.ticketbar2.dal.exceptions.EventsException;
-import dk.easv.ticketbar2.dal.web.EventsDAO;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -34,7 +32,10 @@ public class CoordinatorController {
     @FXML
     private FlowPane contentPane;  // FlowPane to dynamically add new images and labels
 
+    //  private int selectedEventId = -1; // Store selected event ID
+
     private final EventsManager eventsManager = new EventsManager();
+
 
 
     @FXML
@@ -100,7 +101,13 @@ public class CoordinatorController {
         imageView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) { //show the event info in 1 click
 
+
                 int clickedEventID = (int) imageView.getUserData(); // Retrieve the eventID from the ImageView
+                System.out.println("Single click detected! Event ID: " + clickedEventID);
+
+                // Set eventID in the controller so it's available for the Print Ticket button
+                this.setEventID(clickedEventID);
+
                 try {
                     Events clickedEvent = eventsManager.getEventById(clickedEventID);
                     if (clickedEvent != null) {
@@ -145,6 +152,10 @@ public class CoordinatorController {
         }
     }
 
+    //public int getSelectedEventId() {
+    //   return selectedEventId;
+    //}
+
     @FXML
     private void logout(ActionEvent event) {
         try {
@@ -164,4 +175,54 @@ public class CoordinatorController {
             e.printStackTrace();
         }
     }
+
+
+
+        private int eventID;
+
+
+    @FXML
+    public void handlePrintTickets(ActionEvent event) {
+        System.out.println("Print Ticket button clicked!");
+        System.out.println("Event ID in CoordinatorController before passing: " + eventID);  // Debugging line
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/print-ticket.fxml"));
+            Parent root = loader.load();
+
+            // Get the SaveTicketsController instance after loading the FXML
+            SaveTicketsController saveTicketsController = loader.getController();
+
+            // Pass the eventID to the SaveTicketsController
+            saveTicketsController.setEventID(this.eventID);  // This ensures eventID is set before loading details
+
+            System.out.println("eventID in printTicket: " + this.eventID); // Debugging line
+
+            Stage stage = new Stage();
+            stage.setTitle("Print Ticket");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    // Setter for eventID (for setting eventID in this controller)
+    public void setEventID(int eventID) {
+        this.eventID = eventID;
+        System.out.println("Event ID set in CoordinatorController: " + eventID);  // Debugging line
+    }
+    public int getEventID() {
+        return eventID;
+    }
 }
+
+
+
+
+
+
+
+

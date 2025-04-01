@@ -142,7 +142,7 @@
          <bottom>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="gridPane" stylesheets="@Main.css" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" styleClass="buttons" stylesheets="@Main.css" text="Print Ticket">
+                  <Button fx:id="printTicket" mnemonicParsing="false" onAction="#handlePrintTickets" styleClass="buttons" stylesheets="@Main.css" text="Print Ticket">
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin>
