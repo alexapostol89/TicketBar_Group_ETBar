@@ -28,6 +28,7 @@ public class SaveTicketsController {
     private final EventsManager eventsManager = new EventsManager();
     private int eventID;
 
+
     // Method to set the eventID
     public void setEventID(int eventID) {
         this.eventID = eventID;
@@ -97,10 +98,11 @@ public class SaveTicketsController {
 
 
 
-    private void openTicketPage(Tickets ticket) {
+    private void openTicketPage(Tickets ticket) throws EventsException {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/ticket.fxml"));
             Scene scene = new Scene(loader.load());
+
 
             PrintTicketsController controller = loader.getController();
             controller.setTicketData(ticket);
@@ -111,6 +113,8 @@ public class SaveTicketsController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (EventsException e) {
+            throw new RuntimeException(e);
         }
     }
 

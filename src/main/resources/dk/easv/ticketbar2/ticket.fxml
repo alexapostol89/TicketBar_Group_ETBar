@@ -9,20 +9,20 @@
 
 <AnchorPane prefHeight="356.0" prefWidth="856.0" styleClass="ticket-container" stylesheets="@ticket.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.PrintTicketsController">
    <children>
-      <Button layoutX="664.0" layoutY="293.0" mnemonicParsing="false" onAction="#printTicket" text="Print" />
-      <Label fx:id="lblEventName" layoutX="115.0" layoutY="14.0" prefHeight="150.0" prefWidth="200.0" styleClass="title" text="Bingo Bango" wrapText="true">
+      <Button layoutX="664.0" layoutY="293.0" mnemonicParsing="false" text="Print" />
+      <Label fx:id="lblEventName" layoutX="59.0" layoutY="14.0" prefHeight="150.0" prefWidth="339.0" styleClass="title" text="Bingo Bango" wrapText="true">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
-      <Label fx:id="lblDate" layoutX="383.0" layoutY="102.0" styleClass="date" text="Saturday 20th April">
+      <Label fx:id="lblDate" layoutX="411.0" layoutY="102.0" styleClass="date" text="Saturday 20th April">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <Label fx:id="lblLocation" layoutX="116.0" layoutY="233.0" styleClass="location" text="Location: EASV Bar" />
       <Label fx:id="lblDirections" layoutX="115.0" layoutY="250.0" prefHeight="68.0" prefWidth="102.0" styleClass="directions" text="How to get there: Go downstairs to the basement" wrapText="true" />
-      <Label fx:id="lblDetails" alignment="CENTER" layoutX="394.0" layoutY="147.0" prefHeight="84.0" prefWidth="126.0" styleClass="details" text="Food Included One Free Drink" wrapText="true">
+      <Label fx:id="lblDetails" alignment="CENTER" layoutX="428.0" layoutY="149.0" prefHeight="84.0" prefWidth="126.0" styleClass="details" text="Food Included One Free Drink" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>

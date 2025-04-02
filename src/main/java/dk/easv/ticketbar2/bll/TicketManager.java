@@ -3,10 +3,10 @@ package dk.easv.ticketbar2.bll;
 import com.google.zxing.WriterException;
 import dk.easv.ticketbar2.be.Tickets;
 import dk.easv.ticketbar2.dal.web.TicketsDAO;
-import dk.easv.ticketbar2.gui.controllers.QRCodeGenerator;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class TicketManager {
     private final TicketsDAO ticketsDAO;
@@ -27,11 +27,11 @@ public class TicketManager {
         boolean isScanned = false;
 
         // Generate QR Code
-        String ticketData = "Event: " + eventId + ", Type: " + ticketType + ", Date: " + purchaseDate;
-        String qrCodePath = null;
+        String ticketData = UUID.randomUUID().toString();
+        String qrCodePath = "C:\\Users\\rauld\\IdeaProjects\\TicketBar_Group_ETBar/QRCode/";
 
         try {
-            qrCodePath = QRCodeGenerator.generateQRCode(ticketData, "QR_Ticket_" + System.currentTimeMillis() + ".jpg");
+            qrCodePath = QRCodeGenerator.generateQRCode(qrCodePath, ticketData + System.currentTimeMillis() + ".png");
         } catch (IOException | WriterException e) {
             e.printStackTrace();
             System.out.println("Failed to generate QR Code.");

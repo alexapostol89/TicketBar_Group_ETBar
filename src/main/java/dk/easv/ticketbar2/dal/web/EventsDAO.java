@@ -40,6 +40,8 @@ public class EventsDAO {
         return eventsList;
     }
 
+
+
     // Get an event by ID
     public Events getEventById(int eventId) throws EventsException {
         String sql = "SELECT * FROM Events WHERE EventID = ?";

@@ -44,11 +44,7 @@ public class Tickets {
     }
 
     // Getters for all fields
-    public String getEventName() { return eventName; }
-    public LocalDateTime getStartDateTime() { return startDateTime; }
-    public LocalDateTime getEndDateTime() { return endDateTime; }
-    public String getLocation() { return location; }
-    public String getLocationGuide() { return locationGuide; }
+
     public String getDescription() { return description; }
     public String getCustomerName() { return customerName; }
     public String getCustomerEmail() { return customerEmail; }
