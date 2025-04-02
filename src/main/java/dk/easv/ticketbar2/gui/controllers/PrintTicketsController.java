@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class PrintTicketsController {
@@ -48,10 +49,16 @@ public class PrintTicketsController {
                 lblEventName.setText(event.getEventName());
                 lblTicketType.setText(ticket.getTicketType());
 
-                // Set time and date (assuming StartDateTime is a LocalDateTime object)
-                if (event.getStartDateTime() != null) {
-                    lblTime.setText("Time: " + event.getStartDateTime().toString());
-                    lblDate.setText("Date: " + event.getStartDateTime().toString());
+                // Define correct format for date-time parsing
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+                LocalDateTime dateTime = LocalDateTime.parse(event.getStartDateTime(), formatter);
+
+                // Format and set date and time labels
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                lblTime.setText("Time: " + dateTime.format(timeFormatter));
+                lblDate.setText("Date: " + dateTime.format(dateFormatter));
                 } else {
                     lblTime.setText("Time: Unknown");
                     lblDate.setText("Date: Unknown");
@@ -60,7 +67,7 @@ public class PrintTicketsController {
                 // Set other event details
                 lblLocation.setText("Location: " + (event.getLocation() != null ? event.getLocation() : "Unknown"));
                 lblDirections.setText("How to get there: " + (event.getLocationGuide() != null ? event.getLocationGuide() : "Unknown"));
-                lblDetails.setText("Details: " + (event.getDescription() != null ? event.getDescription() : "No details available"));
+                lblDetails.setText("Details: " + (ticket.getDescription() != null ? ticket.getDescription() : "No details available"));
 
                 // Now fetch the QR code file path from the ticket object itself
                 String qrFilePath = System.getProperty("user.dir") + "/QRCode/";
@@ -88,5 +95,4 @@ public class PrintTicketsController {
                 lblDetails.setText("Details: Unknown");
             }
         }
-    }
 }

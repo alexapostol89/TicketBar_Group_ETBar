@@ -67,6 +67,7 @@ public class SaveTicketsController {
         String customerName = txtCustomerName.getText();
         String customerEmail = txtCustomerEmail.getText();
         String ticketType = txtTicketType.getText();
+        String description = txtDescription.getText();
 
         System.out.println("Handle print tickets for eventID: " + eventID);
 
@@ -77,7 +78,7 @@ public class SaveTicketsController {
         }
 
         // Save ticket to the database and get generated ticket ID
-        int ticketId = ticketService.saveTicket(eventID, customerName, customerEmail, ticketType);
+        int ticketId = ticketService.saveTicket(eventID, customerName, customerEmail, ticketType, description);
 
         if (ticketId == -1) {
             showAlert("Error", "Failed to create ticket. Please try again.");

@@ -21,7 +21,7 @@ public class TicketManager {
         this(new TicketsDAO());  // Initializes with default DAO implementation
     }
 
-    public int saveTicket(int eventId, String customerName, String customerEmail, String ticketType) {
+    public int saveTicket(int eventId, String customerName, String customerEmail, String ticketType, String description) {
         LocalDateTime purchaseDate = LocalDateTime.now();
         String barcode = "123456789"; // Placeholder barcode
         boolean isScanned = false;
@@ -39,7 +39,7 @@ public class TicketManager {
         }
 
         // Create ticket object
-        Tickets ticket = new Tickets(0, eventId, customerName, customerEmail, ticketType, purchaseDate, qrCodePath, barcode, isScanned);
+        Tickets ticket = new Tickets(0, eventId, customerName, customerEmail, ticketType, description, purchaseDate, qrCodePath, barcode, isScanned);
 
         // Save ticket to database and return the generated ticket ID
         return ticketsDAO.saveTicket(ticket);

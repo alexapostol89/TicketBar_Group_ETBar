@@ -23,12 +23,13 @@ public class Tickets {
 
     // Constructor for Ticket with Event Details
     public Tickets(int ticketId, int eventId, String customerName, String customerEmail, String ticketType,
-                   LocalDateTime purchaseDate, String qrCode, String barcode, boolean isScanned) {
+                   String description, LocalDateTime purchaseDate, String qrCode, String barcode, boolean isScanned) {
         this.ticketId = ticketId;
         this.eventId = eventId;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.ticketType = ticketType;
+        this.description = description;
         this.purchaseDate = purchaseDate;
         this.qrCode = qrCode;
         this.barcode = barcode;
@@ -40,15 +41,16 @@ public class Tickets {
         this.endDateTime = endDateTime;
         this.location = location;
         this.locationGuide = locationGuide;
-        this.description = description;
+
     }
 
     // Getters for all fields
 
-    public String getDescription() { return description; }
+
     public String getCustomerName() { return customerName; }
     public String getCustomerEmail() { return customerEmail; }
     public String getTicketType() { return ticketType; }
+    public String getDescription() { return description; }
     public String getQrCode() { return qrCode; }
     public String getBarcode() { return barcode; }
     public int getTicketId() { return ticketId; }

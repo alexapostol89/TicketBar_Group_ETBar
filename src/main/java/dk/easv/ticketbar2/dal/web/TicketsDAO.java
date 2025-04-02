@@ -13,7 +13,7 @@ public class TicketsDAO {
     private final DBConnection connection = new DBConnection();
 
     public int saveTicket(Tickets ticket) {
-        String sql = "INSERT INTO tickets (EventID, CustomerName, CustomerEmail, TicketType, PurchaseDate, QRCode, Barcode, IsScanned) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO tickets (EventID, CustomerName, CustomerEmail, TicketType, Description, PurchaseDate, QRCode, Barcode, IsScanned) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         int generatedTicketId = -1;
 
         try (PreparedStatement statement = connection.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -21,10 +21,11 @@ public class TicketsDAO {
             statement.setString(2, ticket.getCustomerName());
             statement.setString(3, ticket.getCustomerEmail());
             statement.setString(4, ticket.getTicketType());
-            statement.setObject(5, ticket.getPurchaseDate());
-            statement.setString(6, ticket.getQrCode());
-            statement.setString(7, ticket.getBarcode());
-            statement.setBoolean(8, ticket.isScanned());
+            statement.setString(5, ticket.getDescription());
+            statement.setObject(6, ticket.getPurchaseDate());
+            statement.setString(7, ticket.getQrCode());
+            statement.setString(8, ticket.getBarcode());
+            statement.setBoolean(9, ticket.isScanned());
 
             int rowsAffected = statement.executeUpdate();
 
@@ -45,9 +46,9 @@ public class TicketsDAO {
 
     public Tickets getTicketById(int ticketId) {
         Tickets ticket = null;
-        String sql = "SELECT t.TicketID, t.EventID, t.CustomerName, t.CustomerEmail, t.TicketType, " +
+        String sql = "SELECT t.TicketID, t.EventID, t.CustomerName, t.CustomerEmail, t.TicketType, t.Description, " +
                 "t.PurchaseDate, t.QRCode, t.Barcode, t.IsScanned, " +
-                "e.EventName, e.StartDateTime, e.EndDateTime, e.Location, e.LocationGuide, e.Description " +
+                "e.EventName, e.StartDateTime, e.EndDateTime, e.Location, e.LocationGuide " +
                 "FROM Tickets t " +
                 "JOIN Events e ON t.EventID = e.EventID " +
                 "WHERE t.TicketID = ?";
@@ -65,6 +66,7 @@ public class TicketsDAO {
                         rs.getString("CustomerName"),
                         rs.getString("CustomerEmail"),
                         rs.getString("TicketType"),
+                        rs.getString("Description"),
                         rs.getTimestamp("PurchaseDate").toLocalDateTime(),
                         rs.getString("QRCode"),
                         rs.getString("Barcode"),
