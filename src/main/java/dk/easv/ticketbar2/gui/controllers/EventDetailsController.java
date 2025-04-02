@@ -59,7 +59,7 @@ public class EventDetailsController {
             controller.setEventID(eventID); // Pass event ID
 
             Stage stage = new Stage();
-            stage.setTitle("Assign Coordinators");
+            stage.setTitle("Assign or Unassign Coordinators");
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
