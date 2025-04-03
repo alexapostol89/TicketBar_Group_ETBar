@@ -5,9 +5,11 @@ import dk.easv.ticketbar2.be.Tickets;
 import dk.easv.ticketbar2.bll.QRCodeGenerator;
 import dk.easv.ticketbar2.bll.EventsManager;
 import dk.easv.ticketbar2.dal.exceptions.EventsException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 
+import javafx.print.PrinterJob;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -94,4 +96,27 @@ public class PrintTicketsController {
                 lblDetails.setText("Details: Unknown");
             }
         }
+
+        @FXML
+        public void printTicket(ActionEvent actionEvent) {
+            PrinterJob printerJob = PrinterJob.createPrinterJob();
+            if (printerJob != null && printerJob.showPrintDialog(null)) {
+            printerJob.printPage(new javafx.scene.layout.Region() {
+                @Override
+                protected void layoutChildren() {
+                    // This layout will print the ticket data
+                    getChildren().clear();
+                    getChildren().add(lblEventName);
+                    getChildren().add(lblTicketType);
+                    getChildren().add(lblDate);
+                    getChildren().add(lblTime);
+                    getChildren().add(lblLocation);
+                    getChildren().add(lblDirections);
+                    getChildren().add(lblDetails);
+                    getChildren().add(imgQRCode);
+                }
+            });
+            printerJob.endJob();
+        }
+    }
 }
