@@ -55,7 +55,7 @@ public class PrintTicketsController {
 
                 // Format and set date and time labels
                 DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
-                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
                 lblTime.setText("Time: " + dateTime.format(timeFormatter));
                 lblDate.setText("Date: " + dateTime.format(dateFormatter));
@@ -70,17 +70,16 @@ public class PrintTicketsController {
                 lblDetails.setText("Details: " + (ticket.getDescription() != null ? ticket.getDescription() : "No details available"));
 
                 // Now fetch the QR code file path from the ticket object itself
-                String qrFilePath = System.getProperty("user.dir") + "/QRCode/";
-                System.out.println("Debug test  " + ticket.getQrCode());
-                // Ensure the QR code file exists
-                File qrFile = new File(qrFilePath);
+                String qrCodePath = System.getProperty("user.dir") + "/QRCode/" + ticket.getQrCode();
+                File qrFile = new File(qrCodePath);
+
                 if (qrFile.exists()) {
                     // Use toURI().toString() for a valid file URL
-                    Image qrImage = new Image(qrFile.toURI().toString());
+                    Image qrImage = new Image(qrFile.toURI().toString(), false);
                     imgQRCode.setImage(qrImage);
                 } else {
                     // Handle error if the image file is not found
-                    System.out.println("QR Code image not found at: " + qrFilePath);
+                    System.out.println("QR Code image not found at: " + qrCodePath);
                     // Optionally set a default image
                     imgQRCode.setImage(new Image("/QRCode/default_image.png"));
                 }

@@ -9,15 +9,11 @@ import com.google.zxing.common.BitMatrix;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.UUID;
 
 public class QRCodeGenerator {
 
-    // Generate QR Code with the ticket data (not file path)
-    public static String generateQRCode(String data, String fileName) throws WriterException, IOException {
-        // Generate a unique reference code for the ticket
-        String referenceCode = UUID.randomUUID().toString();  // Generates a random unique code (UUID)
-
+    // Generate QR Code with the ticket data (using the passed UUID for consistency)
+    public static void generateQRCode(String uuid, String fileName) throws WriterException, IOException {
         // Define the directory and file path for the QR code image
         String directoryPath = System.getProperty("user.dir") + "/QRCode/";
         File directory = new File(directoryPath);
@@ -28,24 +24,17 @@ public class QRCodeGenerator {
         }
 
         // Define the file path where the image will be saved
-        String filePath = directoryPath + referenceCode + ".png";
+        String filePath = directoryPath + fileName;
 
         // Generate the QR code image
-        BitMatrix bitMatrix = new MultiFormatWriter().encode(referenceCode, BarcodeFormat.QR_CODE, 300, 300);
+        BitMatrix bitMatrix = new MultiFormatWriter().encode(uuid, BarcodeFormat.QR_CODE, 300, 300);
         MatrixToImageWriter.writeToFile(bitMatrix, "png", Paths.get(filePath).toFile());
 
-        System.out.println("Generated QR Code: " + filePath + "at  " + directoryPath);
-
-        // Return the data (ticketData) that was encoded in the QR code, instead of the file path
-        return referenceCode;  // Return ticket data (event, ticket type, date)
     }
-
 
     public static String generateBarcode(String data, String fileName) throws WriterException, IOException {
 
-        String referenceCode = UUID.randomUUID().toString();
-
-        // Define the directory and file path
+        // Define the directory and file path for the barcode
         String directoryPath = "dk/easv/ticketbar2/pictures/barcodes/";
         File directory = new File(directoryPath);
 
@@ -54,11 +43,11 @@ public class QRCodeGenerator {
             directory.mkdirs(); // Create the directory if it does not exist
         }
 
-        String filePath = directoryPath + referenceCode + ".png";
+        String filePath = directoryPath + fileName;
 
         BitMatrix bitMatrix = new MultiFormatWriter().encode(data, BarcodeFormat.CODE_128, 300, 100);
         MatrixToImageWriter.writeToFile(bitMatrix, "png", Paths.get(filePath).toFile());
 
-        return referenceCode; // Return file path so it can be stored in the DB
+        return fileName; // Return the file name for saving to the DB
     }
 }

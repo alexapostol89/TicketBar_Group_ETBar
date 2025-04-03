@@ -23,30 +23,31 @@ public class TicketManager {
 
     public int saveTicket(int eventId, String customerName, String customerEmail, String ticketType, String description) {
         LocalDateTime purchaseDate = LocalDateTime.now();
-        String barcode = "123456789"; // Placeholder barcode
+        String barcode = "123456789";
         boolean isScanned = false;
 
-        // Generate QR Code
-        String ticketData = UUID.randomUUID().toString();
-        String qrCodePath = "C:\\Users\\rauld\\IdeaProjects\\TicketBar_Group_ETBar/QRCode/";
+        // Generate UUID once and use it consistently
+        String ticketUUID = UUID.randomUUID().toString();
+        String qrFileName = ticketUUID + ".png"; // QR code filename will be UUID-based
+
 
         try {
-            qrCodePath = QRCodeGenerator.generateQRCode(qrCodePath, ticketData + System.currentTimeMillis() + ".png");
+            // Pass the UUID to QRCodeGenerator to ensure the same UUID is used for the ticket and the QR code
+            QRCodeGenerator.generateQRCode(ticketUUID, qrFileName);  // Use the UUID and filename
+
         } catch (IOException | WriterException e) {
             e.printStackTrace();
             System.out.println("Failed to generate QR Code.");
             return -1;
         }
 
-        // Create ticket object
-        Tickets ticket = new Tickets(0, eventId, customerName, customerEmail, ticketType, description, purchaseDate, qrCodePath, barcode, isScanned);
+        // Store only the file name in the database
+        Tickets ticket = new Tickets(0, eventId, customerName, customerEmail, ticketType, description, purchaseDate, qrFileName, barcode, isScanned);
 
-        // Save ticket to database and return the generated ticket ID
         return ticketsDAO.saveTicket(ticket);
     }
 
     public Tickets getTickets(int ticketId) {
         return ticketsDAO.getTicketById(ticketId);
     }
-
 }
