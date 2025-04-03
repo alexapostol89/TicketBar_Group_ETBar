@@ -1,0 +1,35 @@
+.tab:selected {
+    -fx-background-color: #ffcc00; /* #66b5ff */
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+
+    -fx-border-width: 1px;
+    -fx-border-color: #000000;
+    -fx-border-radius: 2px;
+
+    /*
+    -fx-effect: dropshadow(gaussian, #000000, 10, 0, 0, 2);
+    */
+}
+
+.tab {
+    -fx-background-color: #66ccff;
+    -fx-text-fill: black;
+}
+
+/* Set a background color for the SplitPane */
+.split-pane {
+    -fx-background-color: transparent;  /* Remove background for the SplitPane */
+}
+
+/* Target the divider */
+.split-pane-divider {
+    -fx-background-color: transparent;  /* Make the divider background transparent */
+    -fx-background-insets: 0;  /* Remove any padding around the divider */
+    -fx-border-color: transparent;  /* Make the divider border transparent */
+}
+
+/* Set the background color of the right pane */
+.split-pane > .split-pane-divider {
+    -fx-background-color: transparent;  /* Make the divider blend in */
+}

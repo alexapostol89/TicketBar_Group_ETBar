@@ -7,37 +7,19 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="606.0" styleClass="backgroundLogin" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.LoginController">
-
-   <children>
-      <!-- Username Field -->
-      <TextField fx:id="usernameTextfield" layoutX="167.0" layoutY="156.0" prefHeight="25.0" prefWidth="274.0" promptText="Username" style="-fx-background-radius: 20px; -fx-border-radius: 20px;" styleClass="labelLogin" stylesheets="@Main.css" />
-
-      <!-- Sign In Button -->
-      <Button layoutX="249.0" layoutY="299.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="109.0" styleClass="buttons" stylesheets="@Main.css" text="Sign in" />
-
-      <Label layoutX="230.0" layoutY="85.0" prefHeight="32.0" prefWidth="147.0" styleClass="labels" stylesheets="@Main.css" text="EASV Ticket App">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-
-      <!-- Password Field (default, hidden text) -->
-      <PasswordField fx:id="passwordTextfield" layoutX="166.0" layoutY="228.0" prefHeight="25.0" prefWidth="274.0" promptText="Password" style="-fx-background-radius: 20px;" styleClass="labelLogin" stylesheets="@Main.css" />
-
-      <!-- TextField for visible password (hidden by default) -->
-      <TextField fx:id="textFieldPassword" layoutX="207.0" layoutY="253.0" managed="false" prefHeight="25.0" prefWidth="274.0" style="-fx-background-radius: 20px;" styleClass="labelLogin" stylesheets="@Main.css" visible="false" />
-
-      <!-- Eye Button to Toggle Password Visibility -->
-      <Button fx:id="togglePasswordButton" layoutX="443.0" layoutY="253.0" onAction="#togglePasswordVisibility" prefHeight="25.0" prefWidth="38.0" style="-fx-background-color: transparent;" />
-
-            <!-- Eye Icon -->
-      <ImageView fitHeight="22.0" fitWidth="17.0" layoutX="414.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@pictures/icons8-eye-48.png" />
-         </image>
-      </ImageView>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.LoginController">
+    <children>
+        <ImageView fitHeight="54.0" fitWidth="200.0" layoutX="100.0" layoutY="14.0" AnchorPane.topAnchor="25.0">
+            <image>
+                <Image url="@pictures/easv-logo.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="100.0" layoutY="110.0" text="Username" />
+        <TextField fx:id="usernameTextfield" layoutX="100.0" layoutY="130.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="100.0" />
+        <Label layoutX="100.0" layoutY="165.0" text="Password" />
+        <PasswordField fx:id="passwordTextfield" layoutX="100.0" layoutY="185.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="100.0" />
+        <Button fx:id="togglePasswordButton" layoutX="310.0" layoutY="185.0" text="Show" onAction="#togglePasswordVisibility" />
+        <Button layoutX="150.0" layoutY="225.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="100.0" text="Sign in" />
+    </children>
 </AnchorPane>

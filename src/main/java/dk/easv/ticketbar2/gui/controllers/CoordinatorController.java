@@ -3,7 +3,6 @@ package dk.easv.ticketbar2.gui.controllers;
 import dk.easv.ticketbar2.be.Events;
 import dk.easv.ticketbar2.bll.EventsManager;
 import dk.easv.ticketbar2.dal.exceptions.EventsException;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,8 +41,6 @@ public class CoordinatorController {
     private final EventsManager eventsManager = new EventsManager();
 
     private VBox lastSelectedVBox = null; // Track the last selected event
-
-    private EventDetailsController eventDetailsController;
 
     @FXML
     public void initialize() throws EventsException {
@@ -244,14 +241,11 @@ public class CoordinatorController {
             for (Events event : events) {
                 updateCoordinatorView(event.getEventName(), event.getEventImagePath(), event.getEventID());
             }
-
-
         } catch (EventsException e) {
             e.printStackTrace();
             // Show error message if needed
         }
     }
-
 
     // Method for logging out
     @FXML

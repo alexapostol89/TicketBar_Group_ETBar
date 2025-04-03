@@ -20,7 +20,7 @@ public class UserEventDAO {
             stmt.setInt(2, eventID);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new EventsException("Error inserting UserEvent: " + e.getMessage(), e);
+            throw new EventsException("Error inserting UserEvent: " + e.getMessage());
         }
     }
 
@@ -35,7 +35,7 @@ public class UserEventDAO {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new EventsException("Error unassigning coordinator from event", e);
+            throw new EventsException("Error unassigning coordinator from event");
         }
     }
 }

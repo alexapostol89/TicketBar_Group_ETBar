@@ -1,24 +1,38 @@
 package dk.easv.ticketbar2.be;
 
+
+import java.sql.Timestamp;
+
 public class Users {
     private int Userid;
     private String Username;
-    private String Password;
+    private String PasswordHash;
     private int Rank;
     private String Firstname;
     private String Lastname;
     private String Email;
     private String Phone;
+    private String CreatedDate;
+    private Timestamp LastLogin;
+    private String RankName;
 
-    public Users(int userid, String username, String password, int rank, String firstname, String lastname, String email, String phone, String lastLogin, String createdDate) {
+    public Users(int userid, String username, String passwordHash, int rank, String firstname, String lastname, String email, String phone, Timestamp lastLogin , String createdDate, String rankName) {
         Userid = userid;
         Username = username;
-        Password = password;
+        PasswordHash = passwordHash;
         Rank = rank;
         Firstname = firstname;
         Lastname = lastname;
         Email = email;
         Phone = phone;
+        CreatedDate= createdDate;
+        LastLogin = lastLogin;
+        RankName = rankName;
+
+    }
+
+    public Users() {
+
     }
 
     public int getUserid() {
@@ -37,12 +51,12 @@ public class Users {
         Username = username;
     }
 
-    public String getPassword() {
-        return Password;
+    public String getPasswordHash() {
+        return PasswordHash;
     }
 
-    public void setPassword(String password) {
-        Password = password;
+    public void setPasswordHash(String passwordHash) {
+        PasswordHash = passwordHash;
     }
 
     public int getRank() {
@@ -84,4 +98,29 @@ public class Users {
     public void setPhone(String phone) {
         Phone = phone;
     }
+
+    public String getCreatedDate() {
+        return CreatedDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        CreatedDate = createdDate;
+    }
+
+    public Timestamp getLastLogin() {
+        return LastLogin;
+    }
+
+    public void setLastLogin(Timestamp lastLogin) {
+        LastLogin = lastLogin;
+    }
+
+    public String getRankName() {
+        return RankName;
+    }
+
+    public void setRankName(String rankName) {
+        RankName = rankName;
+    }
 }
+

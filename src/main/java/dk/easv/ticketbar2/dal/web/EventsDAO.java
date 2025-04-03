@@ -11,62 +11,6 @@ import java.sql.*;
 public class EventsDAO {
     private DBConnection connection = new DBConnection();
 
-    // Get all events from the database
-    public ObservableList<Events> getAllEvents() throws EventsException {
-        ObservableList<Events> eventsList = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM Events"; // Adjust the query as needed
-        try (Connection conn = connection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                Events event = new Events(
-                        rs.getInt("EventID"),
-                        rs.getString("EventName"),
-                        rs.getString("StartDateTime"),
-                        rs.getString("EndDateTime"),
-                        rs.getString("Location"),
-                        rs.getString("Description"),
-                        rs.getString("Notes"),
-                        rs.getString("LocationGuide"),
-                        rs.getInt("CoordinatorID"),
-                        rs.getString("EventImagePath")
-                );
-                eventsList.add(event);
-            }
-        } catch (SQLException e) {
-            throw new EventsException(e);
-        }
-        return eventsList;
-    }
-
-    // Get an event by ID
-    public Events getEventById(int eventId) throws EventsException {
-        String sql = "SELECT * FROM Events WHERE EventID = ?";
-        try (Connection conn = connection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, eventId);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return new Events(
-                        rs.getInt("EventID"),
-                        rs.getString("EventName"),
-                        rs.getString("StartDateTime"),
-                        rs.getString("EndDateTime"),
-                        rs.getString("Location"),
-                        rs.getString("Description"),
-                        rs.getString("Notes"),
-                        rs.getString("LocationGuide"),
-                        rs.getInt("CoordinatorID"),
-                        rs.getString("EventImagePath")
-                );
-            }
-        } catch (SQLException e) {
-            throw new EventsException(e);
-        }
-        return null;
-    }
-
     public int saveEvent(String eventName, String imagePath, String startDate, String endDate, String location, String description, String notes, String locationGuide) throws EventsException {
         String insertSql = "INSERT INTO Events (EventName, EventImagePath, StartDateTime, EndDateTime, Location, Description, Notes, LocationGuide) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -150,5 +94,110 @@ public class EventsDAO {
         }
         return false;
     }
+
+    //DAVID METHOD'S
+
+    // Get all events from the database
+    public ObservableList<Events> getAllEvents() {
+        ObservableList<Events> eventList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Events"; // Adjust the query as needed
+        try (Connection conn = connection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Events event = new Events(
+                        rs.getInt("EventID"),
+                        rs.getString("EventName"),
+                        rs.getString("StartDateTime"),
+                        rs.getString("EndDateTime"),
+                        rs.getString("Location"),
+                        rs.getString("Description"),
+                        rs.getString("Notes"),
+                        rs.getString("LocationGuide"),
+                        rs.getInt("CoordinatorID"),
+                        rs.getString("EventImagePath")
+                );
+                eventList.add(event);
+            }
+        } catch (SQLException e) {
+            throw new EventsException(e);
+        }
+        return eventList;
+    }
+
+    // Get an event by ID
+    public Events getEventById(int eventId) {
+        String sql = "SELECT * FROM Events WHERE EventID = ?";
+        try (Connection conn = connection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, eventId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Events(
+                        rs.getInt("EventID"),
+                        rs.getString("EventName"),
+                        rs.getString("StartDateTime"),
+                        rs.getString("EndDateTime"),
+                        rs.getString("Location"),
+                        rs.getString("Description"),
+                        rs.getString("Notes"),
+                        rs.getString("LocationGuide"),
+                        rs.getInt("CoordinatorID"),
+                        rs.getString("EventImagePath")
+                );
+            }
+        } catch (SQLException e) {
+            throw new EventsException(e);
+        }
+        return null;
+    }
+
+    // Method to get the coordinator's username by their UserID (CoordinatorID in Events)
+    public String getCoordinatorUsername(int coordinatorID) {
+        String username = null;
+        String sql = "SELECT Username FROM Users WHERE UserID = ?";
+        try (Connection conn = connection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, coordinatorID);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    username = rs.getString("Username");
+                }
+            }
+        } catch (SQLException e) {
+            throw new EventsException(e);
+        }
+        return username;
+    }
+
+    // Method to update the coordinator of the event
+    public void updateEventCoordinator(Events events) {
+        String sql = "UPDATE Events SET CoordinatorID = ? WHERE EventID = ?";
+        try (Connection conn = connection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, events.getCoordinatorID()); // Set the new CoordinatorID
+            stmt.setInt(2, events.getEventID()); // Set the EventID
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new EventsException("An error occurred while updating the coordinator. Please try again later.");
+        }
+    }
+
+    public void deleteEvent(Events events) {
+        String sql = "DELETE FROM Events WHERE EventID = ?";
+        try (Connection conn = connection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, events.getEventID()); // Set the EventID of the event to delete
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new EventsException("An error occurred while deleting the event. Please try again later.");
+        }
+    }
 }
+
 

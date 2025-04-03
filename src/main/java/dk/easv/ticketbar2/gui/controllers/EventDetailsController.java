@@ -65,7 +65,6 @@ public class EventDetailsController {
     }
 
 
-
     @FXML
     public void handlePrintTickets(ActionEvent event) {
         System.out.println("Print Ticket button clicked!");

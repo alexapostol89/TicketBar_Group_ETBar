@@ -15,7 +15,7 @@ public class ETBarApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ETBarApplication.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("ETBar Application");
+        stage.setTitle("Event Tickets EASV Bar");
         stage.setScene(scene);
         stage.show();
     }

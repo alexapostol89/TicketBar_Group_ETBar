@@ -1,8 +1,6 @@
 package dk.easv.ticketbar2.dal.exceptions;
 
-import java.sql.SQLException;
-
-public class EventsException extends Exception {
+/*public class EventsException extends Exception {
 
     public EventsException(SQLException cause) {
         super(cause);
@@ -14,6 +12,15 @@ public class EventsException extends Exception {
     }
 
     public EventsException(String s) {
+    }*/
+
+
+    //DAVID METHOD'S
+    public class EventsException extends RuntimeException {
+        public EventsException(String message) {
+            super(message);
+        }
+        public EventsException(Exception e) { super(e); }
     }
-}
+
 

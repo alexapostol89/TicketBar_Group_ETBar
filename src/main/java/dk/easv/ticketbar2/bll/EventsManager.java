@@ -16,9 +16,9 @@ public class EventsManager {
         return events;
     }
 
-    public Events getEventById(int eventId) throws EventsException {
-        return eventsDAO.getEventById(eventId);
-    }
+   // public Events getEventById(int eventId) throws EventsException {
+    //    return eventsDAO.getEventById(eventId);
+    //}
 
     public int saveEvent(String eventName, String imagePath, String startDate, String endDate,
                          String location, String description, String locationGuide,
@@ -31,7 +31,42 @@ public class EventsManager {
         return eventsDAO.deleteEvent(eventID);
     }
 
-    public boolean updateEvent(Events event){
-        return  eventsDAO.updateEvent(event);
+    public boolean updateEvent(Events event) {
+        return eventsDAO.updateEvent(event);
     }
+
+    //DAVID METHOD'S
+
+    // Get all events
+    public ObservableList<Events> getAllEvents() {
+        return eventsDAO.getAllEvents();
     }
+
+    // Get event by ID
+    public Events getEventById(int eventId) {
+        return eventsDAO.getEventById(eventId);
+    }
+
+    // Get the coordinator's username by their UserID
+    public String getCoordinatorUsername(int coordinatorID) {
+        return eventsDAO.getCoordinatorUsername(coordinatorID);
+    }
+
+    // Method to update the event's coordinator
+    public void updateEventCoordinator(Events event) {
+        eventsDAO.updateEventCoordinator(event);
+    }
+
+    // Method to delete an event
+    public void deleteEvent(Events event) {
+        eventsDAO.deleteEvent(event);
+    }
+}
+
+
+
+
+
+
+
+
