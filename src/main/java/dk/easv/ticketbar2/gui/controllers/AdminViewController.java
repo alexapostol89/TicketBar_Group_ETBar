@@ -441,7 +441,7 @@ public class AdminViewController {
 
     private void openLoginWindow() throws Exception {
         // Load the login view and show it
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/oldlogin-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/login-view.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
