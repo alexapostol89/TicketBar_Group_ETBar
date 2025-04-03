@@ -32,7 +32,7 @@ public class CoordinatorController {
     @FXML
     private Label nameLabel, startDateLabel, descriptionLabel;
     @FXML
-    private Button addEvents,editEvents;
+    private Button addEvents, editEvents;
     @FXML
     private Button deleteBtn;
 
@@ -125,7 +125,6 @@ public class CoordinatorController {
         Label label = new Label(eventName);
 
 
-
         label.setWrapText(true);
         label.setMaxWidth(200);
 
@@ -190,7 +189,6 @@ public class CoordinatorController {
     }
 
 
-
     // Method to delete the selected event from the app and database
     @FXML
     private void onActionDelete(ActionEvent event) {
@@ -233,6 +231,7 @@ public class CoordinatorController {
             warningAlert.showAndWait();
         }
     }
+
     public void refreshEvents() {
         try {
             // Clear existing events
@@ -245,7 +244,6 @@ public class CoordinatorController {
             for (Events event : events) {
                 updateCoordinatorView(event.getEventName(), event.getEventImagePath(), event.getEventID());
             }
-
 
 
         } catch (EventsException e) {
@@ -276,3 +274,6 @@ public class CoordinatorController {
         }
     }
 }
+
+
+

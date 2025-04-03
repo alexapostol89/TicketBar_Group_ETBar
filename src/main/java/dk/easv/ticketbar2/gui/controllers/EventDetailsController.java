@@ -40,9 +40,6 @@ public class EventDetailsController {
         }
     }
 
-    public int getEventID() {  // Add this method
-        return this.eventID;
-    }
 
     @FXML
     private void btnAssignCoordinator(ActionEvent event) {
@@ -65,5 +62,44 @@ public class EventDetailsController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+
+    @FXML
+    public void handlePrintTickets(ActionEvent event) {
+        System.out.println("Print Ticket button clicked!");
+        System.out.println("Event ID in CoordinatorController before passing: " + eventID);  // Debugging line
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/print-ticket.fxml"));
+            Parent root = loader.load();
+
+            // Get the SaveTicketsController instance after loading the FXML
+            SaveTicketsController saveTicketsController = loader.getController();
+
+            // Pass the eventID to the SaveTicketsController
+            saveTicketsController.setEventID(this.eventID);  // This ensures eventID is set before loading details
+
+            System.out.println("eventID in printTicket: " + this.eventID); // Debugging line
+
+            Stage stage = new Stage();
+            stage.setTitle("Print Ticket");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    // Setter for eventID (for setting eventID in this controller)
+    public void setEventID(int eventID) {
+        this.eventID = eventID;
+        System.out.println("Event ID set in CoordinatorController: " + eventID);  // Debugging line
+    }
+    public int getEventID() {
+        return eventID;
     }
 }
