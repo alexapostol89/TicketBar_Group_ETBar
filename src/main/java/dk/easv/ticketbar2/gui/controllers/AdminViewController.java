@@ -20,6 +20,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class AdminViewController {
@@ -53,7 +55,7 @@ public class AdminViewController {
     private TableColumn<Events, String> coordinatorColumn;
 
     @FXML
-    private Label nameLabel, startDateLabel, endDateLabel, locationLabel, descriptionLabel, coordinatorLabel, guideLabel, notesLabel;
+    private Label nameLabel, startDateLabel, startTimeLabel, endDateLabel, endTimeLabel, locationLabel, descriptionLabel, coordinatorLabel, guideLabel, notesLabel;
 
     @FXML
     private Button signOutButton1, signOutButton2, addUserButton, editUserButton, deleteUserButton, assignCoordinatorButton, deleteEventButton;
@@ -155,8 +157,24 @@ public class AdminViewController {
 
     private void populateEventDetails(Events events) {
         nameLabel.setText(events.getEventName());
-        startDateLabel.setText(events.getStartDateTime());
-        endDateLabel.setText(events.getEndDateTime());
+        // Define correct format for date-time parsing
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+        LocalDateTime dateTime = LocalDateTime.parse(events.getStartDateTime(), formatter);
+        LocalDateTime dateTime2 = LocalDateTime.parse(events.getEndDateTime(), formatter);
+
+        // Format and set date and time labels
+        DateTimeFormatter startTimeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+        DateTimeFormatter startDateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        DateTimeFormatter endDateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter endTimeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+
+        startDateLabel.setText(startDateFormatter.format(dateTime));
+        startTimeLabel.setText(startTimeFormatter.format(dateTime));
+
+        endDateLabel.setText(endDateFormatter.format(dateTime2));
+        endTimeLabel.setText(endTimeFormatter.format(dateTime2));
+
         locationLabel.setText(events.getLocation());
         descriptionLabel.setText(events.getDescription());
 
