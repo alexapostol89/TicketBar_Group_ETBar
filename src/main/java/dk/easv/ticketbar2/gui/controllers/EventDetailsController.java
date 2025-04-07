@@ -14,6 +14,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,17 +24,28 @@ import java.util.Optional;
 public class EventDetailsController {
 
     @FXML
-    private Button deleteBtn;
+    private Button deleteBtn, editEvents;
 
     @FXML
     private Label nameLabel, startDateLabel, endDateLabel, locationLabel, descriptionLabel, coordinatorLabel, guideLabel, notesLabel;
+
     private final EventsManager eventsManager = new EventsManager();
+
     private CoordinatorController coordinatorController;
+
     private int eventID; // Store the current event ID
 
-    public void setCoordinatorController(CoordinatorController coordinatorController) {
-        this.coordinatorController = coordinatorController;
+    public void setCoordinatorController(CoordinatorController controller) {
+        this.coordinatorController = controller;
     }
+
+    @FXML
+    private void initialize() {
+        editEvents.setOnAction(event ->
+            openAddEditEventWindow(eventID));
+
+    }
+
 
     // Method to delete the selected event from the app and database
     @FXML
@@ -151,5 +164,31 @@ public class EventDetailsController {
     }
     public int getEventID() {
         return eventID;
+    }
+
+    private void openAddEditEventWindow(Integer eventID) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/add-event.fxml"));
+            Parent root = loader.load();
+            AddEventsController editEventsController = loader.getController();
+
+            // Pass CoordinatorController to refresh events
+            if (coordinatorController != null) {
+                editEventsController.setCoordinatorController(coordinatorController);
+            }
+
+            if (eventID != null) {
+                Events eventToEdit = eventsManager.getEventById(eventID);
+                editEventsController.setEventToEdit(eventToEdit);
+            }
+
+            Stage stage = new Stage();
+            stage.setTitle(eventID != null ? "Edit Event" : "Add Event");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException | EventsException e) {
+            e.printStackTrace();
+        }
     }
 }

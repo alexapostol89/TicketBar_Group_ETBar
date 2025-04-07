@@ -3,7 +3,6 @@ package dk.easv.ticketbar2.gui.controllers;
 import dk.easv.ticketbar2.be.Events;
 import dk.easv.ticketbar2.bll.EventsManager;
 import dk.easv.ticketbar2.dal.exceptions.EventsException;
-import dk.easv.ticketbar2.dal.web.EventsDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;

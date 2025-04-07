@@ -28,15 +28,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class CoordinatorController {
-    @FXML
-    private Button assignCoordinatorButton;
-    @FXML
-    private Label nameLabel, startDateLabel, descriptionLabel;
+
     @FXML
     private Button addEvents, editEvents;
-   // @FXML
-    //private Button deleteBtn;
-
     @FXML
     private FlowPane contentPane;  // FlowPane to dynamically add new images and labels
 
@@ -47,20 +41,9 @@ public class CoordinatorController {
     @FXML
     public void initialize() throws EventsException {
         // Initially disable the delete and edit buttons
-        //deleteBtn.setDisable(true);
-        editEvents.setDisable(true);
+
         loadExistingEvents();
         addEvents.setOnAction(event -> openAddEditEventWindow(null)); // Pass null for add mode
-
-        //deleteBtn.setOnAction(this::onActionDelete);
-
-        editEvents.setOnAction(event -> {
-            if (lastSelectedVBox != null) {
-                ImageView imageView = (ImageView) lastSelectedVBox.getChildren().get(0);
-                int eventID = (int) imageView.getUserData();
-                openAddEditEventWindow(eventID);
-            }
-        });
     }
 
     // Load existing events into the content pane
@@ -68,7 +51,6 @@ public class CoordinatorController {
         List<Events> events = eventsManager.getEvents();
         for (Events event : events) {
             updateCoordinatorView(event.getEventName(), event.getEventImagePath(), event.getEventID(), event.getStartDateTime());
-
         }
     }
 
@@ -81,11 +63,6 @@ public class CoordinatorController {
             AddEventsController editEventsController = loader.getController();
             editEventsController.setCoordinatorController(this);
 
-            if (eventID != null) {
-                // Edit mode - load existing event data
-                Events eventToEdit = eventsManager.getEventById(eventID);
-                editEventsController.setEventToEdit(eventToEdit);
-            }
 
             Stage stage = new Stage();
             stage.setTitle(eventID != null ? "Edit Event" : "Add Event");
@@ -158,8 +135,7 @@ public class CoordinatorController {
             lastSelectedVBox = vbox;
 
             // Enable edit and delete buttons when an event is selected
-            editEvents.setDisable(false);
-            //deleteBtn.setDisable(false);
+
 
            if (event.getClickCount() == 2) { // Open details window on double click
                 int clickedEventID = (int) imageView.getUserData();

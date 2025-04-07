@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -117,6 +118,20 @@
          <children>
             <HBox alignment="CENTER" prefHeight="61.0" prefWidth="668.0">
                <children>
+                  <Button fx:id="editEvents" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0" styleClass="buttons" stylesheets="@Main.css">
+                     <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <cursor>
+                              <Cursor fx:constant="SW_RESIZE" />
+                           </cursor>
+                           <image>
+                              <Image url="@pictures/pencil.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin></Button>
                   <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#onActionDelete" prefHeight="25.0" prefWidth="61.0" styleClass="buttons" stylesheets="@Main.css">
                      <graphic>
                         <ImageView fitHeight="27.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
@@ -126,12 +141,12 @@
                         </ImageView>
                      </graphic>
                      <HBox.margin>
-                        <Insets right="20.0" />
+                        <Insets left="20.0" right="20.0" />
                      </HBox.margin>
                   </Button>
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handlePrintTickets" prefHeight="25.0" prefWidth="61.0" styleClass="buttons" stylesheets="@Main.css">
                      <HBox.margin>
-                        <Insets right="20.0" />
+                        <Insets left="20.0" right="20.0" />
                      </HBox.margin>
                      <graphic>
                         <ImageView fitHeight="31.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
@@ -143,12 +158,12 @@
                   </Button>
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" styleClass="buttons" stylesheets="@Main.css" text="E-mail Ticket">
                      <HBox.margin>
-                        <Insets right="20.0" />
+                        <Insets left="20.0" right="20.0" />
                      </HBox.margin>
                   </Button>
                   <Button fx:id="assignCoordinatorButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnAssignCoordinator" styleClass="buttons" stylesheets="@Main.css" text="Assign EC">
                      <HBox.margin>
-                        <Insets right="20.0" />
+                        <Insets left="2.0" right="20.0" />
                      </HBox.margin>
                   </Button>
                </children>
