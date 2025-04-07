@@ -47,6 +47,7 @@ public class TicketManager {
         return ticketsDAO.saveTicket(ticket);
     }
 
+
     public Tickets getTickets(int ticketId) {
         return ticketsDAO.getTicketById(ticketId);
     }
