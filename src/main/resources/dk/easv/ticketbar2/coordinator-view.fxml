@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -21,17 +22,20 @@
       <FlowPane fx:id="contentPane" prefHeight="486.0" prefWidth="908.0" BorderPane.alignment="TOP_LEFT" />
    </center>
    <top>
-      <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="1090.0" styleClass="eventsC" stylesheets="@Main.css" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1090.0" styleClass="eventsC" stylesheets="@Main.css" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="95.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="52.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
-                  <Insets left="20.0" right="800.0" />
+                  <Insets left="9.0" right="20.0" />
                </HBox.margin>
                <image>
                   <Image url="@pictures/logo.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="SW_RESIZE" />
+               </cursor>
             </ImageView>
-            <Button fx:id="addEvents" mnemonicParsing="false" prefHeight="32.0" prefWidth="45.0" styleClass="buttons" stylesheets="@Main.css">
+            <Button fx:id="addEvents" mnemonicParsing="false" prefHeight="60.0" prefWidth="52.0" styleClass="buttons" stylesheets="@Main.css">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -39,8 +43,11 @@
                      </image>
                   </ImageView>
                </graphic>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
             </Button>
-            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#logout" prefHeight="51.0" prefWidth="107.0" styleClass="buttons" stylesheets="@Main.css" text="Log out">
+            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#logout" prefHeight="54.0" prefWidth="107.0" styleClass="buttons" stylesheets="@Main.css" text="Log out">
                <graphic>
                   <ImageView fitHeight="43.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -48,6 +55,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
             </Button>
          </children>
       </HBox>
