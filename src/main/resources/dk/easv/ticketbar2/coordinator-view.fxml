@@ -23,6 +23,14 @@
    <top>
       <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="1090.0" styleClass="eventsC" stylesheets="@Main.css" BorderPane.alignment="CENTER">
          <children>
+            <ImageView fitHeight="95.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="20.0" right="800.0" />
+               </HBox.margin>
+               <image>
+                  <Image url="@pictures/logo.png" />
+               </image>
+            </ImageView>
             <Button fx:id="addEvents" mnemonicParsing="false" prefHeight="32.0" prefWidth="45.0" styleClass="buttons" stylesheets="@Main.css">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
