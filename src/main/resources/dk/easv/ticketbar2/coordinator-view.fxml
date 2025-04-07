@@ -53,49 +53,39 @@
       <FlowPane fx:id="contentPane" prefHeight="659.0" prefWidth="570.0" BorderPane.alignment="TOP_LEFT" />
    </center>
    <left>
-      <VBox alignment="CENTER" prefHeight="573.0" prefWidth="114.0" styleClass="eventsC" stylesheets="@Main.css" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="512.0" prefWidth="70.0" styleClass="eventsC" stylesheets="@Main.css" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="addEvents" mnemonicParsing="false" prefHeight="26.0" prefWidth="102.0" styleClass="buttons" stylesheets="@Main.css" text="Add">
+            <Button fx:id="addEvents" mnemonicParsing="false" prefHeight="33.0" prefWidth="63.0" styleClass="buttons" stylesheets="@Main.css" text="Add">
                <VBox.margin>
-                  <Insets bottom="45.0" top="45.0" />
+                  <Insets bottom="20.0" top="45.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#onActionDelete" prefHeight="51.0" prefWidth="49.0" styleClass="buttons" stylesheets="@Main.css">
+            <Button fx:id="editEvents" layoutX="16.0" layoutY="101.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0" styleClass="buttons" stylesheets="@Main.css">
                <VBox.margin>
-                  <Insets bottom="45.0" top="45.0" />
+                  <Insets bottom="30.0" top="20.0" />
                </VBox.margin>
                <graphic>
-                  <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@pictures/trash.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="editEvents" layoutX="16.0" layoutY="101.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="52.0" styleClass="buttons" stylesheets="@Main.css">
-               <VBox.margin>
-                  <Insets bottom="45.0" top="45.0" />
-               </VBox.margin>
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="31.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@pictures/pencil.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button mnemonicParsing="false" onAction="#logout" prefHeight="74.0" prefWidth="109.0" styleClass="buttons" stylesheets="@Main.css" text="Log out">
-               <graphic>
-                  <ImageView fitHeight="43.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@pictures/icons8-logout-96.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Button>
          </children>
       </VBox>
    </left>
+   <bottom>
+      <Button mnemonicParsing="false" onAction="#logout" prefHeight="51.0" prefWidth="107.0" styleClass="buttons" stylesheets="@Main.css" text="Log out" BorderPane.alignment="BOTTOM_RIGHT">
+         <graphic>
+            <ImageView fitHeight="43.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@pictures/icons8-logout-96.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <BorderPane.margin>
+            <Insets bottom="20.0" right="20.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
 </BorderPane>

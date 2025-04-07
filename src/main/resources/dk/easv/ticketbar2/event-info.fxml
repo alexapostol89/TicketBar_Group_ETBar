@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="349.0" prefWidth="179.0" styleClass="backgroundC" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.EventDetailsController">
+<BorderPane prefHeight="349.0" prefWidth="179.0" styleClass="backgroundC" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.EventDetailsController">
    <center>
       <FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="264.0" prefWidth="600.0">
          <children>
@@ -109,10 +117,29 @@
          <children>
             <HBox alignment="CENTER" prefHeight="61.0" prefWidth="668.0">
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handlePrintTickets" styleClass="buttons" stylesheets="@Main.css" text="Print Ticket">
+                  <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#onActionDelete" prefHeight="25.0" prefWidth="61.0" styleClass="buttons" stylesheets="@Main.css">
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pictures/icons8-trash-48.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handlePrintTickets" prefHeight="25.0" prefWidth="61.0" styleClass="buttons" stylesheets="@Main.css">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pictures/icons8-printer-100.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" styleClass="buttons" stylesheets="@Main.css" text="E-mail Ticket">
                      <HBox.margin>

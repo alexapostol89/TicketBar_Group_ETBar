@@ -10,18 +10,69 @@ import dk.easv.ticketbar2.dal.exceptions.EventsException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class EventDetailsController {
 
     @FXML
+    private Button deleteBtn;
+
+    @FXML
     private Label nameLabel, startDateLabel, endDateLabel, locationLabel, descriptionLabel, coordinatorLabel, guideLabel, notesLabel;
     private final EventsManager eventsManager = new EventsManager();
-
+    private CoordinatorController coordinatorController;
     private int eventID; // Store the current event ID
+
+    public void setCoordinatorController(CoordinatorController coordinatorController) {
+        this.coordinatorController = coordinatorController;
+    }
+
+    // Method to delete the selected event from the app and database
+    @FXML
+    private void onActionDelete(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Deletion");
+        alert.setHeaderText("Are you sure you want to delete this event?");
+        alert.setContentText("This action cannot be undone.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        boolean success = false;
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                success = eventsManager.deleteEvent(eventID);
+                if (success) {
+                    System.out.println("Event deleted successfully.");
+
+                    // Close current window
+                    Stage stage = (Stage) deleteBtn.getScene().getWindow();
+                    stage.close();
+                } else {
+                    System.out.println("Failed to delete the event.");
+                }
+            } catch (EventsException e) {
+                e.printStackTrace();
+            }
+        }
+        if (success) {
+            System.out.println("Event deleted successfully.");
+
+            // Refresh the coordinator view if reference is set
+            if (coordinatorController != null) {
+                coordinatorController.refreshEvents();
+            }
+
+            // Close the current window
+            Stage stage = (Stage) deleteBtn.getScene().getWindow();
+            stage.close();
+        }
+    }
 
     public void populateEventInfo(int eventID) throws EventsException {
         this.eventID = eventID; // Store the event ID

@@ -32,8 +32,8 @@ public class CoordinatorController {
     private Label nameLabel, startDateLabel, descriptionLabel;
     @FXML
     private Button addEvents, editEvents;
-    @FXML
-    private Button deleteBtn;
+   // @FXML
+    //private Button deleteBtn;
 
     @FXML
     private FlowPane contentPane;  // FlowPane to dynamically add new images and labels
@@ -45,12 +45,12 @@ public class CoordinatorController {
     @FXML
     public void initialize() throws EventsException {
         // Initially disable the delete and edit buttons
-        deleteBtn.setDisable(true);
+        //deleteBtn.setDisable(true);
         editEvents.setDisable(true);
         loadExistingEvents();
         addEvents.setOnAction(event -> openAddEditEventWindow(null)); // Pass null for add mode
 
-        deleteBtn.setOnAction(this::onActionDelete);
+        //deleteBtn.setOnAction(this::onActionDelete);
 
         editEvents.setOnAction(event -> {
             if (lastSelectedVBox != null) {
@@ -128,6 +128,7 @@ public class CoordinatorController {
         VBox.setMargin(imageView, new javafx.geometry.Insets(0, 0, 5, 0));
         VBox.setMargin(label, new javafx.geometry.Insets(5, 0, 0, 0));
 
+
         vbox.getChildren().addAll(imageView, label);
 
         vbox.setOnMouseClicked(event -> {
@@ -142,7 +143,7 @@ public class CoordinatorController {
 
             // Enable edit and delete buttons when an event is selected
             editEvents.setDisable(false);
-            deleteBtn.setDisable(false);
+            //deleteBtn.setDisable(false);
 
             if (event.getClickCount() == 1) { // Show event details on single click
                 int clickedEventID = (int) imageView.getUserData();
@@ -167,14 +168,13 @@ public class CoordinatorController {
 
     // Open the details window for the selected event
     private void openDetailsWindow(int eventID) {
-        System.out.println("Opening details for event ID: " + eventID); // Debugging
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/event-info.fxml"));
             Parent root = loader.load();
 
-            // Get the EventInfo controller and pass the eventID
             EventDetailsController eventInfoController = loader.getController();
             eventInfoController.populateEventInfo(eventID);
+            eventInfoController.setCoordinatorController(this); // Pass reference!
 
             Stage stage = new Stage();
             stage.setTitle("Event Details");
@@ -185,49 +185,6 @@ public class CoordinatorController {
         }
     }
 
-
-    // Method to delete the selected event from the app and database
-    @FXML
-    private void onActionDelete(ActionEvent event) {
-        if (lastSelectedVBox != null) {
-            // Show confirmation alert
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirm Deletion");
-            alert.setHeaderText("Are you sure you want to delete this event?");
-            alert.setContentText("Event: " + nameLabel.getText() + "\n\nThis action cannot be undone.");
-
-            // Wait for user response
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                // Get the event ID from the selected event
-                ImageView imageView = (ImageView) lastSelectedVBox.getChildren().get(0); // First child is the image
-                int eventID = (int) imageView.getUserData();
-
-                // Delete the event from the database
-                try {
-                    boolean success = eventsManager.deleteEvent(eventID);
-                    if (success) {
-                        // Remove the event from the UI
-                        contentPane.getChildren().remove(lastSelectedVBox);
-                        System.out.println("Event deleted successfully from the database and UI.");
-                    } else {
-                        System.out.println("Failed to delete the event from the database.");
-                    }
-                } catch (EventsException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                System.out.println("Event deletion canceled.");
-            }
-        } else {
-            // Show a warning alert if no event is selected
-            Alert warningAlert = new Alert(Alert.AlertType.WARNING);
-            warningAlert.setTitle("No Event Selected");
-            warningAlert.setHeaderText(null);
-            warningAlert.setContentText("Please select an event to delete.");
-            warningAlert.showAndWait();
-        }
-    }
 
     public void refreshEvents() {
         try {
