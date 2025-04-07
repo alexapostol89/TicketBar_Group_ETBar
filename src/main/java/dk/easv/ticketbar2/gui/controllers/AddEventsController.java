@@ -128,7 +128,7 @@ public class AddEventsController {
             System.out.println("New event ID: " + eventID);
 
             if (coordinatorController != null) {
-                coordinatorController.updateCoordinatorView(eventName, selectedImagePath, eventID);
+                coordinatorController.updateCoordinatorView(eventName, selectedImagePath, eventID, startDate);
             }
         }
 

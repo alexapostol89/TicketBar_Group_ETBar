@@ -22,6 +22,8 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,7 +67,7 @@ public class CoordinatorController {
     public void loadExistingEvents() throws EventsException {
         List<Events> events = eventsManager.getEvents();
         for (Events event : events) {
-            updateCoordinatorView(event.getEventName(), event.getEventImagePath(), event.getEventID());
+            updateCoordinatorView(event.getEventName(), event.getEventImagePath(), event.getEventID(), event.getStartDateTime());
 
         }
     }
@@ -96,7 +98,7 @@ public class CoordinatorController {
 
 
     // Update the coordinator view with the list of events
-    public void updateCoordinatorView(String eventName, String imagePath, int eventID) {
+    public void updateCoordinatorView(String eventName, String imagePath, int eventID,String StartDateTime) {
         VBox vbox = new VBox();
         vbox.setSpacing(10);
 
@@ -121,15 +123,29 @@ public class CoordinatorController {
 
         Label label = new Label(eventName);
 
+        // Format StartDateTime string
+        String formattedDateTime = StartDateTime;
+        try {
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy ', ' HH:mm 'h'");
+            LocalDateTime dateTime = LocalDateTime.parse(StartDateTime, inputFormatter);
+            formattedDateTime = dateTime.format(outputFormatter);
+        } catch (Exception e) {
+            System.out.println("Error formatting date: " + e.getMessage());
+        }
+
+        Label date = new Label(formattedDateTime);
+
 
         label.setWrapText(true);
         label.setMaxWidth(200);
 
         VBox.setMargin(imageView, new javafx.geometry.Insets(0, 0, 5, 0));
         VBox.setMargin(label, new javafx.geometry.Insets(5, 0, 0, 0));
+        VBox.setMargin(date, new javafx.geometry.Insets(5, 0, 0, 0));
 
 
-        vbox.getChildren().addAll(imageView, label);
+        vbox.getChildren().addAll(imageView, label, date);
 
         vbox.setOnMouseClicked(event -> {
             // Remove the border from the previously selected event
@@ -145,19 +161,7 @@ public class CoordinatorController {
             editEvents.setDisable(false);
             //deleteBtn.setDisable(false);
 
-            if (event.getClickCount() == 1) { // Show event details on single click
-                int clickedEventID = (int) imageView.getUserData();
-                try {
-                    Events clickedEvent = eventsManager.getEventById(clickedEventID);
-                    if (clickedEvent != null) {
-                        nameLabel.setText(clickedEvent.getEventName());
-                        startDateLabel.setText(clickedEvent.getStartDateTime());
-                        descriptionLabel.setText(clickedEvent.getDescription());
-
-                    }
-                } catch (EventsException e) {
-                }
-            } else if (event.getClickCount() == 2) { // Open details window on double click
+           if (event.getClickCount() == 2) { // Open details window on double click
                 int clickedEventID = (int) imageView.getUserData();
                 openDetailsWindow(clickedEventID);
             }
@@ -196,7 +200,7 @@ public class CoordinatorController {
 
             // Rebuild the UI
             for (Events event : events) {
-                updateCoordinatorView(event.getEventName(), event.getEventImagePath(), event.getEventID());
+                updateCoordinatorView(event.getEventName(), event.getEventImagePath(), event.getEventID(), event.getStartDateTime());
             }
         } catch (EventsException e) {
             e.printStackTrace();
