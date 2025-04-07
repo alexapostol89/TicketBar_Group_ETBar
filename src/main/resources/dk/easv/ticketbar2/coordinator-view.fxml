@@ -14,51 +14,62 @@
 
 <BorderPane prefHeight="573.0" prefWidth="1089.0" styleClass="backgroundC" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.CoordinatorController">
    <right>
-      <GridPane alignment="TOP_RIGHT" prefHeight="164.0" prefWidth="405.0" styleClass="gridPane" stylesheets="@Main.css" BorderPane.alignment="CENTER">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.199951171875" minWidth="10.0" prefWidth="150.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="372.59996795654297" minWidth="10.0" prefWidth="255.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="160.59998168945313" minHeight="8.0" prefHeight="31.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="464.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Label text="Event  :">
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </Label>
-            <Label text="Start Date :" GridPane.rowIndex="1">
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </Label>
-            <Label text="Description :" GridPane.rowIndex="2">
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </Label>
-            <Label fx:id="nameLabel" GridPane.columnIndex="1" />
-            <Label fx:id="startDateLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="descriptionLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-         </children>
+      <VBox BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="400.0" />
          </BorderPane.margin>
-      </GridPane>
+         <children>
+            <GridPane alignment="TOP_RIGHT" prefHeight="102.0" prefWidth="279.0" styleClass="gridPane" stylesheets="@Main.css">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.199951171875" minWidth="10.0" prefWidth="150.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="372.59996795654297" minWidth="10.0" prefWidth="255.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="160.59998168945313" minHeight="8.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="464.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="Event  :">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Start Date :" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Description :" GridPane.rowIndex="2">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="nameLabel" GridPane.columnIndex="1" />
+                  <Label fx:id="startDateLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="descriptionLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
    </right>
    <center>
-      <FlowPane fx:id="contentPane" prefHeight="659.0" prefWidth="570.0" BorderPane.alignment="TOP_LEFT" />
+      <FlowPane fx:id="contentPane" prefHeight="486.0" prefWidth="908.0" BorderPane.alignment="TOP_LEFT" />
    </center>
    <left>
-      <VBox alignment="CENTER" prefHeight="512.0" prefWidth="70.0" styleClass="eventsC" stylesheets="@Main.css" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="502.0" prefWidth="57.0" styleClass="eventsC" stylesheets="@Main.css" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="addEvents" mnemonicParsing="false" prefHeight="33.0" prefWidth="63.0" styleClass="buttons" stylesheets="@Main.css" text="Add">
+            <Button fx:id="addEvents" mnemonicParsing="false" prefHeight="32.0" prefWidth="45.0" styleClass="buttons" stylesheets="@Main.css">
                <VBox.margin>
                   <Insets bottom="20.0" top="45.0" />
                </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@pictures/icons8-plus-40.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
             <Button fx:id="editEvents" layoutX="16.0" layoutY="101.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0" styleClass="buttons" stylesheets="@Main.css">
                <VBox.margin>
