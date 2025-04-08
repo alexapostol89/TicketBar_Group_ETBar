@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.AdminViewController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="adminBackground" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.AdminViewController">
    <tabs>
       <Tab fx:id="usersTab" text="Users">
          <content>
@@ -26,7 +26,7 @@
                      <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <TableView fx:id="usersTableView" prefHeight="428.0" prefWidth="639.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                              <TableView fx:id="usersTableView" prefHeight="428.0" prefWidth="639.0" style="-fx-opacity: 0.7;" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                  <columns>
                                     <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First Name" />
                                     <TableColumn fx:id="usernameColumn" prefWidth="75.0" text="Username" />
@@ -81,9 +81,9 @@
                               </GridPane>
                               <ButtonBar buttonMinWidth="80.0" prefHeight="40.0" prefWidth="281.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="5.0">
                                  <buttons>
-                                    <Button fx:id="addUserButton" mnemonicParsing="false" text="Add" />
-                                    <Button fx:id="editUserButton" mnemonicParsing="false" text="Edit" />
-                                    <Button fx:id="deleteUserButton" mnemonicParsing="false" text="Delete" />
+                                    <Button fx:id="addUserButton" mnemonicParsing="false" style="-fx-background-radius: 20;" text="Add" />
+                                    <Button fx:id="editUserButton" mnemonicParsing="false" style="-fx-background-radius: 20;" text="Edit" />
+                                    <Button fx:id="deleteUserButton" mnemonicParsing="false" style="-fx-background-radius: 20;" text="Delete" />
                                  </buttons>
                               </ButtonBar>
                               <GridPane prefHeight="60.0" prefWidth="170.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="25.0">
@@ -105,8 +105,8 @@
                                     </Label>
                                  </children>
                               </GridPane>
-                              <TextField fx:id="usernameTextField" layoutX="14.0" layoutY="598.0" prefHeight="25.0" prefWidth="170.0" promptText="Username" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="25.0" />
-                              <Button fx:id="signOutButton1" layoutX="409.0" layoutY="636.0" mnemonicParsing="false" prefWidth="80.0" text="Sign out" AnchorPane.bottomAnchor="27.0" AnchorPane.rightAnchor="30.0" />
+                              <TextField fx:id="usernameTextField" layoutX="14.0" layoutY="598.0" prefHeight="25.0" prefWidth="170.0" promptText="Username" style="-fx-background-radius: 20;" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="25.0" />
+                              <Button fx:id="signOutButton1" layoutX="409.0" layoutY="636.0" mnemonicParsing="false" prefWidth="80.0" style="-fx-background-radius: 20;" text="Sign out" AnchorPane.bottomAnchor="27.0" AnchorPane.rightAnchor="30.0" />
                            </children>
                         </AnchorPane>
                      </items>
@@ -122,7 +122,7 @@
                      <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <TableView fx:id="eventsTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                              <TableView fx:id="eventsTableView" prefHeight="200.0" prefWidth="200.0" style="-fx-opacity: 0.7;;" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                  <columns>
                                     <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
                                     <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Date &amp; Time" />
@@ -200,12 +200,12 @@
                               </GridPane>
                               <ButtonBar buttonMinWidth="80.0" prefHeight="40.0" prefWidth="235.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="5.0">
                                  <buttons>
-                                    <Button fx:id="assignCoordinatorButton" mnemonicParsing="false" prefWidth="125.0" text="Assign Coordinator" />
-                                    <Button fx:id="deleteEventButton" maxWidth="80.0" mnemonicParsing="false" text="Delete" />
+                                    <Button fx:id="assignCoordinatorButton" mnemonicParsing="false" prefWidth="125.0" style="-fx-background-radius: 20;" text="Assign Coordinator" />
+                                    <Button fx:id="deleteEventButton" maxWidth="80.0" mnemonicParsing="false" style="-fx-background-radius: 20;" text="Delete" />
                                  </buttons>
                               </ButtonBar>
-                              <Button fx:id="signOutButton2" mnemonicParsing="false" prefWidth="80.0" text="Sign out" AnchorPane.bottomAnchor="27.0" AnchorPane.rightAnchor="30.0" />
-                              <TextField fx:id="eventNameTextField" prefHeight="25.0" prefWidth="170.0" promptText="Event Name" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="25.0" />
+                              <Button fx:id="signOutButton2" mnemonicParsing="false" prefWidth="80.0" style="-fx-background-radius: 20;" text="Sign out" AnchorPane.bottomAnchor="27.0" AnchorPane.rightAnchor="30.0" />
+                              <TextField fx:id="eventNameTextField" prefHeight="25.0" prefWidth="170.0" promptText="Event Name" style="-fx-background-radius: 20;" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="25.0" />
                            </children></AnchorPane>
                      </items>
                   </SplitPane>

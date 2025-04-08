@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="290.0" prefWidth="488.0" styleClass="backgroundC" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.SaveTicketsController">
+<AnchorPane prefHeight="290.0" prefWidth="488.0" styleClass="backgroundE" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.SaveTicketsController">
     <children>
         <Label layoutX="44.0" layoutY="14.0" prefHeight="35.0" prefWidth="200.0" text="Add New Tickets">
             <font>
@@ -65,7 +65,7 @@
                         </HBox>
                         <HBox alignment="CENTER">
                             <children>
-                                <Button fx:id="btnPrintTickets" layoutX="185.0" layoutY="10.0" mnemonicParsing="false" onAction="#handlePrintTickets" text="Print Tickets">
+                                <Button fx:id="btnPrintTickets" layoutX="185.0" layoutY="10.0" mnemonicParsing="false" onAction="#handlePrintTickets" styleClass="saveCancel" stylesheets="@Main.css" text="Print Tickets">
                                     <HBox.margin>
                                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                                     </HBox.margin>

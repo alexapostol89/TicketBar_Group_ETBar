@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" styleClass="backgroundC" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.AddEventsController">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" styleClass="backgroundE" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.AddEventsController">
 
    <VBox alignment="TOP_CENTER" spacing="15" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
       <padding>
@@ -105,8 +105,8 @@
       </HBox>
 
       <HBox alignment="CENTER" spacing="20">
-         <Button fx:id="btnSave" prefWidth="100" styleClass="buttons" text="Save" />
-         <Button fx:id="btnCancel" prefWidth="100" styleClass="buttons" text="Cancel" />
+         <Button fx:id="btnSave" prefWidth="100" styleClass="saveCancel" stylesheets="@Main.css" text="Save" />
+         <Button fx:id="btnCancel" prefWidth="100" styleClass="saveCancel" stylesheets="@Main.css" text="Cancel" />
       </HBox>
    </VBox>
 </AnchorPane>

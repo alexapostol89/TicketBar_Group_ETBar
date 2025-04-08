@@ -7,7 +7,15 @@
 }
 
 . backgroundC {
-    -fx-background-image: url("pictures/11.jpg");
+    -fx-background-image: url("pictures/14.jpg");
+    -fx-background-size: cover; /* Ensures the image covers the entire element */
+    -fx-background-position: center; /* Centers the image */
+    -fx-background-repeat: no-repeat;
+}
+
+
+. backgroundE {
+    -fx-background-image: url("pictures/background.png");
     -fx-background-size: cover; /* Ensures the image covers the entire element */
     -fx-background-position: center; /* Centers the image */
     -fx-background-repeat: no-repeat;
@@ -84,4 +92,8 @@
     -fx-text-alignment: center;
 }
 
-
+. saveCancel {
+    -fx-background-color: B2B2B2;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}

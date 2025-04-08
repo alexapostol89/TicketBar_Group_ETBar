@@ -4,21 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="backgroundLogin" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="665.0" styleClass="backgroundLogin" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.LoginController">
     <children>
-        <Label layoutX="350.0" layoutY="-3.0" prefHeight="408.0" prefWidth="251.0" styleClass="labelB" stylesheets="@Main.css" AnchorPane.rightAnchor="0.0" />
-        <ImageView fitHeight="54.0" fitWidth="200.0" layoutX="7.0" layoutY="8.0" AnchorPane.bottomAnchor="338.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="393.0" AnchorPane.topAnchor="8.0">
-            <image>
-                <Image url="@pictures/easv-logo.png" />
-            </image>
-        </ImageView>
-        <TextField fx:id="usernameTextfield" layoutX="375.0" layoutY="113.0" prefHeight="25.0" prefWidth="200.0" promptText="Username" styleClass="labelLogin" stylesheets="@Main.css" AnchorPane.rightAnchor="25.0" />
-        <PasswordField fx:id="passwordTextfield" layoutX="376.0" layoutY="188.0" prefHeight="25.0" prefWidth="200.0" promptText="Password" styleClass="labelLogin" stylesheets="@Main.css" AnchorPane.rightAnchor="25.0" />
-        <Button fx:id="togglePasswordButton" layoutX="541.0" layoutY="226.0" onAction="#togglePasswordVisibility" style="-fx-background-color: white;" text="Show" AnchorPane.rightAnchor="25.0" />
-        <Button layoutX="426.0" layoutY="273.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: grey;" styleClass="labelLogin" stylesheets="@Main.css" text="Sign in" AnchorPane.rightAnchor="25.0" />
+        <Label layoutX="350.0" layoutY="-3.0" prefHeight="408.0" prefWidth="265.0" styleClass="labelB" stylesheets="@Main.css" AnchorPane.rightAnchor="0.0" />
+        <TextField fx:id="usernameTextfield" layoutX="414.0" layoutY="135.0" prefHeight="30.0" prefWidth="220.0" promptText="Username" styleClass="labelLogin" stylesheets="@Main.css" AnchorPane.rightAnchor="34.0" />
+        <PasswordField fx:id="passwordTextfield" layoutX="431.0" layoutY="215.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" style="-fx-background-radius: 20; -fx-border-radius: 20;" styleClass="labelLogin" stylesheets="@Main.css" AnchorPane.rightAnchor="34.0" />
+        <Button fx:id="togglePasswordButton" layoutX="595.0" layoutY="259.0" onAction="#togglePasswordVisibility" style="-fx-background-color: white;" text="Show" AnchorPane.rightAnchor="25.0" />
+        <Button layoutX="540.0" layoutY="314.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: grey;" styleClass="labelLogin" stylesheets="@Main.css" text="Sign in" AnchorPane.rightAnchor="25.0" />
     </children>
 </AnchorPane>

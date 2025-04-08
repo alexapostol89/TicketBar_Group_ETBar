@@ -33,3 +33,10 @@
 .split-pane > .split-pane-divider {
     -fx-background-color: transparent;  /* Make the divider blend in */
 }
+
+. adminBackground {
+    -fx-background-image: url("pictures/14.jpg");
+    -fx-background-size: cover; /* Ensures the image covers the entire element */
+    -fx-background-position: center; /* Centers the image */
+    -fx-background-repeat: no-repeat;
+}
