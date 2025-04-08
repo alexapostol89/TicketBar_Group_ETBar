@@ -9,6 +9,7 @@ import dk.easv.ticketbar2.dal.exceptions.EventsException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -92,8 +93,14 @@ public class CoordinatorController {
 
 
         vbox.setPadding(new javafx.geometry.Insets(10));
-        vbox.setStyle("-fx-border-color: transparent; -fx-border-width: 2;"); // Default no border
-        vbox.setStyle("-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0)");
+        vbox.setStyle(" -fx-background-color: #ffffff;\n" +
+                "    -fx-background-radius: 15;\n" +
+                "    -fx-border-radius: 15;\n" +
+                "    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 4);\n" +
+                "    -fx-padding: 10;\n" +
+                "    -fx-spacing: 10;\n" +
+                "    -fx-alignment: top_center;");
+
 
 
         ImageView imageView = new ImageView();
@@ -138,11 +145,15 @@ public class CoordinatorController {
         vbox.setOnMouseClicked(event -> {
             // Remove the border from the previously selected event
             if (lastSelectedVBox != null) {
-                lastSelectedVBox.setStyle("-fx-border-color: transparent; -fx-border-width: 2;");
+                String cleanedStyle = lastSelectedVBox.getStyle().replaceAll("-fx-border-color: #[0-9A-Fa-f]{6};?", "")
+                        .replaceAll("-fx-border-width: \\d+;", "");
+                lastSelectedVBox.setStyle(cleanedStyle);
+            }
+            // Now apply selection highlight
+            if (!vbox.getStyle().contains("-fx-border-color")) {
+                vbox.setStyle(vbox.getStyle() + " -fx-border-color: #53D2DC; -fx-border-width: 2;");
             }
 
-            // Apply a blue border to the selected event
-            vbox.setStyle("-fx-border-color: #9AD0E7; -fx-border-width: 2; -fx-border-radius: 5;");
             lastSelectedVBox = vbox;
 
             // Enable edit and delete buttons when an event is selected
@@ -154,6 +165,7 @@ public class CoordinatorController {
             }
         });
 
+        contentPane.setMargin(vbox, new Insets(10, 10, 10, 10)); // Top, Right, Bottom, Left
         contentPane.getChildren().add(vbox);
     }
 
