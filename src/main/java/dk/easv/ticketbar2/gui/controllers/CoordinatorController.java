@@ -1,7 +1,10 @@
 package dk.easv.ticketbar2.gui.controllers;
 
 import dk.easv.ticketbar2.be.Events;
+import dk.easv.ticketbar2.be.Users;
 import dk.easv.ticketbar2.bll.EventsManager;
+import dk.easv.ticketbar2.bll.SessionManager;
+import dk.easv.ticketbar2.bll.UsersManager;
 import dk.easv.ticketbar2.dal.exceptions.EventsException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,17 +33,25 @@ import java.util.Optional;
 public class CoordinatorController {
 
     @FXML
+    private Label userName;
+    @FXML
     private Button addEvents, editEvents;
     @FXML
     private FlowPane contentPane;  // FlowPane to dynamically add new images and labels
 
     private final EventsManager eventsManager = new EventsManager();
+    private final UsersManager userManager = new UsersManager();
+    private final SessionManager sessionManager = new SessionManager();
 
     private VBox lastSelectedVBox = null; // Track the last selected event
 
+
     @FXML
     public void initialize() throws EventsException {
-        // Initially disable the delete and edit buttons
+
+        int userID = SessionManager.getCurrentUserID();
+        String fullName = userManager.getFullNameByUserID(userID);
+        userName.setText(fullName);
 
         loadExistingEvents();
         addEvents.setOnAction(event -> openAddEditEventWindow(null)); // Pass null for add mode

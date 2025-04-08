@@ -122,5 +122,7 @@ public class Users {
     public void setRankName(String rankName) {
         RankName = rankName;
     }
+
+
 }
 

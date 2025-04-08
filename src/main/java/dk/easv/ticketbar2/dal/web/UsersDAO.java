@@ -82,49 +82,69 @@ public class UsersDAO {
         } catch (SQLException e) {
             throw new EventsException("Error retrieving UserID for: " + fullName);
         }
-        }
-        //DAVID METHOD'S
-        // Validate User sign or log in
-        public Users validateUser(String username, String password) {
-            String sql = "SELECT u.UserID, u.Username, u.PasswordHash, u.Rank, ur.rank AS RankName, u.LastLogin FROM Users u " +
-                    "JOIN User_rank ur ON u.Rank = ur.id " +
-                    "WHERE u.Username = ?";
-            String updateLastLoginSQL = "UPDATE Users SET LastLogin = ? WHERE UserID = ?"; // SQL to update the LastLogin field
-            try {
-                Connection c = conn.getConnection();
-                PreparedStatement stmt = c.prepareStatement(sql);
+    }
 
-                // Set parameters to prevent SQL injection
-                stmt.setString(1, username);
+    public String getFullNameByUserID(int userID) throws EventsException {
+        String sql = "SELECT FirstName, LastName FROM Users WHERE UserID = ?";
+        try (Connection c = conn.getConnection();
+             PreparedStatement stmt = c.prepareStatement(sql)) {
 
-                ResultSet rs = stmt.executeQuery();
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
 
-                if (rs.next()) {
-                    String hashedPassword = rs.getString("PasswordHash");
-                    // Use BCrypt to check if the raw password matches the stored hash
-                    if (passwordEncoder.matches(password, hashedPassword)) {
-                        Users users = new Users();
-                        users.setUserid(rs.getInt("UserID"));
-                        users.setUsername(rs.getString("Username"));
-                        users.setPasswordHash(rs.getString("PasswordHash"));
-                        users.setRank(rs.getInt("Rank"));
-                        users.setRankName(rs.getString("RankName"));
-                        users.setLastLogin(rs.getTimestamp("LastLogin")); // Fetch last login timestamp
-
-                        // Update the lastLogin field to the current timestamp
-                        try (PreparedStatement updateStmt = c.prepareStatement(updateLastLoginSQL)) {
-                            updateStmt.setTimestamp(1, new Timestamp(System.currentTimeMillis())); // Set current time
-                            updateStmt.setInt(2, users.getUserid()); // Set the UserID
-                            updateStmt.executeUpdate();
-                        }
-                        return users;
-                    }
-                }
-            } catch (SQLException e) {
-                throw new UsersException(e.getMessage());
+            if (rs.next()) {
+                return rs.getString("FirstName") + " " + rs.getString("LastName");
+            } else {
+                throw new EventsException("User not found with ID: " + userID);
             }
-            return null;
+        } catch (SQLException e) {
+            throw new EventsException("Error retrieving name for UserID: " + userID);
         }
+    }
+
+
+    //DAVID METHOD'S
+    // Validate User sign or log in
+    public Users validateUser(String username, String password) {
+        String sql = "SELECT u.UserID, u.Username, u.PasswordHash, u.Rank, ur.rank AS RankName, u.LastLogin FROM Users u " +
+                "JOIN User_rank ur ON u.Rank = ur.id " +
+                "WHERE u.Username = ?";
+        String updateLastLoginSQL = "UPDATE Users SET LastLogin = ? WHERE UserID = ?"; // SQL to update the LastLogin field
+        try {
+            Connection c = conn.getConnection();
+            PreparedStatement stmt = c.prepareStatement(sql);
+
+            // Set parameters to prevent SQL injection
+            stmt.setString(1, username);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String hashedPassword = rs.getString("PasswordHash");
+                // Use BCrypt to check if the raw password matches the stored hash
+                if (passwordEncoder.matches(password, hashedPassword)) {
+                    Users users = new Users();
+                    users.setUserid(rs.getInt("UserID"));
+                    users.setUsername(rs.getString("Username"));
+                    users.setPasswordHash(rs.getString("PasswordHash"));
+                    users.setRank(rs.getInt("Rank"));
+                    users.setRankName(rs.getString("RankName"));
+                    users.setLastLogin(rs.getTimestamp("LastLogin")); // Fetch last login timestamp
+
+                    // Update the lastLogin field to the current timestamp
+                    try (PreparedStatement updateStmt = c.prepareStatement(updateLastLoginSQL)) {
+                        updateStmt.setTimestamp(1, new Timestamp(System.currentTimeMillis())); // Set current time
+                        updateStmt.setInt(2, users.getUserid()); // Set the UserID
+                        updateStmt.executeUpdate();
+                    }
+                    return users;
+                }
+            }
+        } catch (SQLException e) {
+            throw new UsersException(e.getMessage());
+        }
+        return null;
+    }
 
     // Get all users from the database
     public ObservableList<Users> getAllUsers() {

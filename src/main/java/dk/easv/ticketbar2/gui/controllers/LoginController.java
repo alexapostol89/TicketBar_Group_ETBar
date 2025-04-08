@@ -1,6 +1,7 @@
 package dk.easv.ticketbar2.gui.controllers;
 
 import dk.easv.ticketbar2.be.Users;
+import dk.easv.ticketbar2.bll.SessionManager;
 import dk.easv.ticketbar2.bll.UsersManager;
 import dk.easv.ticketbar2.dal.web.UsersDAO;
 import javafx.application.Platform;
@@ -26,6 +27,8 @@ public class LoginController {
 
     @FXML
     private Button togglePasswordButton;
+
+
 
     // Method to toggle password visibility
     @FXML
@@ -86,6 +89,7 @@ public class LoginController {
         Users user = usersDAO.validateUser(username, password);
         if (user != null) {
             System.out.println("User found: " + user.getRankName()); // Debug
+
         } else {
             System.out.println("User not found or password incorrect"); // Debug
         }
@@ -104,6 +108,9 @@ public class LoginController {
         // Validate Coordinator Login
         else if (usersManager.validateCoordinator(username, password)) {
             try {
+                if (user != null) {
+                    SessionManager.setCurrentUserID(user.getUserid()); // <--- Set current user in session
+                }
                 openCoordinator();
                 closeLoginWindow(actionEvent);  // Close the login window after successful login
             } catch (Exception e) {
@@ -144,6 +151,7 @@ public class LoginController {
 
     // Method to open Coordinator dashboard
     private void openCoordinator() throws Exception {
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/coordinator-view.fxml"));
             Parent root = loader.load();
@@ -173,5 +181,6 @@ public class LoginController {
             alert.setContentText(message);
             alert.showAndWait();
         }
+
     }
 

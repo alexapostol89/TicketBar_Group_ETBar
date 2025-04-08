@@ -23,6 +23,12 @@ public class UsersManager {
         return usersDAO.getUserIDByName(fullName); // Calls the DAO method properly
     }
 
+    public String getFullNameByUserID(int userID) throws EventsException {
+        return usersDAO.getFullNameByUserID(userID);
+    }
+
+
+
     //DAVID METHOD'S
     // Method to validate Admin login
     public boolean validateAdmin(String username, String password) {
