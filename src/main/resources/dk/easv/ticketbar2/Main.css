@@ -1,6 +1,6 @@
 
 . backgroundLogin {
-    -fx-background-image: url("pictures/123.jpg");
+    -fx-background-image: url("pictures/001.jpg");
     -fx-background-size: cover; /* Ensures the image covers the entire element */
     -fx-background-position: center; /* Centers the image */
     -fx-background-repeat: no-repeat;

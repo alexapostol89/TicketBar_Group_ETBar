@@ -115,7 +115,7 @@ public class CoordinatorController {
         String formattedDateTime = StartDateTime;
         try {
             DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy ', ' HH:mm 'h'");
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM '-' HH:mm");
             LocalDateTime dateTime = LocalDateTime.parse(StartDateTime, inputFormatter);
             formattedDateTime = dateTime.format(outputFormatter);
         } catch (Exception e) {
