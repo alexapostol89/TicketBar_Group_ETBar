@@ -156,7 +156,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" styleClass="buttons" stylesheets="@Main.css" text="E-mail Ticket">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#sendTicketsByEmail" styleClass="buttons" stylesheets="@Main.css" text="E-mail Ticket">
                      <HBox.margin>
                         <Insets left="20.0" right="20.0" />
                      </HBox.margin>

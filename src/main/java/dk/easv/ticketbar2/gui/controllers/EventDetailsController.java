@@ -156,6 +156,17 @@ public class EventDetailsController {
         }
     }
 
+    @FXML
+    public void sendTicketsByEmail(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Email Status");
+        alert.setHeaderText(null);
+        alert.setContentText("Email sent");
+
+        alert.showAndWait();
+
+    }
+
 
     // Setter for eventID (for setting eventID in this controller)
     public void setEventID(int eventID) {
