@@ -1,7 +1,6 @@
 package dk.easv.ticketbar2.gui.controllers;
 
 import dk.easv.ticketbar2.be.Events;
-import dk.easv.ticketbar2.be.Users;
 import dk.easv.ticketbar2.bll.EventsManager;
 import dk.easv.ticketbar2.bll.SessionManager;
 import dk.easv.ticketbar2.bll.UsersManager;
@@ -13,9 +12,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,36 +26,39 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 
 public class CoordinatorController {
 
     @FXML
     private Label userName;
     @FXML
-    private Button addEvents, editEvents;
+    private Button addEvents;
     @FXML
-    private FlowPane contentPane;  // FlowPane to dynamically add new images and labels
+    private FlowPane contentPane;
 
     private final EventsManager eventsManager = new EventsManager();
     private final UsersManager userManager = new UsersManager();
     private final SessionManager sessionManager = new SessionManager();
 
-    private VBox lastSelectedVBox = null; // Track the last selected event
-
+    private VBox lastSelectedVBox = null;
 
     @FXML
     public void initialize() throws EventsException {
-
         int userID = SessionManager.getCurrentUserID();
         String fullName = userManager.getFullNameByUserID(userID);
         userName.setText(fullName);
 
         loadExistingEvents();
-        addEvents.setOnAction(event -> openAddEditEventWindow(null)); // Pass null for add mode
+
+        addEvents.setOnAction(event -> openAddEditEventWindow(null));
+        if (!contentPane.getChildren().contains(addEvents)) {
+            contentPane.getChildren().add(addEvents);
+        }
+
+
+        //contentPane.getChildren().add(addEvents); // Ensure add button is added initially
     }
 
-    // Load existing events into the content pane
     public void loadExistingEvents() throws EventsException {
         List<Events> events = eventsManager.getEvents();
         for (Events event : events) {
@@ -66,15 +66,13 @@ public class CoordinatorController {
         }
     }
 
-    // Open the "Add Event" window
     private void openAddEditEventWindow(Integer eventID) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/add-event.fxml"));
             Parent root = loader.load();
 
             AddEventsController editEventsController = loader.getController();
-            editEventsController.setCoordinatorController(this);
-
+            editEventsController.setCoordinatorController(this); // Allow callback
 
             Stage stage = new Stage();
             stage.setTitle(eventID != null ? "Edit Event" : "Add Event");
@@ -82,26 +80,23 @@ public class CoordinatorController {
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException | EventsException e) {
+            e.printStackTrace();
         }
     }
 
-
-    // Update the coordinator view with the list of events
-    public void updateCoordinatorView(String eventName, String imagePath, int eventID,String StartDateTime) {
+    public void updateCoordinatorView(String eventName, String imagePath, int eventID, String startDateTime) {
         VBox vbox = new VBox();
         vbox.setSpacing(10);
-
-
-        vbox.setPadding(new javafx.geometry.Insets(10));
-        vbox.setStyle(" -fx-background-color: #ffffff;\n" +
-                "    -fx-background-radius: 15;\n" +
-                "    -fx-border-radius: 15;\n" +
-                "    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 4);\n" +
-                "    -fx-padding: 10;\n" +
-                "    -fx-spacing: 10;\n" +
-                "    -fx-alignment: top_center;");
-
-
+        vbox.setPadding(new Insets(10));
+        vbox.setStyle(
+                "-fx-background-color: #ffffff;" +
+                        "-fx-background-radius: 15;" +
+                        "-fx-border-radius: 15;" +
+                        "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 4);" +
+                        "-fx-padding: 10;" +
+                        "-fx-spacing: 10;" +
+                        "-fx-alignment: top_center;"
+        );
 
         ImageView imageView = new ImageView();
         if (imagePath != null && !imagePath.isEmpty()) {
@@ -113,17 +108,17 @@ public class CoordinatorController {
                 imageView.setFitWidth(200);
             }
         }
-
         imageView.setUserData(eventID);
 
         Label label = new Label(eventName);
+        label.setWrapText(true);
+        label.setMaxWidth(200);
 
-        // Format StartDateTime string
-        String formattedDateTime = StartDateTime;
+        String formattedDateTime = startDateTime;
         try {
             DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
             DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM '-' HH:mm");
-            LocalDateTime dateTime = LocalDateTime.parse(StartDateTime, inputFormatter);
+            LocalDateTime dateTime = LocalDateTime.parse(startDateTime, inputFormatter);
             formattedDateTime = dateTime.format(outputFormatter);
         } catch (Exception e) {
             System.out.println("Error formatting date: " + e.getMessage());
@@ -131,45 +126,39 @@ public class CoordinatorController {
 
         Label date = new Label(formattedDateTime);
 
-
-        label.setWrapText(true);
-        label.setMaxWidth(200);
-
-        VBox.setMargin(imageView, new javafx.geometry.Insets(0, 0, 5, 0));
-        VBox.setMargin(label, new javafx.geometry.Insets(5, 0, 0, 0));
-        VBox.setMargin(date, new javafx.geometry.Insets(5, 0, 0, 0));
-
+        VBox.setMargin(imageView, new Insets(0, 0, 5, 0));
+        VBox.setMargin(label, new Insets(5, 0, 0, 0));
+        VBox.setMargin(date, new Insets(5, 0, 0, 0));
 
         vbox.getChildren().addAll(imageView, label, date);
 
         vbox.setOnMouseClicked(event -> {
-            // Remove the border from the previously selected event
             if (lastSelectedVBox != null) {
                 String cleanedStyle = lastSelectedVBox.getStyle().replaceAll("-fx-border-color: #[0-9A-Fa-f]{6};?", "")
                         .replaceAll("-fx-border-width: \\d+;", "");
                 lastSelectedVBox.setStyle(cleanedStyle);
             }
-            // Now apply selection highlight
-            if (!vbox.getStyle().contains("-fx-border-color")) {
-                vbox.setStyle(vbox.getStyle() + " -fx-border-color: #53D2DC; -fx-border-width: 2;");
-            }
 
+            vbox.setStyle(vbox.getStyle() + " -fx-border-color: #53D2DC; -fx-border-width: 2;");
             lastSelectedVBox = vbox;
 
-            // Enable edit and delete buttons when an event is selected
-
-
-           if (event.getClickCount() == 2) { // Open details window on double click
+            if (event.getClickCount() == 2) {
                 int clickedEventID = (int) imageView.getUserData();
                 openDetailsWindow(clickedEventID);
             }
         });
 
-        contentPane.setMargin(vbox, new Insets(10, 10, 10, 10)); // Top, Right, Bottom, Left
-        contentPane.getChildren().add(vbox);
+        contentPane.setMargin(vbox, new Insets(10, 10, 10, 10));
+
+        // Insert event before the add button
+        int addButtonIndex = contentPane.getChildren().indexOf(addEvents);
+        if (addButtonIndex != -1) {
+            contentPane.getChildren().add(addButtonIndex, vbox);
+        } else {
+            contentPane.getChildren().add(vbox); // fallback
+        }
     }
 
-    // Open the details window for the selected event
     private void openDetailsWindow(int eventID) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/event-info.fxml"));
@@ -177,7 +166,7 @@ public class CoordinatorController {
 
             EventDetailsController eventInfoController = loader.getController();
             eventInfoController.populateEventInfo(eventID);
-            eventInfoController.setCoordinatorController(this); // Pass reference!
+            eventInfoController.setCoordinatorController(this);
 
             Stage stage = new Stage();
             stage.setTitle("Event Details");
@@ -188,34 +177,28 @@ public class CoordinatorController {
         }
     }
 
-
     public void refreshEvents() {
         try {
-            // Clear existing events
+            Node addButton = addEvents;
             contentPane.getChildren().clear();
 
-            // Reload events from database
             List<Events> events = eventsManager.getEvents();
-
-            // Rebuild the UI
             for (Events event : events) {
                 updateCoordinatorView(event.getEventName(), event.getEventImagePath(), event.getEventID(), event.getStartDateTime());
             }
+
+            contentPane.getChildren().add(addButton); // ensure Add button is always last
         } catch (EventsException e) {
             e.printStackTrace();
-            // Show error message if needed
         }
     }
 
-    // Method for logging out
     @FXML
     private void logout(ActionEvent event) {
         try {
-            // Load Login screen
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/login-view.fxml"));
             Parent root = loader.load();
 
-            // Close the current stage
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.close();
 
@@ -228,6 +211,3 @@ public class CoordinatorController {
         }
     }
 }
-
-
-

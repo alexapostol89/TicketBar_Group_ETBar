@@ -20,7 +20,21 @@
       </VBox>
    </right>
    <center>
-      <FlowPane fx:id="contentPane" prefHeight="522.0" prefWidth="1011.0" />
+      <FlowPane fx:id="contentPane" prefHeight="522.0" prefWidth="1011.0">
+         <children>
+            <Button fx:id="addEvents" mnemonicParsing="false" prefHeight="233.0" prefWidth="210.0" styleClass="buttons" stylesheets="@Main.css">
+               <graphic>
+                  <ImageView fitHeight="294.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@pictures/icons8-add-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <FlowPane.margin>
+                  <Insets left="9.0" />
+               </FlowPane.margin>
+            </Button>
+         </children></FlowPane>
    </center>
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="957.0" styleClass="eventsC" stylesheets="@Main.css" BorderPane.alignment="CENTER">
@@ -36,18 +50,6 @@
                   <Cursor fx:constant="SW_RESIZE" />
                </cursor>
             </ImageView>
-            <Button fx:id="addEvents" mnemonicParsing="false" prefHeight="60.0" prefWidth="52.0" styleClass="buttons" stylesheets="@Main.css">
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@pictures/icons8-add-50.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </Button>
             <HBox alignment="TOP_RIGHT" prefHeight="52.0" prefWidth="880.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Hello , ">
