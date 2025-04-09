@@ -134,7 +134,7 @@ public class EventsDAO {
             stmt.setInt(1, eventId);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return new Events(
+                Events event = new Events(
                         rs.getInt("EventID"),
                         rs.getString("EventName"),
                         rs.getString("StartDateTime"),
@@ -146,6 +146,8 @@ public class EventsDAO {
                         rs.getInt("CoordinatorID"),
                         rs.getString("EventImagePath")
                 );
+
+                return event;
             }
         } catch (SQLException e) {
             throw new EventsException(e);
@@ -169,6 +171,26 @@ public class EventsDAO {
             throw new EventsException(e);
         }
         return username;
+    }
+
+    public String getCoordinatorFullName(int coordinatorID) {
+        String fullName = null;
+        String sql = "SELECT FirstName, LastName FROM Users WHERE UserID = ?";
+
+        try (Connection conn = connection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, coordinatorID);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    fullName = rs.getString("FirstName") + " " + rs.getString("LastName");
+                }
+            }
+        } catch (SQLException e) {
+            throw new EventsException("Error retrieving coordinator full name.", e);
+        }
+
+        return fullName;
     }
 
     // Method to update the coordinator of the event

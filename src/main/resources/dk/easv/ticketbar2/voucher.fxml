@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="180.0" prefWidth="316.0" stylesheets="@voucher.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.Voucher">
+   <children>
+      <VBox layoutX="14.0" layoutY="14.0" prefHeight="176.0" prefWidth="192.0" spacing="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <children>
+            <Label fx:id="voucherTitle" styleClass="voucher-title" text="FREE DRINK VOUCHER" />
+            <Label fx:id="voucherSubtitle" prefHeight="41.0" prefWidth="143.0" styleClass="voucher-subtitle" text="Redeem for one drink of your choice" wrapText="true" />
+            <Label fx:id="voucherTerms" prefHeight="89.0" prefWidth="114.0" styleClass="voucher-terms" text="Valid at all locations. One-time use. Expires: 2025-12-31" wrapText="true" />
+         </children>
+      </VBox>
+      <StackPane layoutX="241.0" layoutY="36.0" prefHeight="100.0" prefWidth="100.0" styleClass="stack-pane" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="45.0">
+         <children>
+            <ImageView fx:id="qrImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

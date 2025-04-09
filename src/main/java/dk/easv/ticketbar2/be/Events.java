@@ -13,7 +13,11 @@ public class Events {
     private String EventImagePath;
 
 
-   public Events(int eventID, String eventName, String startDateTime, String endDateTime, String location, String description, String notes, String locationGuide, int coordinatorID, String eventImagePath) {
+
+    public Events(int eventID, String eventName, String startDateTime, String endDateTime,
+                  String location, String description, String notes, String locationGuide,
+                  int coordinatorID, String eventImagePath) {
+
         EventID = eventID;
         EventName = eventName;
         StartDateTime = startDateTime;
@@ -24,6 +28,8 @@ public class Events {
         LocationGuide = locationGuide;
         CoordinatorID = coordinatorID;
         EventImagePath = eventImagePath;
+
+
     }
 
     public String getDescription() {
@@ -105,4 +111,5 @@ public class Events {
     public void setEventImagePath(String eventImagePath) {
         EventImagePath = eventImagePath;
     }
+
 }

@@ -91,6 +91,8 @@ public class EventDetailsController {
         this.eventID = eventID; // Store the event ID
 
         Events event = eventsManager.getEventById(eventID);
+        String fullName = eventsManager.getCoordinatorFullName(event.getCoordinatorID());
+
 
         if (event != null) {
             nameLabel.setText(event.getEventName());
@@ -98,9 +100,10 @@ public class EventDetailsController {
             endDateLabel.setText(event.getEndDateTime());
             locationLabel.setText(event.getLocation());
             descriptionLabel.setText(event.getDescription());
-            coordinatorLabel.setText(String.valueOf(event.getCoordinatorID()));
+            coordinatorLabel.setText(fullName != null ? fullName : "Coordinator not assigned");
             guideLabel.setText(event.getLocationGuide());
             notesLabel.setText(event.getNotes());
+
         }
     }
 

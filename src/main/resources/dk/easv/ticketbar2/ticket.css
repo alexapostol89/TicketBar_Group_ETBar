@@ -42,3 +42,11 @@
 .directions {
     -fx-font-size: 12px;
 }
+
+.stack-pane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #bdc3c7;
+    -fx-border-width: 1;
+    -fx-padding: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0.5, 0, 1);
+}

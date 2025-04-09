@@ -52,6 +52,11 @@ public class EventsManager {
         return eventsDAO.getCoordinatorUsername(coordinatorID);
     }
 
+    // Get the coordinator's First name and Lastname as one
+    public String getCoordinatorFullName(int coordinatorID) {
+        return eventsDAO.getCoordinatorFullName(coordinatorID);
+    }
+
     // Method to update the event's coordinator
     public void updateEventCoordinator(Events event) {
         eventsDAO.updateEventCoordinator(event);

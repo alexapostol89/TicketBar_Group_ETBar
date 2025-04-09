@@ -29,7 +29,7 @@
         </Label>
         <Label fx:id="lblTime" layoutX="116.0" layoutY="207.0" styleClass="time" text="Time: 7PM" />
         <Label fx:id="lblTicketType" layoutX="116.0" layoutY="177.0" styleClass="subtitle" text="EarlyBird" />
-        <StackPane layoutX="616.0" layoutY="102.0" prefHeight="150.0" prefWidth="123.0">
+        <StackPane layoutX="616.0" layoutY="102.0" prefHeight="150.0" prefWidth="123.0" styleClass="stack-pane">
             <children>
                 <ImageView fx:id="imgQRCode" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="qr-code" />
             </children>
