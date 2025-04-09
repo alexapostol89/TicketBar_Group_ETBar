@@ -6,6 +6,7 @@ import dk.easv.ticketbar2.dal.exceptions.EventsException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -17,6 +18,9 @@ public class AddEventsController {
 
     @FXML
     private Button searchBtn;
+
+    @FXML
+    private Label imageFilePath;
 
 
     @FXML
@@ -32,6 +36,8 @@ public class AddEventsController {
     private final EventsManager eventsManager = new EventsManager();
 
     private Events eventToEdit;
+
+
 
     @FXML
     public void initialize() {
@@ -77,6 +83,7 @@ public class AddEventsController {
                 // Store relative path
                 selectedImagePath = "media/" + selectedFile.getName();
                 System.out.println("Image saved to: " + selectedImagePath);
+                imageFilePath.setText(selectedImagePath);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -146,7 +153,8 @@ public class AddEventsController {
             descriptionText.setText(event.getDescription());
             guidanceText.setText(event.getLocationGuide());
             notesText.setText(event.getNotes());
-            selectedImagePath = event.getEventImagePath();
+            imageFilePath.setText(event.getEventImagePath());
+
         }
     }
 

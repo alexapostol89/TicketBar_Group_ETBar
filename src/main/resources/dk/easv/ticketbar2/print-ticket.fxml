@@ -25,17 +25,17 @@
             <children>
                 <HBox alignment="CENTER" prefHeight="47.0" prefWidth="512.0">
                     <children>
-                        <TextField fx:id="txtTicketType" prefHeight="25.0" prefWidth="84.0" promptText="Ticket Name">
+                        <TextField fx:id="txtTicketType" prefHeight="25.0" prefWidth="84.0" promptText="Ticket Name" style="-fx-border-radius: 10; -fx-background-radius: 10;">
                             <HBox.margin>
                                 <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                             </HBox.margin>
                         </TextField>
-                        <TextField fx:id="txtCustomerName" layoutX="20.0" layoutY="20.0" prefHeight="25.0" prefWidth="110.0" promptText="Name">
+                        <TextField fx:id="txtCustomerName" layoutX="20.0" layoutY="20.0" prefHeight="25.0" prefWidth="110.0" promptText="Name" style="-fx-border-radius: 10; -fx-background-radius: 10;">
                             <HBox.margin>
                                 <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                             </HBox.margin>
                         </TextField>
-                        <TextField fx:id="txtCustomerEmail" layoutX="124.0" layoutY="13.0" prefHeight="25.0" prefWidth="120.0" promptText="example@mail.com">
+                        <TextField fx:id="txtCustomerEmail" layoutX="124.0" layoutY="13.0" prefHeight="25.0" prefWidth="120.0" promptText="example@mail.com" style="-fx-border-radius: 10; -fx-background-radius: 10;">
                             <HBox.margin>
                                 <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                             </HBox.margin>

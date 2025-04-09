@@ -19,7 +19,7 @@
       <FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="264.0" prefWidth="600.0">
          <children>
             <HBox alignment="CENTER" />
-            <GridPane prefHeight="266.0" prefWidth="595.0" styleClass="gridPane" stylesheets="@Main.css">
+            <GridPane prefHeight="266.0" prefWidth="595.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -93,13 +93,6 @@
       <VBox alignment="CENTER" prefHeight="397.0" prefWidth="68.0" styleClass="eventsC" stylesheets="@Main.css" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="33.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@pictures/icons8-back-64.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
                <VBox.margin>
                   <Insets bottom="50.0" />
                </VBox.margin></Button>
@@ -118,7 +111,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="61.0" prefWidth="668.0">
                <children>
-                  <Button fx:id="editEvents" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0" styleClass="buttons" stylesheets="@Main.css">
+                  <Button fx:id="editEvents" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0" style="-fx-background-color: white;" styleClass="buttons" stylesheets="@Main.css">
                      <graphic>
                         <ImageView fitHeight="31.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <cursor>
@@ -132,9 +125,9 @@
                      <HBox.margin>
                         <Insets left="20.0" right="20.0" />
                      </HBox.margin></Button>
-                  <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#onActionDelete" prefHeight="25.0" prefWidth="61.0" styleClass="buttons" stylesheets="@Main.css">
+                  <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#onActionDelete" prefHeight="25.0" prefWidth="61.0" style="-fx-background-color: white; -fx-background-radius: 20;">
                      <graphic>
-                        <ImageView fitHeight="27.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="28.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@pictures/icons8-trash-48.png" />
                            </image>
@@ -144,7 +137,19 @@
                         <Insets left="20.0" right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handlePrintTickets" prefHeight="25.0" prefWidth="61.0" styleClass="buttons" stylesheets="@Main.css">
+                  <Button fx:id="assignCoordinatorButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnAssignCoordinator" style="-fx-background-color: white;" styleClass="buttons" stylesheets="@Main.css">
+                     <HBox.margin>
+                        <Insets left="2.0" right="20.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="39.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pictures/icons8-add-user-80.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handlePrintTickets" prefHeight="25.0" prefWidth="61.0" style="-fx-background-color: white;" styleClass="buttons" stylesheets="@Main.css">
                      <HBox.margin>
                         <Insets left="20.0" right="20.0" />
                      </HBox.margin>
@@ -156,15 +161,17 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#sendTicketsByEmail" styleClass="buttons" stylesheets="@Main.css" text="E-mail Ticket">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#sendTicketsByEmail" style="-fx-background-color: white;" styleClass="buttons" stylesheets="@Main.css">
                      <HBox.margin>
                         <Insets left="20.0" right="20.0" />
                      </HBox.margin>
-                  </Button>
-                  <Button fx:id="assignCoordinatorButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnAssignCoordinator" styleClass="buttons" stylesheets="@Main.css" text="Assign EC">
-                     <HBox.margin>
-                        <Insets left="2.0" right="20.0" />
-                     </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pictures/icons8-send-email-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
             </HBox>

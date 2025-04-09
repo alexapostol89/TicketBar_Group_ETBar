@@ -1,4 +1,4 @@
-
+/* background for login window */
 . backgroundLogin {
     -fx-background-image: url("pictures/001.jpg");
     -fx-background-size: cover; /* Ensures the image covers the entire element */
@@ -6,6 +6,8 @@
     -fx-background-repeat: no-repeat;
 }
 
+
+/*background for Coordinator window*/
 . backgroundC {
     -fx-background-image: url("pictures/14.jpg");
     -fx-background-size: cover; /* Ensures the image covers the entire element */
@@ -13,7 +15,7 @@
     -fx-background-repeat: no-repeat;
 }
 
-
+ /*background for event-info.fxml + add-event.fxml */
 . backgroundE {
     -fx-background-image: url("pictures/background.png");
     -fx-background-size: cover; /* Ensures the image covers the entire element */
@@ -21,36 +23,18 @@
     -fx-background-repeat: no-repeat;
 }
 
+/*background for left label from event-info.fxml*/
 . eventsC {
-    -fx-font-family: "Comic Sans MS";
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 0); /* Blur effect */
     -fx-background-color: rgba(255, 255, 255, 0.2); /* Light opacity for transparency */
-    /*-fx-background-radius: 20;
-    -fx-border-radius: 20;*/
     -fx-content-display: top;
     -fx-text-alignment: center;
 }
 
+/*mostly all the buttons*/
 . buttons {
-    -fx-font-family: "Comic Sans MS";
-    /*-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 0); /* Blur effect */
-    -fx-background-color: rgba(255, 255, 255, 0.15); /* Light opacity for transparency */
-    /*-fx-background-color: "#DEF2F0";*/
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-}
-
-
-. labels {
-    -fx-font-family: "Comic Sans MS";
-}
-
-. eventABC {
-    -fx-background-color: "#FFE3B3";
-}
-
-. labelEvent {
-    -fx-background-color: rgba(255, 255, 255, 0.15); /* Light opacity for transparency */
+    /*-fx-font-family: "Comic Sans MS";*/
+    -fx-background-color: rgba(255, 255, 255, 0.15);
     -fx-background-radius: 20;
     -fx-border-radius: 20;
 }
@@ -59,28 +43,6 @@
     -fx-background-color: rgba(255, 255, 255, 0.9);
     -fx-background-radius: 20;
     -fx-border-radius: 20;
-
-}
-
-
-
-. eventsHeader {
-
-    -fx-font-family: "Comic Sans MS";
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 0); /* Blur effect */
-    -fx-background-color: rgba(255, 255, 255, 0.1); /* Light opacity for transparency */
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-    -fx-content-display: top;
-    -fx-text-alignment: center;
-
-}
-
-. gridPane {
-
-    -fx-background-color: rgba(255, 255, 255, 0.1);
-    -fx-background-radius: 10;
-    -fx-border-radius: 10;
 }
 
 . labelB {
@@ -92,8 +54,3 @@
     -fx-text-alignment: center;
 }
 
-. saveCancel {
-    -fx-background-color: B2B2B2;
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-}

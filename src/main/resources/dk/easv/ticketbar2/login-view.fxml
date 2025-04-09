@@ -10,8 +10,8 @@
     <children>
         <Label layoutX="350.0" layoutY="-3.0" prefHeight="408.0" prefWidth="265.0" styleClass="labelB" stylesheets="@Main.css" AnchorPane.rightAnchor="0.0" />
         <TextField fx:id="usernameTextfield" layoutX="414.0" layoutY="135.0" prefHeight="30.0" prefWidth="220.0" promptText="Username" styleClass="labelLogin" stylesheets="@Main.css" AnchorPane.rightAnchor="34.0" />
-        <PasswordField fx:id="passwordTextfield" layoutX="431.0" layoutY="215.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" style="-fx-background-radius: 20; -fx-border-radius: 20;" styleClass="labelLogin" stylesheets="@Main.css" AnchorPane.rightAnchor="34.0" />
+        <PasswordField fx:id="passwordTextfield" layoutX="431.0" layoutY="215.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" styleClass="labelLogin" stylesheets="@Main.css" AnchorPane.rightAnchor="34.0" />
         <Button fx:id="togglePasswordButton" layoutX="595.0" layoutY="259.0" onAction="#togglePasswordVisibility" style="-fx-background-color: white;" text="Show" AnchorPane.rightAnchor="25.0" />
-        <Button layoutX="540.0" layoutY="314.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: grey;" styleClass="labelLogin" stylesheets="@Main.css" text="Sign in" AnchorPane.rightAnchor="25.0" />
+        <Button layoutX="540.0" layoutY="314.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 20; -fx-background-color: B2B2B2;" text="Sign in" AnchorPane.rightAnchor="25.0" />
     </children>
 </AnchorPane>

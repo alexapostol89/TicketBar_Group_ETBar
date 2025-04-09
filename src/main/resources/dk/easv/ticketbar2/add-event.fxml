@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -92,19 +94,15 @@
                <Font size="14.0" />
             </font>
          </Label>
-         <Button fx:id="searchBtn" prefHeight="33.0" prefWidth="182.0" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-background-color: white;">
+         <Button fx:id="searchBtn" prefHeight="33.0" prefWidth="49.0" style="-fx-background-radius: 20px; -fx-border-radius: 20px; -fx-background-color: white;">
             <graphic>
-               <Label text="🔍">
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-                  <padding>
-                     <Insets left="150.0" />
-                  </padding>
-               </Label>
-            </graphic>
-         </Button>
-         <Label fx:id="imageFilePath" />
+               <ImageView fitHeight="23.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@pictures/icons8-search-50.png" />
+                  </image>
+               </ImageView>
+            </graphic></Button>
+         <Label fx:id="imageFilePath" prefHeight="28.0" prefWidth="239.0" />
       </HBox>
 
       <HBox alignment="CENTER" spacing="20">
