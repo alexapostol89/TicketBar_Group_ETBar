@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="574.0" prefWidth="975.0" styleClass="backgroundC" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.CoordinatorController">
    <right>
@@ -55,7 +56,10 @@
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Hello , ">
                      <HBox.margin>
                         <Insets top="18.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
                   <Label fx:id="userName">
                      <HBox.margin>
                         <Insets right="10.0" top="18.0" />

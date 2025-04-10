@@ -1,6 +1,7 @@
 package dk.easv.ticketbar2.gui.controllers;
 
 import dk.easv.ticketbar2.be.Events;
+import dk.easv.ticketbar2.be.Tickets;
 import dk.easv.ticketbar2.bll.EventsManager;
 import dk.easv.ticketbar2.bll.SessionManager;
 import dk.easv.ticketbar2.bll.UsersManager;
@@ -23,7 +24,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -86,6 +86,8 @@ public class CoordinatorController {
     }
 
     public void updateCoordinatorView(String eventName, String imagePath, int eventID, String startDateTime) {
+
+        //Event Card Styling
         VBox vbox = new VBox();
         vbox.setSpacing(10);
         vbox.setPadding(new Insets(10));
@@ -111,9 +113,11 @@ public class CoordinatorController {
         }
         imageView.setUserData(eventID);
 
+        // EventName label styling
         Label label = new Label(eventName);
         label.setWrapText(true);
         label.setMaxWidth(200);
+        label.setStyle("-fx-text-fill: #2E2E2E; -fx-font-size: 16px; -fx-font-weight: bold;");
 
         String formattedDateTime = startDateTime;
         try {
@@ -125,7 +129,9 @@ public class CoordinatorController {
             System.out.println("Error formatting date: " + e.getMessage());
         }
 
+        //Date label styling
         Label date = new Label(formattedDateTime);
+        date.setStyle("-fx-text-fill: #4F8FC0; -fx-font-size: 13px;");
 
         VBox.setMargin(imageView, new Insets(0, 0, 5, 0));
         VBox.setMargin(label, new Insets(5, 0, 0, 0));

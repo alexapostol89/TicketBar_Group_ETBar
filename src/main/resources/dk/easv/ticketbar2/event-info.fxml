@@ -173,6 +173,14 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Button fx:id="addVoucher" mnemonicParsing="false" onAction="#openAddVoucherWindow" style="-fx-background-color: white;" styleClass="buttons">
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pictures/icon-voucher.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children>
             </HBox>
          </children>

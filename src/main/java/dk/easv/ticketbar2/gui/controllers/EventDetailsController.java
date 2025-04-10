@@ -1,6 +1,7 @@
 package dk.easv.ticketbar2.gui.controllers;
 
 import dk.easv.ticketbar2.be.Events;
+import dk.easv.ticketbar2.be.Tickets;
 import dk.easv.ticketbar2.bll.EventsManager;
 import dk.easv.ticketbar2.dal.web.EventsDAO;
 import javafx.event.ActionEvent;
@@ -24,7 +25,7 @@ import java.util.Optional;
 public class EventDetailsController {
 
     @FXML
-    private Button deleteBtn, editEvents;
+    private Button deleteBtn, editEvents, addVoucher;
 
     @FXML
     private Label nameLabel, startDateLabel, endDateLabel, locationLabel, descriptionLabel, coordinatorLabel, guideLabel, notesLabel;
@@ -156,6 +157,31 @@ public class EventDetailsController {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void openAddVoucherWindow(ActionEvent event) throws EventsException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketbar2/voucher-dialog.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            // Get the SaveTicketsController instance after loading the FXML
+            SaveVouchersController saveVouchersController = loader.getController();
+
+            // Pass the eventID to the SaveTicketsController
+            saveVouchersController.setEventID(this.eventID);  // This ensures eventID is set before loading details
+
+            System.out.println("eventID in printTicket: " + this.eventID);
+
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Add Voucher");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (EventsException e) {
+            throw new RuntimeException(e);
         }
     }
 

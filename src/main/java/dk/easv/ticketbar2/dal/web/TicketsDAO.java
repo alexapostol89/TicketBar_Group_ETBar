@@ -4,7 +4,7 @@ import dk.easv.ticketbar2.dal.db.DBConnection;
 import dk.easv.ticketbar2.be.Tickets;
 
 import java.sql.*;
-import java.time.LocalDateTime;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane prefHeight="180.0" prefWidth="316.0" stylesheets="@voucher.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.Voucher">
+<AnchorPane fx:id="voucherContainer" prefHeight="265.0" prefWidth="382.0" stylesheets="@voucher.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketbar2.gui.controllers.PrintVouchersController">
    <children>
-      <VBox layoutX="14.0" layoutY="14.0" prefHeight="176.0" prefWidth="192.0" spacing="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <VBox layoutX="14.0" layoutY="26.0" prefHeight="214.0" prefWidth="206.0" spacing="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="26.0">
          <children>
-            <Label fx:id="voucherTitle" styleClass="voucher-title" text="FREE DRINK VOUCHER" />
-            <Label fx:id="voucherSubtitle" prefHeight="41.0" prefWidth="143.0" styleClass="voucher-subtitle" text="Redeem for one drink of your choice" wrapText="true" />
-            <Label fx:id="voucherTerms" prefHeight="89.0" prefWidth="114.0" styleClass="voucher-terms" text="Valid at all locations. One-time use. Expires: 2025-12-31" wrapText="true" />
+            <Label fx:id="voucherTitle" prefHeight="43.0" prefWidth="218.0" styleClass="voucher-title" text="FREE DRINK VOUCHER" wrapText="true" />
+            <Label fx:id="voucherSubtitle" prefHeight="44.0" prefWidth="143.0" styleClass="voucher-subtitle" text="Redeem for one drink of your choice" wrapText="true" />
+            <Label fx:id="voucherTerms" prefHeight="44.0" prefWidth="114.0" styleClass="voucher-terms" text="Valid at all locations. One-time use." wrapText="true" />
+            <Label fx:id="expirationDate" prefHeight="42.0" prefWidth="84.0" text="Expiration Date:" wrapText="true" />
          </children>
       </VBox>
-      <StackPane layoutX="241.0" layoutY="36.0" prefHeight="100.0" prefWidth="100.0" styleClass="stack-pane" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="45.0">
+      <StackPane layoutX="202.0" layoutY="83.0" prefHeight="100.0" prefWidth="143.0" AnchorPane.leftAnchor="202.0" AnchorPane.rightAnchor="37.0" AnchorPane.topAnchor="83.0">
          <children>
-            <ImageView fx:id="qrImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgQRCode" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="imgQRCode" />
          </children>
       </StackPane>
+      <Button fx:id="printButton" layoutX="229.0" layoutY="208.0" mnemonicParsing="false" onAction="#printVoucher" prefHeight="15.0" prefWidth="60.0" styleClass="printBtn" text="Print" />
    </children>
 </AnchorPane>
