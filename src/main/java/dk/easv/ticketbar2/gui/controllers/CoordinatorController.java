@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -87,18 +88,16 @@ public class CoordinatorController {
 
     public void updateCoordinatorView(String eventName, String imagePath, int eventID, String startDateTime) {
 
-        //Event Card Styling
+        // Event Card Styling
         VBox vbox = new VBox();
         vbox.setSpacing(10);
         vbox.setPadding(new Insets(10));
+        vbox.setAlignment(Pos.CENTER); // Aligns children both horizontally and vertically to the center
         vbox.setStyle(
                 "-fx-background-color: #ffffff;" +
                         "-fx-background-radius: 15;" +
                         "-fx-border-radius: 15;" +
-                        "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 4);" +
-                        "-fx-padding: 10;" +
-                        "-fx-spacing: 10;" +
-                        "-fx-alignment: top_center;"
+                        "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 4);"
         );
 
         ImageView imageView = new ImageView();
@@ -118,6 +117,7 @@ public class CoordinatorController {
         label.setWrapText(true);
         label.setMaxWidth(200);
         label.setStyle("-fx-text-fill: #2E2E2E; -fx-font-size: 16px; -fx-font-weight: bold;");
+        label.setAlignment(Pos.CENTER); // Centers text within the label
 
         String formattedDateTime = startDateTime;
         try {
@@ -129,9 +129,10 @@ public class CoordinatorController {
             System.out.println("Error formatting date: " + e.getMessage());
         }
 
-        //Date label styling
+        // Date label styling
         Label date = new Label(formattedDateTime);
         date.setStyle("-fx-text-fill: #4F8FC0; -fx-font-size: 13px;");
+        date.setAlignment(Pos.CENTER); // Centers text within the label
 
         VBox.setMargin(imageView, new Insets(0, 0, 5, 0));
         VBox.setMargin(label, new Insets(5, 0, 0, 0));
@@ -154,6 +155,7 @@ public class CoordinatorController {
                 openDetailsWindow(clickedEventID);
             }
         });
+
 
         contentPane.setMargin(vbox, new Insets(10, 10, 10, 10));
 
